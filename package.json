@@ -16,7 +16,6 @@
     "axios": "^0.21.4",
     "compression": "^1.7.4",
     "express": "^4.17.1",
-    "install": "^0.13.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.12",
     "npm": "^7.24.0",
