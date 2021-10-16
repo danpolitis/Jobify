@@ -19,11 +19,13 @@ router.route('/:poster_id')
     const poster_id = request.params.poster_id;
     const title = request.body.title;
     const body = request.body.body;
-    const created = Date.now();
+    const created = new Date();
+
+    const params = [poster_id, title, body, created]
 
     const result = pool.query(
-      `INSERT INTO seeker_notes(poster_id, title, body, created)
-       VALUES (${poster_id}, ${title}, ${body}, ${created});`
+      'INSERT INTO seeker_notes(poster_id, title, body, created) \
+       VALUES ($1, $2, $3, $4);'
     )
 
     try {
@@ -39,11 +41,13 @@ router.route('/id/:id')
     const title = request.body.title;
     const body = request.body.body;
 
+    const params = [id, title, body]
+
     const result = pool.query(
-      `UPDATE seeker_notes
-       SET (title, body)
-        VALUES (${title}, ${body})
-        WHERE id = ${id}`
+      'UPDATE seeker_notes \
+      SET title = $2, \
+           body = $3 \
+      WHERE id = $1'
     )
     try {
       response.status(201).send(result);
