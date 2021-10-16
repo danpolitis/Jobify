@@ -49,9 +49,9 @@ router.route('/:email')
     const params = [user_name, first_name, last_name, city, state];
 
     const result = await pool.query(
-      'UPDATE employer_blogs \
+      'UPDATE seekers \
        SET (user_name, first_name, last_name, city, state) \
-        VALUES ($1, $2, $3, $4, $5}',
+        VALUES ($1, $2, $3, $4, $5)',
     params)
 
     try {
