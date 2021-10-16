@@ -3,13 +3,9 @@ const pool = require('./pool');
 
 router.route('/:email')
   .get(async (request, response) => {
-<<<<<<< HEAD
-    const email = request.params.email;
-=======
     const user_email = request.params.email;
     const params = [user_email]
 
->>>>>>> 9eb3ac84e2edc69ae765b0af2b65e3b964d49fb1
     const result = await pool.query(
       'SELECT * FROM seekers \
        WHERE email = $1',

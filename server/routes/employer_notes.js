@@ -9,7 +9,7 @@ router.route('/:poster_id')
        WHERE poster_id = ${poster_id};`
     )
     try {
-      response.status(200).send(result);
+      response.status(200).send(result.rows);
     } catch (error) {
       console.error(error);
     }
@@ -19,12 +19,13 @@ router.route('/:poster_id')
     const poster_id = request.params.poster_id;
     const title = request.body.title;
     const body = request.body.body;
-    const created = Date.now();
+    const created = new Date();
+    const params = [poster_id, title, body, created]
 
     const result = pool.query(
-      `INSERT INTO employers_notes(poster_id, title, body, created)
-       VALUES (${poster_id}, ${title}, ${body}, ${created});`
-    )
+      'INSERT INTO employers_notes(poster_id, title, body, created) \
+       VALUES($1, $2, $3, $4);',
+       params)
 
     try {
       response.status(201).send(result);
@@ -38,13 +39,14 @@ router.route('/id/:id')
     const id = request.params.id;
     const title = request.body.title;
     const body = request.body.body;
+    const params = [id, title, body];
 
     const result = pool.query(
-      `UPDATE employers_notes
-       SET (title, body)
-        VALUES (${title}, ${body})
-        WHERE id = ${id}`
-    )
+      'UPDATE employers_notes \
+      SET (title, body) \
+      VALUES ($2, $3) \
+      WHERE id = $1',
+      params)
     try {
       response.status(201).send(result);
     } catch (error) {

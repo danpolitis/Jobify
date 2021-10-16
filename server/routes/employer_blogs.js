@@ -20,12 +20,13 @@ router.route('/:poster_id')
     const title = request.body.title;
     const public = request.body.public;
     const body = request.body.body;
-    const created = Date.now();
+    const created = new Date();
+    const params = [poster_id, title, body, created, public]
 
     const result = pool.query(
-      `INSERT INTO employers_blogs(poster_id, title, body, created, public)
-       VALUES (${poster_id}, ${title}, ${body}, ${created}, ${public});`
-    )
+      'INSERT INTO employers_blogs(poster_id, title, body, created, public) \
+      VALUES($1, $2, $3, $4, $5)',
+      params)
 
     try {
       response.status(201).send(result);
@@ -41,12 +42,14 @@ router.route('/id/:id')
     const body = request.body.body;
     const public = request.body.public;
 
+    const params = [id, title, body, public]
+
     const result = pool.query(
-      `UPDATE employers_blogs
-       SET (title, body, public)
-        VALUES (${title}, ${body}, ${public})
-        WHERE id = ${id}`
-    )
+      'UPDATE employers_blogs \
+      SET (title, body, public) \
+      VALUES ($2, $3, $4) \
+      WHERE id = $1',
+      params)
     try {
       response.status(201).send(result);
     } catch (error) {
