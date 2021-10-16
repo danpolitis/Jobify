@@ -9,10 +9,12 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import Container from "@mui/material/Container";
-import Home from "./Home.jsx"
-import Profile from "./Profile.jsx"
+import Box from '@mui/material/Box';
+import Home from "./components/Home.jsx"
+import Test from "./components/Test.jsx"
 import Theme from "./Theme/ThemeFile.js"
 import { ThemeProvider } from "@mui/material/styles";
+import { Helmet } from 'react-helmet';
 
 
 function Footer() {
@@ -73,33 +75,46 @@ function Header() {
 function App() {
   return (
     <>
-  <ThemeProvider theme={Theme}>
-    <GlobalStyles
-        styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
-      />
-      <CssBaseline />
-      <Header />
-    <div className="App">
-    <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/profile" component={Profile} />
-        </Switch>
-    </div>
-        {/* Footer */}
-        <Container
-        maxWidth="md"
-        component="footer"
-        sx={{
-          borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-          mt: "auto",
-          py: [3],
-          minWidth: "100%",
-          backgroundColor: "#799496"
-        }}
-      >
-        <Footer sx={{ mt: 5 }} />
-      </Container>
-      {/* End footer */}
+      <ThemeProvider theme={Theme}>
+        <GlobalStyles
+          styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
+        />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100vh',
+          }}
+        >
+          <CssBaseline />
+          <Header />
+          <div className="App">
+          <Helmet>
+            <title>Andy</title>
+            <meta name="description" content="App Description" />
+            <meta name="theme-color" content="#799496" />
+          </Helmet>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/profile" component={Test} />
+            </Switch>
+          </div>
+          {/* Footer */}
+          <Container
+            maxWidth="md"
+            component="footer"
+            sx={{
+              borderTop: (theme) => `1px solid ${theme.palette.divider}`,
+              mt: "auto",
+              py: [3],
+              minWidth: "100%",
+              backgroundColor: "#799496"
+            }}
+          >
+            <Footer sx={{ mt: 5 }} />
+          </Container>
+        </Box>
+        {/* End footer */}
       </ThemeProvider>
     </>
   );

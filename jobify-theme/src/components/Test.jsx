@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 
 
 
-function Profile(props) {
+function Test(props) {
   return (
     <Typography
       variant="h2"
@@ -20,4 +20,4 @@ function Profile(props) {
   );
 }
 
-export default Profile
+export default Test

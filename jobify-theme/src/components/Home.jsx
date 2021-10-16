@@ -12,6 +12,7 @@ function Home(props) {
       {...props}
     >
       Test Home Comp
+      <h1> TEST </h1>
     </Typography>
   );
 }
