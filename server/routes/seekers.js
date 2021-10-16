@@ -3,6 +3,7 @@ const pool = require('./pool');
 
 router.route('/:email')
   .get(async (request, response) => {
+    console.log('request: ', request);
     const email = request.params.email;
     const result = await pool.query(
       `SELECT * FROM seekers
@@ -10,7 +11,7 @@ router.route('/:email')
     )
     try {
       response.status(200).send(result);
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })
@@ -27,6 +28,11 @@ router.route('/:email')
       VALUES (${username}, ${first_name}, ${last_name}, ${city}, ${state}, ${email})\
       `
     )
+    try {
+      response.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+    }
   })
   .put(async (request, response) => {
     const username = request.body.username;
@@ -41,6 +47,11 @@ router.route('/:email')
         VALUES (${username}, ${first_name}, ${last_name}, ${city}, ${state})
         WHERE email = ${email}`
     )
+    try {
+      response.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+    }
   })
 
 module.exports = router;

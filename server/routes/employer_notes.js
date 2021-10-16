@@ -10,7 +10,7 @@ router.route('/:poster_id')
     )
     try {
       response.status(200).send(result);
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })
@@ -28,7 +28,7 @@ router.route('/:poster_id')
 
     try {
       response.status(201).send(result);
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })
@@ -47,7 +47,7 @@ router.route('/id/:id')
     )
     try {
       response.status(201).send(result);
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })
@@ -60,7 +60,7 @@ router.route('/id/:id')
     )
     try {
       response.status(202).send(result);
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })
