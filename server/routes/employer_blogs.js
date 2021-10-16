@@ -5,7 +5,7 @@ router.route('/:poster_id')
   .get(async (request, response) => {
     const poster_id = request.params.poster_id;
     const result = await pool.query(
-      `SELECT * FROM employer_blogs
+      `SELECT * FROM employers_blogs
        WHERE poster_id = ${poster_id};`
     )
     try {
@@ -23,7 +23,7 @@ router.route('/:poster_id')
     const created = Date.now();
 
     const result = pool.query(
-      `INSERT INTO employer_blogs(poster_id, title, body, created, public)
+      `INSERT INTO employers_blogs(poster_id, title, body, created, public)
        VALUES (${poster_id}, ${title}, ${body}, ${created}, ${public});`
     )
 
@@ -34,7 +34,7 @@ router.route('/:poster_id')
     }
   })
 
-router.route('/:id')
+router.route('/id/:id')
   .put(async (request, reponse) => {
     const id = request.params.id;
     const title = request.body.title;
@@ -42,7 +42,7 @@ router.route('/:id')
     const public = request.body.public;
 
     const result = pool.query(
-      `UPDATE employer_blogs
+      `UPDATE employers_blogs
        SET (title, body, public)
         VALUES (${title}, ${body}, ${public})
         WHERE id = ${id}`
@@ -57,7 +57,7 @@ router.route('/:id')
   .delete(async (request, response) => {
     const id = request.params.id;
     const result = pool.query(
-      `DELETE FROM employer_blogs
+      `DELETE FROM employers_blogs
        WHERE id = ${id};`
     )
     try {
