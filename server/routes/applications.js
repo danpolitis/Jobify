@@ -32,11 +32,11 @@ router.route('/:posting_id')
     const application_body = request.body.application_body;
     const favorited = false;
     const posting_id = request.params.posting_id;
+    const params = [applicant_id, application_body, favorited, posting_id];
 
     const result = await pool.query(
-      `INSERT INTO applications(applicant_id, application_body, favorited, posting_id)
-       VALUES (${applicant_id}, ${application_body}, ${favorited}, ${posting_id})`
-    )
+      'INSERT INTO applications(applicant_id, application_body, favorited, posting_id) \
+      VALUES ($1, $2, $3, $4)', params)
 
     try {
       response.status(201).send(result);
