@@ -29,14 +29,18 @@ router.route('/:posting_id')
 
   .post(async (request, response) => {
     const applicant_id = request.body.applicant_id;
-    const application_body = request.body.application_body;
+    const resume = request.body.resume;
+    const cover_letter = request.body.cover_letter;
+    const years_exp = request.body.years_exp;
+    const years_edu = request.body.years_edu;
+    const status = true;
     const favorited = false;
     const posting_id = request.params.posting_id;
-    const params = [applicant_id, application_body, favorited, posting_id];
+    const params = [applicant_id, resume, cover_letter, years_exp, years_edu, status, favorited, posting_id];
 
     const result = await pool.query(
-      'INSERT INTO applications(applicant_id, application_body, favorited, posting_id) \
-      VALUES ($1, $2, $3, $4)', params)
+      'INSERT INTO applications(applicant_id, resume, cover_letter, years_exp, years_edu, status, favorited, posting_id) \
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', params)
 
     try {
       response.status(201).send(result);
