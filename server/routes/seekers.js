@@ -3,7 +3,6 @@ const pool = require('./pool');
 
 router.route('/:email')
   .get(async (request, response) => {
-    console.log('request: ', request);
     const email = request.params.email;
     const result = await pool.query(
       `SELECT * FROM seekers
