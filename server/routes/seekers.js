@@ -35,7 +35,7 @@ router.route('/:email')
     const city = request.body.city;
     const state = request.body.state;
 
-    const result = pool.query(
+    const result = await pool.query(
       `UPDATE employer_blogs
        SET (username, first_name, last_name, city, state)
         VALUES (${username}, ${first_name}, ${last_name}, ${city}, ${state})
