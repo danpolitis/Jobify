@@ -47,9 +47,21 @@ router.route('/:id')
         VALUES (${title}, ${body}, ${public})
         WHERE id = ${id}`
     )
-
     try {
       response.status(201).send(result);
+    } catch {
+      console.error(error);
+    }
+  })
+
+  .delete(async (request, response) => {
+    const id = request.params.id;
+    const result = pool.query(
+      `DELETE FROM employer_blogs
+       WHERE id = ${id};`
+    )
+    try {
+      response.status(202).send(result);
     } catch {
       console.error(error);
     }
