@@ -6,6 +6,11 @@ const { applications, employers_blogs, employers_notes, documents, employers, po
 
 app.use(express.static(path.join(__dirname, '..client/dist')));
 app.use(express.json());
+
+app.listen(port, () => {
+  console.log(`connected to port: ${port}`);
+})
+
 app.use('/applications', applications);
 app.use('/documents', documents);
 app.use('/employers', employers);
@@ -16,8 +21,5 @@ app.use('/seekers', seekers);
 app.use('/seeker_blogs', seeker_blogs);
 app.use('/seeker_notes', seeker_notes);
 
-app.listen(port, () => {
-  console.log(`connected to port: ${port}`);
-})
 
 module.exports = app;
