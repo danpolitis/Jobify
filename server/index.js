@@ -2,15 +2,15 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = 3000;
-const { applications, employer_blogs, employer_notes, documents, employers, postings, seeker_blogs, seeker_notes, seekers } = require('./routes/index');
+const { applications, employers_blogs, employers_notes, documents, employers, postings, seeker_blogs, seeker_notes, seekers } = require('./routes/index.js');
 
 app.use(express.static(path.join(__dirname, '..client/dist')));
 app.use(express.json());
 app.use('/applications', applications);
 app.use('/documents', documents);
 app.use('/employers', employers);
-app.use('/employer_blogs', employer_blogs);
-app.use('/employer_notes', employer_notes);
+app.use('/employer_blogs', employers_blogs);
+app.use('/employer_notes', employers_notes);
 app.use('/postings', postings);
 app.use('/seekers', seekers);
 app.use('/seeker_blogs', seeker_blogs);
