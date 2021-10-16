@@ -32,7 +32,7 @@ router
       console.log(error);
     }
   })
-  .put(async (request, resposne) => {
+  .put(async (request, response) => {
     const company_name = request.params.company_name;
     const city = request.params.city;
     const state = request.params.state;

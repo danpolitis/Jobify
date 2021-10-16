@@ -35,7 +35,7 @@ router.route('/:poster_id')
   })
 
 router.route('/id/:id')
-  .put(async (request, reponse) => {
+  .put(async (request, response) => {
     const id = request.params.id;
     const title = request.body.title;
     const body = request.body.body;
