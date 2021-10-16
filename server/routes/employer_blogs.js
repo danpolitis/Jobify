@@ -46,8 +46,9 @@ router.route('/id/:id')
 
     const result = pool.query(
       'UPDATE employers_blogs \
-      SET (title, body, public) \
-      VALUES ($2, $3, $4) \
+      SET title = $2, \
+      body = $3, \
+      public = $4, \
       WHERE id = $1',
       params)
     try {
