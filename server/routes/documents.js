@@ -11,7 +11,7 @@ router.route('/:user_id')
     )
     try {
       response.status(200).send(result);
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })
@@ -24,7 +24,7 @@ router.route('/:user_id')
 
     try {
       response.status(200).end();
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })

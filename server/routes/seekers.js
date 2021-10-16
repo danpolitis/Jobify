@@ -13,7 +13,7 @@ router.route('/:email')
 
     try {
       response.status(200).send(result);
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })

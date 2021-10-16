@@ -5,12 +5,12 @@ router.route('/:poster_id')
   .get(async (request, response) => {
     const poster_id = request.params.poster_id;
     const result = await pool.query(
-      `SELECT * FROM seeker_blogs
+      `SELECT * FROM seekers_blogs
        WHERE poster_id = ${poster_id};`
     )
     try {
       response.status(200).send(result);
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })
@@ -29,7 +29,7 @@ router.route('/:poster_id')
 
     try {
       response.status(201).send(result);
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })
@@ -49,7 +49,7 @@ router.route('/id/:id')
     )
     try {
       response.status(201).send(result);
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })
@@ -62,7 +62,7 @@ router.route('/id/:id')
     )
     try {
       response.status(202).send(result);
-    } catch {
+    } catch (error) {
       console.error(error);
     }
   })

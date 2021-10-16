@@ -12,7 +12,7 @@ router
     );
     try {
       response.status(200).send(result);
-    } catch {
+    } catch (error) {
       console.log(error);
     }
   })
@@ -26,6 +26,11 @@ router
       `INSERT INTO employers (company_name, city, state)
          VALUES (${company_name}, ${city}, ${state});`
     );
+    try {
+      response.status(200).send(result);
+    } catch (error) {
+      console.log(error);
+    }
   })
   .put(async (request, resposne) => {
     const company_name = request.params.company_name;
@@ -37,6 +42,11 @@ router
          VALUES (${company_name}, ${city}, ${state})
          WHERE id = ${id};`
     );
+    try {
+      response.status(200).send(result);
+    } catch (error) {
+      console.log(error);
+    }
   });
 
 module.exports = router;
