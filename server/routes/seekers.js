@@ -45,14 +45,18 @@ router.route('/:email')
     const last_name = request.body.last_name;
     const city = request.body.city;
     const state = request.body.state;
+    const id = request.params.id;
 
-    const params = [user_name, first_name, last_name, city, state];
+    const params = [user_name, first_name, last_name, city, state, id];
 
     const result = await pool.query(
-      'UPDATE employer_blogs \
-       SET (user_name, first_name, last_name, city, state) \
-        VALUES ($1, $2, $3, $4, $5}',
-    params)
+      'UPDATE seekers \
+      SET user_name = $1, \
+           first_name = $2, \
+           last_name = $3, \
+           city = $4, \
+           state = $5 \
+      WHERE id = $6', params)
 
     try {
       response.status(201).send(result);
