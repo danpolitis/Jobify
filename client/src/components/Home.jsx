@@ -6,13 +6,12 @@ import Typography from "@mui/material/Typography";
 function Home(props) {
   return (
     <Typography
-      variant="bodh2y2"
+      variant="h2"
       color="text.secondary"
       align="center"
       {...props}
     >
-      Test Home Comp
-      <h1> TEST </h1>
+      Home Comp
     </Typography>
   );
 }

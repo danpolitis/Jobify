@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "start:react": "parcel serve client/dist/index.html --open --dist-dir client/build",
+    "start:react": "parcel serve client/dist/index.html --open --dist-dir client/build  --no-cache",
     "build": "parcel build client/dist/index.html --dist-dir client/build",
     "test": "test"
   },
