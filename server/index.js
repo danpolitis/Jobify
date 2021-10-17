@@ -1,25 +1,43 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
 const app = express();
-const port = 3000;
-const { applications, employers_blogs, employers_notes, documents, employers, postings, seeker_blogs, seeker_notes, seekers } = require('./routes/index.js');
+const port = process.env.PORT || 3000;
+const {
+  applications,
+  employers_blogs,
+  employers_notes,
+  documents,
+  employers,
+  postings,
+  seeker_blogs,
+  seeker_notes,
+  seekers,
+} = require("./routes/index.js");
 
-app.use(express.static(path.join(__dirname, '..client/dist')));
+app.use(express.static(path.resolve(__dirname, "..client/build")));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use("/applications", applications);
+app.use("/documents", documents);
+app.use("/employers", employers);
+app.use("/employer_blogs", employers_blogs);
+app.use("/employer_notes", employers_notes);
+app.use("/postings", postings);
+app.use("/seekers", seekers);
+app.use("/seeker_blogs", seeker_blogs);
+app.use("/seeker_notes", seeker_notes);
+
+app.get("/api", (req, res) => {
+  res.json({ message: "👋 from Express!" });
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+});
 
 app.listen(port, () => {
   console.log(`connected to port: ${port}`);
-})
-
-app.use('/applications', applications);
-app.use('/documents', documents);
-app.use('/employers', employers);
-app.use('/employer_blogs', employers_blogs);
-app.use('/employer_notes', employers_notes);
-app.use('/postings', postings);
-app.use('/seekers', seekers);
-app.use('/seeker_blogs', seeker_blogs);
-app.use('/seeker_notes', seeker_notes);
-
+});
 
 module.exports = app;
