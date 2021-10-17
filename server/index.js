@@ -1,5 +1,7 @@
 const express = require("express");
 const path = require("path");
+const colors = require("colors");
+const logo = require("./logo.js");
 const app = express();
 const port = process.env.PORT || 3000;
 const {
@@ -37,7 +39,10 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`connected to port: ${port}`);
+  console.log(
+    `${logo.logo}
+  Connected to port: ${port}`.brightCyan
+  );
 });
 
 module.exports = app;
