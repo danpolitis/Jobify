@@ -1,6 +1,18 @@
 const router = require('express').Router();
 const pool = require('./pool');
 
+router.route('/all')
+  .get(async (request, response) =>{
+    const result = await pool.query(
+      'SELECT * FROM postings;'
+    )
+    try {
+      response.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  })
+
 router.route('/employer/:employer_id')
   .get(async (request, response) => {
     const employer_id = request.params.employer_id;
