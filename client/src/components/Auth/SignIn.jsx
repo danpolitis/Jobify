@@ -50,15 +50,7 @@ export default function SignIn() {
                 </Grid>
                 <TextField label='Email' placeholder='Enter email' fullWidth required inputRef={emailRef}/>
                 <TextField label='Password' placeholder='Enter password' type='password' fullWidth required inputRef={passwordRef}/>
-                {/* <FormControlLabel
-                    control={
-                    <Checkbox
-                        name="checkedB"
-                        color="primary"
-                    />
-                    }
-                    // label="Remember me"
-                 /> */}
+
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} component={Link} to="/" fullWidth>Sign in</Button>
                 <Typography >
                      {/* <Link href="#" >
