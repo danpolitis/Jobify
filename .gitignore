@@ -1,5 +1,11 @@
-package-lock.json
+# dev dependencies
 node_modules
+.parcel-cache
+
+package-lock.json
 .DS_Store
 .DS_Store?
 *.log
+
+# builds
+client/build
