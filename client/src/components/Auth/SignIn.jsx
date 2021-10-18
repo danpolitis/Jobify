@@ -33,7 +33,7 @@ export default function SignIn() {
         history.push('/');
       })
       .catch((error) => {
-        setError("Failed to log in");
+        setError(error.message);
       })
       .finally(() => {
         setLoading(false);
@@ -51,8 +51,8 @@ export default function SignIn() {
                 </Grid>
                 {error && <Alert severity="error">{error}</Alert>}
                 <form>
-                <TextField label='Email' placeholder='Enter email' fullWidth required inputRef={emailRef}/>
-                <TextField label='Password' placeholder='Enter password' type='password' fullWidth required inputRef={passwordRef}/>
+                <TextField label='Email' placeholder='name@example.com' fullWidth required inputRef={emailRef}/>
+                <TextField label='Password' placeholder='Enter your password' type='password' fullWidth required inputRef={passwordRef}/>
 
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} component={Link} to="/" onClick={signInHandler}>Sign in</Button>
                 </form>

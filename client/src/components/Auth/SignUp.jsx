@@ -58,7 +58,7 @@ const Signup = () => {
         history.push("/");
       })
       .catch((error) => {
-        setError("Failed to create an account");
+        setError(error.message);
       })
       .finally(() => {
         setLoading(false);
@@ -85,9 +85,9 @@ const Signup = () => {
                 {error && <Alert severity="error">{error}</Alert>}
                 <form >
 
-                    <TextField fullWidth label='Email' placeholder="Enter your email" inputRef={emailRef}/>
+                    <TextField fullWidth label='Email' placeholder="name@example.com" inputRef={emailRef}/>
 
-                    <TextField fullWidth label='Password' placeholder="Enter your password" inputRef={passwordRef}/>
+                    <TextField fullWidth label='Password' placeholder="Enter password" inputRef={passwordRef}/>
                     <TextField fullWidth label='Confirm Password' placeholder="Confirm your password" inputRef={passwordConfirmRef}/>
                     <FormControl component="fieldset" style={marginTop}>
                         <RadioGroup style={{ display: 'initial' }}>
