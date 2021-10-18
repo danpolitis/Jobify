@@ -1,7 +1,7 @@
 import React, {
   useRef, useState, useEffect,
 } from 'react';
-import { Grid, Paper, Avatar, TextField, Button, Typography } from '@mui/material';
+import { Grid, Paper, Avatar, TextField, Button, Typography, Alert } from '@mui/material';
 import { Link, useHistory } from 'react-router-dom';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -10,9 +10,9 @@ import { useAuth } from './AuthContext';
 
 export default function SignIn() {
 
-  const paperStyle={padding:20, height:'45vh',width:380, margin:"20px auto"}
+  const paperStyle={padding:20, height:'50vh',width:380, margin:"20px auto"}
   const avatarStyle={backgroundColor:'#1bbd7e'}
-  const btnstyle={margin:'8px 0'}
+  const btnstyle={margin:'15px 0'}
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -24,15 +24,16 @@ export default function SignIn() {
   const signInHandler = (event) => {
     event.preventDefault();
 
-    setErrorMessage('');
+    setError('');
     setLoading(true);
 
     login(emailRef.current.value, passwordRef.current.value)
       .then(() => {
+        console.log(emailRef.current.value);
         history.push('/');
       })
       .catch((error) => {
-        setErrorMessage(error.message);
+        setError("Failed to log in");
       })
       .finally(() => {
         setLoading(false);
@@ -48,16 +49,15 @@ export default function SignIn() {
                      {/*  */}
                     <h2>Sign In</h2>
                 </Grid>
+                {error && <Alert severity="error">{error}</Alert>}
+                <form>
                 <TextField label='Email' placeholder='Enter email' fullWidth required inputRef={emailRef}/>
                 <TextField label='Password' placeholder='Enter password' type='password' fullWidth required inputRef={passwordRef}/>
 
-                <Button type='submit' color='primary' variant="contained" style={btnstyle} component={Link} to="/" fullWidth>Sign in</Button>
-                <Typography >
-                     {/* <Link href="#" >
-                        Forgot password ?
-                </Link> */}
-                </Typography>
-                <Typography > Do you have an account ?
+                <Button type='submit' color='primary' variant="contained" style={btnstyle} component={Link} to="/" onClick={signInHandler}>Sign in</Button>
+                </form>
+                {/* <Typography ><Link href="#" >Forgot password ?</Link></Typography> */}
+                <Typography> Do you have an account ?
                      <Link to="/signup" >
                         Sign Up
                 </Link>

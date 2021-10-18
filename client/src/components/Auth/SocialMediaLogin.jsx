@@ -6,7 +6,7 @@ import {Button, Typography } from '@mui/material';
 import firebase from 'firebase';
 import './firebase.js';
 import { useAuth } from './AuthContext.js';
-import { GlobalContext } from '../App.jsx';
+// import { GlobalContext } from '../App.jsx';
 
 // Configure FirebaseUI.
 const uiConfig = {
@@ -28,13 +28,14 @@ function SocialMediaLogin() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  const globalData = useContext(GlobalContext);
+  // const globalData = useContext(GlobalContext);
   // Listen to the Firebase Auth state and set the local state.
   useEffect(() => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
       if(user) {
       console.log('socialmedia: ', user.uid);
-      globalData.dispatch({ type: 'updateUserId', data: user.uid });
+      console.log('socialmedia: ', user.email);
+      // globalData.dispatch({ type: 'updateUserId', data: user.uid });
       }
 
       setIsSignedIn(!!user);

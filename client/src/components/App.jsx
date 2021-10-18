@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useReducer } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
@@ -18,24 +18,10 @@ import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
 // Import component here
 
-const initialState = {
-  userId: '',
-};
 
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'updateUserId':
-      return { ...state, userId: action.data };
-    default:
-      return state;
-  }
-}
-
-export const GlobalContext = React.createContext();
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+
 
   return (
     <>
@@ -58,7 +44,7 @@ function App() {
             <meta name="description" content="App Description" />
             <meta name="theme-color" content="#799496" />
           </Helmet>
-          <GlobalContext.Provider value={{ state, dispatch }}>
+
           <AuthProvider>
             <Switch>
               <Route exact path="/" component={Home} />
@@ -68,7 +54,6 @@ function App() {
               {/* Add route here */}
             </Switch>
           </AuthProvider>
-           </GlobalContext.Provider>
           </div>
             <Footer sx={{ mt: 5 }} />
         </Box>

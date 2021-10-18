@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from './AuthContext.js';
-import { Grid, Paper, Avatar, Typography, TextField, Button } from '@mui/material'
+import { Grid, Paper, Avatar, Typography, TextField, Button, Alert} from '@mui/material'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -45,20 +45,20 @@ const Signup = () => {
 
 
       signup(emailRef.current.value, passwordRef.current.value)
-
-      // .then((userObj) => {
-      //   const data = {
-      //     id: userObj.user.uid,
-      //     email: emailRef.current.value,
-      //   };
-      //   console.log(data);
-      //   return axios.post('/seekers', data);
-      // })
+      .then(() => {
+        console.log(emailRef.current.value);
+        // const data = {
+        //   id: userObj.user.uid,
+        //   email: emailRef.current.value,
+        // };
+        // console.log(data);
+        // return axios.post('/seekers', data);
+      })
       .then(() => {
         history.push("/");
       })
       .catch((error) => {
-        setError(error.message);
+        setError("Failed to create an account");
       })
       .finally(() => {
         setLoading(false);
@@ -82,6 +82,7 @@ const Signup = () => {
                 <Grid align='center'>
                     <h2 style={headerStyle}>Sign Up</h2>
                 </Grid>
+                {error && <Alert severity="error">{error}</Alert>}
                 <form >
 
                     <TextField fullWidth label='Email' placeholder="Enter your email" inputRef={emailRef}/>
