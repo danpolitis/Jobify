@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useContext} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import {Button, Typography } from '@mui/material';
 import firebase from 'firebase';
 import './firebase.js';
 import { useAuth } from './AuthContext.js';
@@ -61,8 +62,8 @@ function SocialMediaLogin() {
   }
   return (
     <div>
-      <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
-      <a onClick={logoutHandler}>Sign-out</a>
+      <Typography>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</Typography>
+      <Button onClick={logoutHandler}>Sign-out</Button>
     </div>
   );
 }

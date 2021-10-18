@@ -1,7 +1,7 @@
 import React, {
   useRef, useState, useEffect,
 } from 'react';
-import { Grid, Paper, Avatar, TextField, Button, Typography } from '@mui/material'
+import { Grid, Paper, Avatar, TextField, Button, Typography } from '@mui/material';
 import { Link, useHistory } from 'react-router-dom';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -10,7 +10,7 @@ import { useAuth } from './AuthContext';
 
 export default function SignIn() {
 
-  const paperStyle={padding :20,height:'45vh',width:380, margin:"20px auto"}
+  const paperStyle={padding:20, height:'45vh',width:380, margin:"20px auto"}
   const avatarStyle={backgroundColor:'#1bbd7e'}
   const btnstyle={margin:'8px 0'}
 
@@ -59,7 +59,7 @@ export default function SignIn() {
                     }
                     // label="Remember me"
                  /> */}
-                <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+                <Button type='submit' color='primary' variant="contained" style={btnstyle} component={Link} to="/" fullWidth>Sign in</Button>
                 <Typography >
                      {/* <Link href="#" >
                         Forgot password ?
