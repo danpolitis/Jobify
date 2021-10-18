@@ -18,7 +18,7 @@ router.route('/:user_id')
 
   .post(async (request, response) => {
     const user_id = request.params.user_id;
-
+    console.log('document post hit:');
     //TODO figure out how axious handles DOCUMENTS
     //insert via https://stackoverflow.com/questions/39573219/can-i-store-a-word-document-in-a-postgresql-database
 
