@@ -25,30 +25,33 @@ const Signup = () => {
     const stateRef = useRef();
     const passwordConfirmRef = useRef();
     const { signup } = useAuth();
-    console.log(signup);
+
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const history = useHistory();
+    // const history = useHistory();
 
 
 
-    const SignUpHandler = (e) => {
+     const SignUpHandler = (e) => {
+      console.log(firstNameRef.current.value);
+      console.log(passwordRef.current.value);
+
       e.preventDefault();
 
-      setError('');
+      // setError('');
 
-      console.log(passwordRef.current);
+      // console.log(firstNameRef.current.value);
       if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-        return setErrorMessage('passwords do not match!');
+        return setError('passwords do not match!');
       }
 
       setLoading(true);
 
+
       signup(emailRef.current.value, passwordRef.current.value)
+
       .then((userObj) => {
         const data = {
-          // _id: userObj.user.uid,
-          // userName: usernameRef.current.value,
           firstName: firstNameRef.current.value,
           lastName: lastNameRef.current.value,
           email: emailRef.current.value,
@@ -61,33 +64,26 @@ const Signup = () => {
         history.push('/');
       })
       .catch((error) => {
-        setErrorMessage(error.message);
+        setError(error.message);
       })
       .finally(() => {
         setLoading(false);
       });
+
+
     }
 
-    // async function handleSubmit(e) {
-    //   e.preventDefault();
-    //   console.log(passwordRef.current.value);
-    //   if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-    //     return setError("Passwords do not match")
-    //   }
-    //   try {
-    //     setError("")
-    //     setLoading(true)
-    //     await signup(emailRef.current.value, passwordRef.current.value)
-    //     // history.push("/")
-    //   } catch {
-    //     setError("Failed to create an account")
-    //   }
+    useEffect(() => {
+      let isSubscribed = true;
+      return () => {
+        isSubscribed = false;
+      };
+    }, []);
 
-    //   setLoading(false);
+
+    // const sendValue = () => {
+    //   return console.log(emailRef.current.value) //on clicking button accesing current value of TextField and outputing it to console
     // }
-
-
-
 
     return (
         <Grid>
@@ -96,9 +92,9 @@ const Signup = () => {
                     <h2 style={headerStyle}>Sign Up</h2>
                     <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
                 </Grid>
-                <form>
-                    <TextField fullWidth label='First Name' placeholder="Enter first name" inputRef={firstNameRef}/>
-                    <TextField fullWidth label='Last Name' placeholder="Enter last name" inputRef={lastNameRef}/>
+                <form >
+                    <TextField fullWidth label='First Name' placeholder="Enter first name" type="text" inputRef={firstNameRef}/>
+                    <TextField fullWidth label='Last Name' placeholder="Enter last name" type="text" inputRef={lastNameRef}/>
                     <TextField fullWidth label='Email' placeholder="Enter your email" inputRef={emailRef}/>
                     <TextField fullWidth label='City' inputRef={cityRef}/>
                     <TextField fullWidth label='State' inputRef={stateRef}/>
@@ -109,13 +105,13 @@ const Signup = () => {
                             <FormControlLabel value="employer" control={<Radio />} label="Employer" />
                         </RadioGroup>
                     </FormControl>
-                    <TextField fullWidth label='Password' placeholder="Enter your password"/>
-                    <TextField fullWidth label='Confirm Password' placeholder="Confirm your password"/>
+                    <TextField fullWidth label='Password' placeholder="Enter your password" inputRef={passwordRef}/>
+                    <TextField fullWidth label='Confirm Password' placeholder="Confirm your password" inputRef={passwordConfirmRef}/>
                     <FormControlLabel
                         control={<Checkbox name="checkedA" />}
                         label="I accept the terms and conditions."
                     />
-                    <Button disabled={loading} type='submit' variant='contained' color='primary' onClick={SignUpHandler}>Sign up</Button>
+                    <Button disabled={loading} type='submit' variant='contained' onClick={SignUpHandler} color='primary'>Sign up</Button>
                 </form>
             </Paper>
         </Grid>
