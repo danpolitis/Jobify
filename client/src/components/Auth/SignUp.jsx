@@ -19,6 +19,7 @@ const Signup = () => {
 
     const emailRef = useRef();
     const passwordRef = useRef();
+    const userNameRef = useRef();
     const firstNameRef = useRef();
     const lastNameRef = useRef();
     const cityRef = useRef();
@@ -28,19 +29,16 @@ const Signup = () => {
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    // const history = useHistory();
+    const history = useHistory();
 
 
 
      const SignUpHandler = (e) => {
-      console.log(firstNameRef.current.value);
-      console.log(passwordRef.current.value);
 
       e.preventDefault();
 
-      // setError('');
+      setError('');
 
-      // console.log(firstNameRef.current.value);
       if (passwordRef.current.value !== passwordConfirmRef.current.value) {
         return setError('passwords do not match!');
       }
@@ -52,12 +50,15 @@ const Signup = () => {
 
       .then((userObj) => {
         const data = {
+          // id: userObj.user.uid,
+          username: username.current.value,
           firstName: firstNameRef.current.value,
           lastName: lastNameRef.current.value,
           email: emailRef.current.value,
           city: cityRef.current.value,
           state: stateRef.current.value,
         };
+        // console.log(data);
         return axios.post('/seekers', data);
       })
       .then(() => {
@@ -81,9 +82,6 @@ const Signup = () => {
     }, []);
 
 
-    // const sendValue = () => {
-    //   return console.log(emailRef.current.value) //on clicking button accesing current value of TextField and outputing it to console
-    // }
 
     return (
         <Grid>
@@ -93,6 +91,7 @@ const Signup = () => {
                     <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
                 </Grid>
                 <form >
+                    <TextField fullWidth label='Username' placeholder="Enter usrname" type="text" inputRef={userNameRef}/>
                     <TextField fullWidth label='First Name' placeholder="Enter first name" type="text" inputRef={firstNameRef}/>
                     <TextField fullWidth label='Last Name' placeholder="Enter last name" type="text" inputRef={lastNameRef}/>
                     <TextField fullWidth label='Email' placeholder="Enter your email" inputRef={emailRef}/>

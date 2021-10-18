@@ -1,10 +1,10 @@
 // Import FirebaseAuth and firebase.
 import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import './firebase.js';
-import axios from 'axios';
-
+import { useAuth } from './AuthContext.js';
 
 // Configure FirebaseUI.
 const uiConfig = {
@@ -21,9 +21,11 @@ const uiConfig = {
   },
 };
 
-const SocialMediaLogin = () => {
+function SocialMediaLogin() {
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
-
+  const [error, setError] = useState("");
+  const { currentUser, logout } = useAuth();
+  const history = useHistory();
   // Listen to the Firebase Auth state and set the local state.
   useEffect(() => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
@@ -32,7 +34,16 @@ const SocialMediaLogin = () => {
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
 
-
+  const logoutHandler =(e) => {
+    setError('');
+    logout()
+    .then(() => {
+      history.push("/");
+    })
+    .catch((error) => {
+      setError('Failed to log out');
+    })
+  }
 
   if (!isSignedIn) {
     return (
@@ -47,7 +58,7 @@ const SocialMediaLogin = () => {
     <div>
       {/* <h1>My App</h1> */}
       <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
-      <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
+      <a onClick={logoutHandler}>Sign-out</a>
     </div>
   );
 }
