@@ -49,8 +49,6 @@ const Signup = () => {
       signup(emailRef.current.value, passwordRef.current.value)
 
       .then((userObj) => {
-        console.log(user.uid);
-        console.log(userObj);
         const data = {
           id: userObj.user.uid,
           email: emailRef.current.value,
