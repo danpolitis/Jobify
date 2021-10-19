@@ -12,6 +12,7 @@ import Footer from "./Footer.jsx"
 import Header from "./Header.jsx"
 import Home from "./Home.jsx"
 import Test from "./Test.jsx"
+import Notes from "./Notes.jsx"
 import Theme from "../Theme/ThemeFile.js"
 // Import component here
 
@@ -40,6 +41,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
+              <Route path="/notes" component={Notes} />
               {/* Add route here */}
             </Switch>
           </div>

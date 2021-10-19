@@ -3,6 +3,8 @@ const path = require("path");
 const colors = require("colors");
 const logo = require("./logo.js");
 const app = express();
+const cors = require('cors');
+
 const port = process.env.PORT || 3000;
 const {
   applications,
@@ -19,6 +21,7 @@ const {
 app.use(express.static(path.resolve(__dirname, "..client/build")));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
 
 app.use("/applications", applications);
 app.use("/documents", documents);
@@ -34,9 +37,9 @@ app.get("/api", (req, res) => {
   res.json({ message: "👋 from Express!" });
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+// });
 
 app.listen(port, () => {
   console.log(
