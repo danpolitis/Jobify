@@ -78,4 +78,16 @@ router.route("/posting_id/:id").put(async (request, response) => {
     console.error(error);
   }
 });
+
+router.route("/posting_id/:id").get(async (request, response) => {
+  const id = request.params.id;
+  const result = await pool.query(`SELECT * FROM postings WHERE id = ${id};`);
+
+  try {
+    response.status(200).send(result.rows);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 module.exports = router;
