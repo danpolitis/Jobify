@@ -1,4 +1,4 @@
-// copy and rename to authKey.js, the details are provided in discord
+// copy and rename to authkey.js, the details are provided in discord notes
 const REACT_APP_FIREBASE_API_KEY="";
 const REACT_APP_FIREBASE_AUTH_DOMAIN="";
 const REACT_APP_FIREBASE_PROJECT_ID="";
