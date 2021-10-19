@@ -34,7 +34,7 @@ export default function Header() {
             <Link to="/dashboard">Dashboard</Link>
           </nav>
           <Button
-            href="#"
+            href="/signin"
             variant="contained"
             sx={{ my: 1, mx: 1.5 }}
           >

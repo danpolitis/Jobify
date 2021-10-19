@@ -10,7 +10,7 @@ const [job, loading] = useFetch(`http://localhost:3000/postings/posting_id/${pro
 if (loading) {
     return <CircularProgress />
 }
-
+console.log(job)
 return (
     <Typography
     variant="h4"
