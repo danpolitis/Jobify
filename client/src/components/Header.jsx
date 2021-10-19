@@ -32,6 +32,7 @@ export default function Header() {
           <nav>
             <Link to="/">Home</Link>
             <Link to="/test">Test Route</Link>
+            <Link to="/new-post">Add Job</Link>
           </nav>
           <Button
             href="#"
