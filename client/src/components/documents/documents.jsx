@@ -7,7 +7,9 @@ const Documents = () => {
 
   return (
   <>
-    Documents!
+    <h1>
+      Documents!
+    </h1>
     <div>
       <Upload/>
     </div>
