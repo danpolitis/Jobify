@@ -31,10 +31,10 @@ export default function Header() {
           </Typography>
           <nav>
             <Link to="/">Home</Link>
-            <Link to="/test">Test Route</Link>
+            <Link to="/dashboard">Dashboard</Link>
           </nav>
           <Button
-            href="#"
+            href="/signin"
             variant="contained"
             sx={{ my: 1, mx: 1.5 }}
           >

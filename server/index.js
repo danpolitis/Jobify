@@ -2,8 +2,8 @@ const express = require("express");
 const path = require("path");
 const colors = require("colors");
 const logo = require("./logo.js");
+const cors = require("cors");
 const app = express();
-const cors = require('cors');
 
 const port = process.env.PORT || 3000;
 const {
@@ -17,11 +17,14 @@ const {
   seeker_notes,
   seekers,
 } = require("./routes/index.js");
-
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.static(path.resolve(__dirname, "..client/build")));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
 
 app.use("/applications", applications);
 app.use("/documents", documents);

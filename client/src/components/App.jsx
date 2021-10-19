@@ -13,10 +13,17 @@ import Header from "./Header.jsx"
 import Home from "./Home.jsx"
 import Test from "./Test.jsx"
 import Notes from "./notes/Notes.jsx"
+import Dashboard from "./dashboard/Dashboard.jsx"
 import Theme from "../Theme/ThemeFile.js"
+import { AuthProvider } from './Auth/AuthContext.js';
+import SignUp from "./Auth/SignUp.jsx";
+import SignIn from "./Auth/SignIn.jsx";
+
 // Import component here
 
 function App() {
+
+
   return (
     <>
       <ThemeProvider theme={Theme}>
@@ -38,12 +45,18 @@ function App() {
             <meta name="description" content="App Description" />
             <meta name="theme-color" content="#799496" />
           </Helmet>
+
+          <AuthProvider>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
               <Route path="/notes" component={Notes} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/signin" component={SignIn} />
               {/* Add route here */}
             </Switch>
+          </AuthProvider>
           </div>
             <Footer sx={{ mt: 5 }} />
         </Box>
