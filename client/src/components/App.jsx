@@ -20,8 +20,6 @@ import SignIn from "./Auth/SignIn.jsx";
 
 // Import component here
 
-
-
 function App() {
 
 
