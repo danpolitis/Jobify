@@ -14,12 +14,12 @@ export function AuthProvider({ children }) {
   // const globalData = useContext(GlobalContext);
 
   function signup(email, password) {
-    console.log(email);
+    console.log('auth signup email:', email);
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
   function login(email, password) {
-    console.log(email);
+    console.log('auth login email:', email);
     return auth.signInWithEmailAndPassword(email, password);
   }
 
@@ -42,7 +42,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        console.log(user.uid);
+        console.log('auth userId:', user.uid);
         setCurrentUser(user);
         // globalData.dispatch({ type: 'updateUserId', data: user.uid });
       } else {

@@ -21,16 +21,18 @@ const Signup = () => {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
+    // const jobseekerRef = useRef(false);
+    // const employerRef = useRef(false);
     const { signup } = useAuth();
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [seeker, setSeeker] = useState(false);
     const history = useHistory();
-
-
+    const [role, setRole] = useState('seeker');
 
      const SignUpHandler = (e) => {
+       console.log(role);
+
 
       e.preventDefault();
 
@@ -46,13 +48,13 @@ const Signup = () => {
 
       signup(emailRef.current.value, passwordRef.current.value)
       .then(() => {
-        console.log(emailRef.current.value);
-        // const data = {
-        //   id: userObj.user.uid,
-        //   email: emailRef.current.value,
-        // };
-        // console.log(data);
-        // return axios.post('/seekers', data);
+        console.log('signup email: ', emailRef.current.value);
+        const data = {
+          id: userObj.user.uid,
+          email: emailRef.current.value,
+        };
+        console.log(data);
+        return axios.post('/signup', data);
       })
       .then(() => {
         history.push("/");
@@ -64,14 +66,13 @@ const Signup = () => {
         setLoading(false);
       });
 
-
     }
 
     useEffect(() => {
-      let isSubscribed = true;
-      return () => {
-        isSubscribed = false;
-      };
+      // let isSubscribed = true;
+      // return () => {
+      //   isSubscribed = false;
+      // };
     }, []);
 
 
@@ -91,8 +92,8 @@ const Signup = () => {
                     <TextField fullWidth label='Confirm Password' placeholder="Confirm your password" inputRef={passwordConfirmRef}/>
                     <FormControl component="fieldset" style={marginTop}>
                         <RadioGroup style={{ display: 'initial' }}>
-                            <FormControlLabel value="seeker" control={<Radio />} label="JobSeeker" />
-                            <FormControlLabel value="employer" control={<Radio />} label="Employer" />
+                            <FormControlLabel value="seeker" control={<Radio />} label="JobSeeker" checked={role === 'seeker'} onClick={() => setRole('seeker')}/>
+                            <FormControlLabel value="employer" control={<Radio />} label="Employer" onClick={role === 'employer'} onClick={() =>setRole('employer')}/>
                         </RadioGroup>
                     </FormControl>
                     <Typography
