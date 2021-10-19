@@ -6,11 +6,12 @@ const pool = require('./pool');
 router.route('/:user_id')
   .get(async (request, response) => {
     const user_id = request.params.user_id;
+    const params = ['base64', user_id]
     const result = await pool.query(
-      `SELECT * FROM documents WHERE user_id = ${user_id}`
+      'SELECT document_name, encode(document_body, $1) FROM documents WHERE user_id = $2;', params
     )
     try {
-      response.status(200).send(result);
+      response.status(200).send(result.rows);
     } catch (error) {
       console.error(error);
     }
