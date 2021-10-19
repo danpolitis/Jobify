@@ -50,7 +50,6 @@ const Signup = () => {
       .then(() => {
         console.log('signup email: ', emailRef.current.value);
         const data = {
-          id: userObj.user.uid,
           email: emailRef.current.value,
         };
         console.log(data);
@@ -69,10 +68,6 @@ const Signup = () => {
     }
 
     useEffect(() => {
-      // let isSubscribed = true;
-      // return () => {
-      //   isSubscribed = false;
-      // };
     }, []);
 
 
