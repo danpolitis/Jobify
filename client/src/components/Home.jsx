@@ -6,7 +6,8 @@ import Grid from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import './Home.css';
-
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
 
 
 
@@ -40,17 +41,15 @@ function Home(props) {
       >
         Jobify
       </Typography>
-        <Grid alignItems="center" justify="center">
       <form onSubmit={() => handleSubmit}>
         <label> What </label>
         <TextField className="homepage"
-          value={jobName} sx={{minWidth: "50px"}} placeholder="Job title, keywords, or company" onChange={e => setJobName(e.target.value)}></TextField>
+          value={jobName} sx={{padding: "5px", minWidth: "10px"}} placeholder="Job title, company, keywords" onChange={e => setJobName(e.target.value)}></TextField>
       <label> Where </label>
-        <TextField
-          value={zipCode} style={{minWidth: '10px'}}  placeholder="Enter zipcode" onChange={e => setZipCode(e.target.value)}></TextField>
-        <Button sx={{marginLeft: "10px", minHeight: "5vh"}} type="submit" disableElevation onClick={handleSubmit} color="primary" variant="contained">Find jobs</Button>
+        <TextField className="homepage"
+          value={zipCode} sx={{padding: "5px", minWidth: '10px'}}  placeholder="Enter zipcode" onChange={e => setZipCode(e.target.value)}></TextField>
+        <Button sx={{marginTop: "10px", marginLeft: "10px"}} type="submit" disableElevation onClick={handleSubmit} color="primary" variant="contained">Find jobs</Button>
       </form>
-      </Grid>
       </Container>
     </div>
   );

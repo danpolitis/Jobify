@@ -13,9 +13,11 @@ import Header from "./Header.jsx"
 import Home from "./Home.jsx"
 import Test from "./Test.jsx"
 import Theme from "../Theme/ThemeFile.js"
+import Dashboard from "./Dashboard/Dashboard.jsx"
 import { AuthProvider } from './Auth/AuthContext.js';
 import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
+
 // Import component here
 
 
@@ -49,6 +51,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
+              <Route path="/dashboard" component={Dashboard} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
               {/* Add route here */}
