@@ -31,7 +31,7 @@ export default function Header() {
           </Typography>
           <nav>
             <Link to="/">Home</Link>
-            <Link to="/test">Test Route</Link>
+            <Link to="/dashboard">Dashboard</Link>
           </nav>
           <Button
             href="/signin"
