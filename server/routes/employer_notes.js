@@ -60,6 +60,7 @@ router.route('/:id')
 
   .delete(async (request, response) => {
     const id = request.params.id;
+    console.log(id);
     const result = pool.query(
       `DELETE FROM employers_notes
        WHERE id = ${id};`

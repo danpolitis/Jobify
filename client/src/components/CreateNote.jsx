@@ -12,9 +12,12 @@ function CreateNote(props) {
   function handleAddNote(e) {
     e.preventDefault();
     if (props.isEmployer === true){
-      console.log(e.target.text.value)
+      props.handleClose()
       axios.post(`http://localhost:3000/employer_notes/${props.currentUser}`, {
         title: e.target.text.value
+      })
+      .then(() => {
+        props.getCurrentNotes()
       })
     } else {
       // axios.post(`http://localhost:3000/employer_notes/${props.currentUser}`)
