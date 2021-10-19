@@ -57,12 +57,13 @@ export default function SignIn() {
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} component={Link} to="/" onClick={signInHandler}>Sign in</Button>
                 </form>
                 {/* <Typography ><Link href="#" >Forgot password ?</Link></Typography> */}
+                <Typography color="primary">-----------------------------or-----------------------------</Typography>
+                <SocialMediaLogin />
                 <Typography> Do you have an account ?
                      <Link to="/signup" >
                         Sign Up
                 </Link>
                 </Typography>
-                <SocialMediaLogin />
             </Paper>
         </Grid>
     </>

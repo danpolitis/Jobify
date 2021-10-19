@@ -95,12 +95,12 @@ const Signup = () => {
                             <FormControlLabel value="employer" control={<Radio />} label="Employer" />
                         </RadioGroup>
                     </FormControl>
-                    <FormControlLabel
-                        control={<Checkbox name="checkedA" />}
+                    <Typography
+                        // control={<Checkbox name="checkedA" />}
                         label="I accept the terms and conditions."
                     />
                     <Button disabled={loading} type='submit' variant='contained' onClick={SignUpHandler} color='primary'style={btnstyle}
-                    component={Link} to="/"
+                    component={Link} to="/signin"
                     >Sign up</Button>
                 </form>
                 <Typography>Already have an account?<Link to="/signin" >Sign In</Link>

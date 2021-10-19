@@ -12,6 +12,8 @@ import { useAuth } from './AuthContext.js';
 const uiConfig = {
   // Popup signin flow rather than redirect flow.
   signInFlow: 'popup',
+  // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
+  // signInSuccessUrl: "/",
   // We will display Google and Facebook as auth providers.
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -33,7 +35,6 @@ function SocialMediaLogin() {
   useEffect(() => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
       if(user) {
-      console.log('socialmedia: ', user.uid);
       console.log('socialmedia: ', user.email);
       // globalData.dispatch({ type: 'updateUserId', data: user.uid });
       }
@@ -64,6 +65,7 @@ function SocialMediaLogin() {
   return (
     <div>
       <Typography>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</Typography>
+      <Typography><Link to="/" >User Profile</Link></Typography>
       <Button onClick={logoutHandler}>Sign-out</Button>
     </div>
   );
