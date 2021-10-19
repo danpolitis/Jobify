@@ -12,7 +12,7 @@ import Footer from "./Footer.jsx"
 import Header from "./Header.jsx"
 import Home from "./Home.jsx"
 import Test from "./Test.jsx"
-import Notes from "./Notes.jsx"
+import Notes from "./notes/Notes.jsx"
 import Theme from "../Theme/ThemeFile.js"
 // Import component here
 
