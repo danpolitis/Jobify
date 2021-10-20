@@ -16,7 +16,8 @@ const {
   postings,
   seeker_blogs,
   seeker_notes,
-  seekers
+  seekers,
+  todo_list
 } = require("./routes/index.js");
 app.use(
   cors({
@@ -37,6 +38,7 @@ app.use("/postings", postings);
 app.use("/seekers", seekers);
 app.use("/seeker_blogs", seeker_blogs);
 app.use("/seeker_notes", seeker_notes);
+app.use("/todo_list", todo_list);
 
 app.get("/api", (req, res) => {
   res.json({ message: "👋 from Express!" });
