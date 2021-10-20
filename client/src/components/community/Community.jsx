@@ -74,7 +74,11 @@ function Community(props) {
                 <Typography variant="h4" className={classes.blogTitle}>
                   Lorem ipsum
                 </Typography>
-                <Typography variant="body2" color="text.secondary" noWrap="true">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  noWrap="true"
+                >
                   This blog post shows a few different types of content that are
                   supported and styled with Material styles. Basic typography,
                   images, and code are all supported. You can extend these by
@@ -91,7 +95,7 @@ function Community(props) {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Typography variant="subtitle2">Author</Typography>
+                <Typography variant="subtitle2">John Doe</Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                   Oct 20, 2021
                 </Typography>
@@ -108,14 +112,20 @@ function Community(props) {
             <Card fullWidth sx={{ maxWidth: 345 }}>
               <CardContent>
                 <Typography variant="h4" className={classes.blogTitle}>
-                  blog title
+                  Garden Festival Committee
                 </Typography>
-                <Typography variant="body2" color="text.secondary" noWrap="true">
-                  blog content
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  noWrap="true"
+                >
+                  Hi! My name is Selphie Tilmitt! I just transferred here from
+                  Trabia Garden. I was on the Garden Festival Committee there,
+                  so I'm excited to join
                 </Typography>
               </CardContent>
               <CardActions>
-                <Typography variant="subtitle2">Author</Typography>
+                <Typography variant="subtitle2">Selphie Tilmitt</Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                   Oct 20, 2021
                 </Typography>
@@ -132,14 +142,20 @@ function Community(props) {
             <Card fullWidth sx={{ maxWidth: 345 }}>
               <CardContent>
                 <Typography variant="h4" className={classes.blogTitle}>
-                  blog title
+                  Timber Maniac
                 </Typography>
-                <Typography variant="body2" color="text.secondary" noWrap="true">
-                  blog content
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  noWrap="true"
+                >
+                  Sir Laguna writes about the time he went to the editor of
+                  Timber Maniacs. He borught an article entitled 'Alcohol Will
+                  Change You' but it got rejected.
                 </Typography>
               </CardContent>
               <CardActions>
-                <Typography variant="subtitle2">Author</Typography>
+                <Typography variant="subtitle2">Sir Laguna</Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                   Oct 20, 2021
                 </Typography>
@@ -156,14 +172,21 @@ function Community(props) {
             <Card fullWidth sx={{ maxWidth: 345 }}>
               <CardContent>
                 <Typography variant="h4" className={classes.blogTitle}>
-                  blog title
+                  Ipsum
                 </Typography>
-                <Typography variant="body2" color="text.secondary" noWrap="true">
-                  blog content
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  noWrap="true"
+                >
+                  Est eaque reiciendis ut tempore quidem qui molestiae quod? Ut
+                  quae nesciunt id recusandae unde ut laudantium quia est
+                  molestiae earum qui molestiae quibusdam vel molestiae labore
+                  id assumenda dolor.
                 </Typography>
               </CardContent>
               <CardActions>
-                <Typography variant="subtitle2">Author</Typography>
+                <Typography variant="subtitle2">Jane Doe</Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                   Oct 20, 2021
                 </Typography>
