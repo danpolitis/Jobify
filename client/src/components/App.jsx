@@ -18,7 +18,8 @@ import Theme from "../Theme/ThemeFile.js"
 import { AuthProvider } from './Auth/AuthContext.js';
 import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
-
+import Blog from "./blog/Blog.jsx";
+import Community from "./community/Community.jsx";
 // Import component here
 
 function App() {
@@ -54,6 +55,8 @@ function App() {
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
+              <Route path="/blog" component={Blog} />
+              <Route path="/community" component={Community} />
               {/* Add route here */}
             </Switch>
           </AuthProvider>
