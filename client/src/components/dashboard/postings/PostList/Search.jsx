@@ -2,19 +2,25 @@ import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import useFetch from "../hooks/useFetch.jsx";
 
-function Search() {
+function Search({ setRoute }) {
   const [ keyword, setKeyword ] = useState("");
   const [ city, setCity ] = useState("");
 
-  function handleSubmit() {
+  function handleSubmit(e) {
     e.preventDefault();
-    console.log('submitted');
+    // console.log(e)
+    keyword.length > 0
+    ? setRoute(`keyword/${keyword}`)
+    : city.length > 0
+    ? setRoute(`city/${city}`)
+    : null;
   }
 
   return (
     <Grid item xs justifyContent="center">
       <form onSubmit={handleSubmit}>
       <TextField
+        name="keyword"
         label="Keyword"
         value={keyword}
         sx={{ padding: "5px", minWidth: "10px" }}
@@ -23,6 +29,7 @@ function Search() {
         variant="outlined"
       />
       <TextField
+        name="city"
         label="City"
         value={city}
         sx={{ padding: "5px", minWidth: "10px" }}
@@ -36,6 +43,7 @@ function Search() {
         color="primary"
         variant="contained"
         disableElevation
+        onSubmit={handleSubmit}
       >
         Find jobs
       </Button>

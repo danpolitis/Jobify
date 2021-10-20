@@ -43,7 +43,7 @@ function Dashboard(props) {
 
   useEffect(() => {
     getToDoList()
-  },[toDoList])
+  },[0])
 
   function handleSubmit() {
     axios.post('/todolist', {
