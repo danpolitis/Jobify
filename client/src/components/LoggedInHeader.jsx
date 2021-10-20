@@ -25,6 +25,7 @@ export default function LoggedInHeader(props) {
   };
 
 
+
   return (
     <>
       <AppBar
@@ -60,12 +61,12 @@ export default function LoggedInHeader(props) {
               IconComponent={() => (
                 <FormatListBulletedIcon sx={{marginLeft: "5px", position: "absolute"}} />)}
             >
-              <MenuItem value={10}>Home</MenuItem>
-              <MenuItem value={20}>Documents</MenuItem>
-              <MenuItem value={30}>Notes</MenuItem>
-              <MenuItem value={40}>Blogs</MenuItem>
-              <MenuItem value={50}>Communities</MenuItem>
-              <MenuItem value={60}>Log Out</MenuItem>
+            <Link to="/"> <MenuItem value={10}>Home</MenuItem></Link>
+            <Link to="/test"> <MenuItem value={20}>Documents</MenuItem></Link>
+            <Link to="/notes"> <MenuItem value={30}>Notes</MenuItem></Link>
+            <Link to="/blogs"> <MenuItem value={40}>Blogs</MenuItem></Link>
+            <Link to="/communities"> <MenuItem value={40}>Communities</MenuItem></Link>
+            <Link to="/logout"> <MenuItem value={50}>Log Out</MenuItem></Link>
             </Select>
           </FormControl>
         </Toolbar>

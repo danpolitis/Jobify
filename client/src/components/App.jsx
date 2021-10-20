@@ -47,6 +47,10 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route path="/test" component={Dashboard} />
               <Route path="/dashboard" component={Dashboard} />
+              {/* <Route path="/notes" component={Notes} />
+              <Route path="/blogs" component={Blogs} /> */}
+              {/* <Route path="/communities" component={Communities} /> */}
+              {/* <Route path="/logout" component={logout} /> */}
               {/* Add route here */}
             </Switch>
           </div>
