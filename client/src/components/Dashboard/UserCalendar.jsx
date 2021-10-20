@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import Calendar from 'react-calendar';
+import React, { useState, useEffect, useContext } from "react"
+import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -7,14 +7,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import axios from 'axios';
+import { GlobalContext } from "../App.jsx"
 
 
 
 
 
 
-
-function Dashboard(props) {
+function UserCalendar(props) {
 
   const [employerPortal, setEmployerPortal] = useState("false")
   const [seekerPortal, setSeekerPortal] = useState("false")
@@ -23,7 +23,7 @@ function Dashboard(props) {
   const [eventActivity, setEventActivity] = useState("")
   const [time, setTime] = useState('')
   const [toDoList, setToDoList] = useState([])
-
+  const { state } = useContext(GlobalContext);
 
   // useEffect(() => {
 
@@ -57,10 +57,10 @@ function Dashboard(props) {
     })
   }
 
-  console.log(toDoList)
+  // console.log(toDoList)
 
   function getToDoList() {
-    axios.get('/todo_list').then((response =>
+    axios.get(`/todo_list/${state.userId}`).then((response =>
       setToDoList(response.rows)
     ))
   }
@@ -104,4 +104,4 @@ function Dashboard(props) {
 }
 
 
-export default Dashboard
+export default UserCalendar
