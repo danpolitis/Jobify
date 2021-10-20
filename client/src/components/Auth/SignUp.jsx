@@ -28,7 +28,7 @@ const Signup = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
-    const [role, setRole] = useState(false);
+    const [role, setRole] = useState('seeker');
 
      const SignUpHandler = (e) => {
        console.log(role);
@@ -47,13 +47,17 @@ const Signup = () => {
 
 
       signup(emailRef.current.value, passwordRef.current.value)
-      .then((user) => {
-        console.log('user uid', user.uid);
+      .then((userObj) => {
+        console.log('user uid', userObj.user.uid);
+        console.log('role,', role);
         console.log('signup email: ', emailRef.current.value);
-        // const data = {
-        //   email: emailRef.current.value,
-        // };
-        // return axios.post('/signup', data);
+        const data = {
+          uuid: userObj.user.uid,
+          role: role,
+          // email: emailRef.current.value,
+        };
+        console.log(data);
+        return axios.post('http://localhost:3000/', data);
       })
       .then(() => {
         history.push("/");
