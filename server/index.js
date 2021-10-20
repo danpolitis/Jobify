@@ -11,10 +11,11 @@ const {
   employers_notes,
   documents,
   employers,
+  login,
   postings,
   seeker_blogs,
   seeker_notes,
-  seekers,
+  seekers
 } = require("./routes/index.js");
 app.use(
   cors({
@@ -30,6 +31,7 @@ app.use("/documents", documents);
 app.use("/employers", employers);
 app.use("/employer_blogs", employers_blogs);
 app.use("/employer_notes", employers_notes);
+app.use("/signup_login", login);
 app.use("/postings", postings);
 app.use("/seekers", seekers);
 app.use("/seeker_blogs", seeker_blogs);

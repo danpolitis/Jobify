@@ -7,3 +7,4 @@ exports.postings = require('./postings.js');
 exports.seeker_blogs = require('./seeker_blogs.js');
 exports.seeker_notes = require('./seeker_notes.js');
 exports.seekers = require('./seekers.js');
+exports.login = require('./signup_login.js');
