@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, CircularProgress } from "@mui/material";
 import useFetch from "./hooks/useFetch.jsx";
+import Search from './Search.jsx'
 import PostList from "./PostList.jsx";
 import PostDetails from "./PostDetails.jsx";
 
@@ -12,7 +13,7 @@ function Postings() {
     ? <CircularProgress />
     : <Grid container>
       <Grid container item>
-        search components go here
+        <Search />
       </Grid>
       <Grid container item>
         filter components go here

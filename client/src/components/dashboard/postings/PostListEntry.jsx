@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, CardHeader, CardContent, Typography, CircularProgress } from "@mui/material";
+import { Card, CardContent, Typography, CircularProgress } from "@mui/material";
 import useFetch from "./hooks/useFetch.jsx"
 
 function PostListEntry({ job }) {

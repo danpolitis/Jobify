@@ -37,7 +37,6 @@ function Home(props) {
         color="text.secondary"
         align="center"
         sx={{marginTop: "100px", marginBottom: "30px", marginBottom: "75px"}}
-        {...props}
       >
         Jobify
       </Typography>
