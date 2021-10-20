@@ -29,7 +29,6 @@ const Signup = () => {
     const [role, setRole] = useState('seeker');
 
      const SignUpHandler = (e) => {
-       console.log(role);
 
 
       e.preventDefault();
@@ -98,7 +97,7 @@ const Signup = () => {
                         label="I accept the terms and conditions."
                     />
                     <Button disabled={loading} type='submit' variant='contained' onClick={SignUpHandler} color='primary'style={btnstyle}
-                    component={Link} to="/signin"
+                    component={Link} to="/dashboard"
                     >Sign up</Button>
                 </form>
                 <Typography>Already have an account?<Link to="/signin" >Sign In</Link>

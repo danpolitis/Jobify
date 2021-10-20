@@ -42,9 +42,10 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        console.log('auth userId:', user.uid);
+        // console.log('auth userId:', user.uid);
         setCurrentUser(user);
         globalData.dispatch({ type: 'updateUserId', data: user.uid });
+        console.log(globalData);
       } else {
         globalData.dispatch({ type: 'updateUserId', data: '' });
       }

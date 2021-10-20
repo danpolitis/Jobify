@@ -34,11 +34,11 @@ export default function SignIn() {
           uuid: userObj.user.uid,
         }
         console.log(data);
-        return axios.get('http://localhost:3000/signup_login');
+        // return axios.get('http://localhost:3000/signup_login');
       })
       .then(() => {
         console.log(emailRef.current.value);
-        history.push('/');
+        history.push('/dashboard');
       })
       .catch((error) => {
         setError(error.message);
@@ -62,7 +62,7 @@ export default function SignIn() {
             <TextField label='Email' placeholder='name@example.com' fullWidth required inputRef={emailRef} />
             <TextField label='Password' placeholder='Enter your password' type='password' fullWidth required inputRef={passwordRef} />
 
-            <Button type='submit' color='primary' variant="contained" style={btnstyle} component={Link} to="/" onClick={signInHandler}>Sign in</Button>
+            <Button type='submit' color='primary' variant="contained" style={btnstyle} component={Link} to="/dashboard" onClick={signInHandler}>Sign in</Button>
           </form>
           {/* <Typography ><Link href="#" >Forgot password ?</Link></Typography> */}
           <Typography color="primary">-----------------------------or-----------------------------</Typography>
