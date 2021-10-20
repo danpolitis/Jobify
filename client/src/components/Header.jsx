@@ -25,9 +25,10 @@ export default function Header() {
             sx={{
               flexGrow: 1,
               display: "flex",
+              fontWeight:"700"
             }}
           >
-            Logo
+            Jobi<sup>fy</sup>
           </Typography>
           <nav>
             <Link to="/">Home</Link>

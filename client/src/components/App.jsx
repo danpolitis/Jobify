@@ -14,9 +14,9 @@ import Home from "./Home.jsx"
 import Test from "./Test.jsx"
 import Dashboard from "./dashboard/Dashboard.jsx"
 import Theme from "../Theme/ThemeFile.js"
-import { AuthProvider } from './Auth/AuthContext.js';
-import SignUp from "./Auth/SignUp.jsx";
-import SignIn from "./Auth/SignIn.jsx";
+// import { AuthProvider } from './Auth/AuthContext.js';
+// import SignUp from "./Auth/SignUp.jsx";
+// import SignIn from "./Auth/SignIn.jsx";
 
 // Import component here
 
@@ -45,16 +45,16 @@ function App() {
             <meta name="theme-color" content="#799496" />
           </Helmet>
 
-          <AuthProvider>
+          {/* <AuthProvider> */}
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
               <Route path="/dashboard" component={Dashboard} />
-              <Route path="/signup" component={SignUp} />
-              <Route path="/signin" component={SignIn} />
+              {/* <Route path="/signup" component={SignUp} />
+              <Route path="/signin" component={SignIn} /> */}
               {/* Add route here */}
             </Switch>
-          </AuthProvider>
+          {/* </AuthProvider> */}
           </div>
             <Footer sx={{ mt: 5 }} />
         </Box>

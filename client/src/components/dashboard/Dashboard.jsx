@@ -1,6 +1,6 @@
 import React from "react"
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Button";
+import Grid from '@mui/material/Grid';
 import Container from "@mui/material/Container";
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
@@ -15,17 +15,19 @@ function Dashboard(props) {
   })
 
   return (
-    <Container>
-      <Stack
-        direction="row"
-        divider={<Divider orientation="vertical" flexItem />}
-        spacing={{xs: 4}}
-      >
+    <Container sx={{padding:"25px 0"}}>
+
+    <Grid container spacing={2} >
+      <Grid item xs={4}>
         <Stack>
           {posts}
         </Stack>
-        <PostDetails postId = {3} />
-      </Stack>
+      </Grid>
+      <Divider orientation="vertical" flexItem />
+      <Grid item xs={4} sx={{paddingLeft:"20px"}}>
+        <PostDetails postId = {5} />
+      </Grid>
+    </Grid>
     </Container>
   );
 }
