@@ -33,9 +33,10 @@ export default function Header() {
             <Link to="/">Home</Link>
             <Link to="/test">Test Route</Link>
             <Link to="/new-post">Add Job</Link>
+            <Link to="/dashboard">Dashboard</Link>
           </nav>
           <Button
-            href="#"
+            href="/signin"
             variant="contained"
             sx={{ my: 1, mx: 1.5 }}
           >

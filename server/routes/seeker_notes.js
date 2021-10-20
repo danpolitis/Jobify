@@ -35,7 +35,7 @@ router.route('/:poster_id')
     }
   })
 
-router.route('/id/:id')
+router.route('/:id')
   .put(async (request, response) => {
     const id = request.params.id;
     const title = request.body.title;
