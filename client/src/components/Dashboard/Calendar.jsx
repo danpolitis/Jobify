@@ -30,23 +30,28 @@ function Dashboard(props) {
   // },[])
 
 
-  function onChange1(calDate) {
-    //change results based on calendar date click
-    setCalDate(calDate)
-    const filteredResults = userResults.filter(result => {
-      const newResultFormat = new Date(result.created_at).toLocaleString().split(",")[0]
-      const newCalDateFormat = calDate.toLocaleString().split(",")[0]
-      return newResultFormat === newCalDateFormat
-    })
-  }
+  // function onChange1(calDate) {
+  //   //change results based on calendar date click
+  //   setCalDate(calDate)
+  //   const filteredResults = userResults.filter(result => {
+  //     const newResultFormat = new Date(result.created_at).toLocaleString().split(",")[0]
+  //     const newCalDateFormat = calDate.toLocaleString().split(",")[0]
+  //     return newResultFormat === newCalDateFormat
+  //   })
+  // }
+
+
 
 
   useEffect(() => {
     getToDoList()
-  },[toDoList])
+  },[0])
+
+
+  //Thu Oct 28 2021 00:00:00 GMT-0700 (Pacific Daylight Time)
 
   function handleSubmit() {
-    axios.post('/todolist', {
+    axios.post('/todo_list', {
       time: time,
       eventActivity: eventActivity
     }).then(resetInputs())
@@ -56,7 +61,7 @@ function Dashboard(props) {
   }
 
   function getToDoList() {
-    axios.get('/todolist').then((response =>
+    axios.get('/todo_list').then((response =>
       setToDoList(response)
     ))
   }
@@ -73,7 +78,7 @@ function Dashboard(props) {
       <Grid container justifyContent="flex-end" sx={{ marginLeft: "10px"}}>
         <Box sx={{ p: 2 }}>
           <Calendar
-            onChange={onChange1}
+            onChange={setCalDate}
             value={calDate}
             sx={{marginLeft: "150px"}} />
           <input value={time} onChange={e => setTime(e.target.value)} type="time" min="09:00" max="18:00" required/>
