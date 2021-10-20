@@ -9,7 +9,7 @@ const useFetch = url => {
       (async () => {
         const data = await fetch(url)
           .then(res => res.json());
-        setState([data[0], false]);
+        data.rows ? setState([data.rows, false]) : setState([data[0], false]);
       })();
     }, [url]);
 
