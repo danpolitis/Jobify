@@ -18,7 +18,7 @@ router.route("/employer/:employer_id")
       `SELECT * FROM postings WHERE employer_id = $1;`, params
     );
     try {
-      response.status(200).send(result);
+      response.status(200).send(result.rows);
     } catch (error) {
       console.error(error);
     }

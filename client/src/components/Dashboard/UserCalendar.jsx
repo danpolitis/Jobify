@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import Button from "@mui/material/Button";
@@ -7,14 +7,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import axios from 'axios';
+import { GlobalContext } from "../App.jsx"
 
 
 
 
 
 
-
-function Dashboard(props) {
+function UserCalendar(props) {
 
   const [employerPortal, setEmployerPortal] = useState("false")
   const [seekerPortal, setSeekerPortal] = useState("false")
@@ -23,22 +23,24 @@ function Dashboard(props) {
   const [eventActivity, setEventActivity] = useState("")
   const [time, setTime] = useState('')
   const [toDoList, setToDoList] = useState([])
-
+  const { state } = useContext(GlobalContext);
 
   // useEffect(() => {
 
   // },[])
 
 
-  function onChange1(calDate) {
-    //change results based on calendar date click
-    setCalDate(calDate)
-    const filteredResults = userResults.filter(result => {
-      const newResultFormat = new Date(result.created_at).toLocaleString().split(",")[0]
-      const newCalDateFormat = calDate.toLocaleString().split(",")[0]
-      return newResultFormat === newCalDateFormat
-    })
-  }
+  // function onChange1(calDate) {
+  //   //change results based on calendar date click
+  //   setCalDate(calDate)
+  //   const filteredResults = userResults.filter(result => {
+  //     const newResultFormat = new Date(result.created_at).toLocaleString().split(",")[0]
+  //     const newCalDateFormat = calDate.toLocaleString().split(",")[0]
+  //     return newResultFormat === newCalDateFormat
+  //   })
+  // }
+
+
 
 
   useEffect(() => {
@@ -46,7 +48,7 @@ function Dashboard(props) {
   },[0])
 
   function handleSubmit() {
-    axios.post('/todolist', {
+    axios.post('/todo_list', {
       time: time,
       eventActivity: eventActivity
     }).then(resetInputs())
@@ -55,9 +57,11 @@ function Dashboard(props) {
     })
   }
 
+  // console.log(toDoList)
+
   function getToDoList() {
-    axios.get('/todolist').then((response =>
-      setToDoList(response)
+    axios.get(`/todo_list/${state.userId}`).then((response =>
+      setToDoList(response.rows)
     ))
   }
 
@@ -73,7 +77,7 @@ function Dashboard(props) {
       <Grid container justifyContent="flex-end" sx={{ marginLeft: "10px"}}>
         <Box sx={{ p: 2 }}>
           <Calendar
-            onChange={onChange1}
+            onChange={setCalDate}
             value={calDate}
             sx={{marginLeft: "150px"}} />
           <input value={time} onChange={e => setTime(e.target.value)} type="time" min="09:00" max="18:00" required/>
@@ -87,7 +91,9 @@ function Dashboard(props) {
                 hello
               </li>
               <li>
-                hhello2
+                {/* {toDoList && toDoList.map(item => (
+                  item.time, item.eventactivity
+                ))} */}
               </li>
             </ul>
           </Box>
@@ -98,4 +104,4 @@ function Dashboard(props) {
 }
 
 
-export default Dashboard
+export default UserCalendar

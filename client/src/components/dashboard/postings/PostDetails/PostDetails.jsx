@@ -3,7 +3,7 @@ import { Grid, Typography, CircularProgress, Stack, Divider, Chip, Box, Button, 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { pink } from "@mui/material/colors";
 import useFetch from "../hooks/useFetch.jsx"
-// import ApplyForm from "./ApplyForm.jsx"
+import ApplyForm from "./ApplyForm.jsx"
 
 const style = {
   position: 'absolute',
@@ -26,7 +26,7 @@ function PostDetails({ postId }) {
   return (
     !job
     ? <CircularProgress />
-    : <Grid item xs={6}>
+    : <Grid item xs={7} sx={{border: "1px solid rgba(0, 0, 0, 0.12)"}}>
       <>
         <Stack
           spacing={{xs: 3}}
@@ -122,7 +122,7 @@ function PostDetails({ postId }) {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Apply For The Position
             </Typography>
-            {/* <ApplyForm /> */}
+            <ApplyForm />
           </Box>
         </Modal>
       </>
