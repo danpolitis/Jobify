@@ -51,6 +51,9 @@ function Notes(props) {
       body: data,
       title: currentNote.title
     })
+    .then(() => {
+      getCurrentNotes()
+    })
   }
   useEffect(() => {
     if (currentNote !== undefined) {

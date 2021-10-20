@@ -17,6 +17,7 @@ function Note(props) {
   function handleListClick(event, index, note) {
     props.setSelectedIndex(index)
     props.setCurrentNote(note)
+    props.getCurrentNotes()
   }
 
   function handleDeleteNote(e) {

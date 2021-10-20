@@ -18,6 +18,7 @@ function NotesList(props) {
 
   function handleClose() {
     setOpen(false)
+    props.getCurrentNotes()
   }
 
   return (
