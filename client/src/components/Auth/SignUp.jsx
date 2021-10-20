@@ -25,12 +25,11 @@ const Signup = () => {
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [seeker, setSeeker] = useState(false);
     const history = useHistory();
-
-
+    const [role, setRole] = useState('seeker');
 
      const SignUpHandler = (e) => {
+
 
       e.preventDefault();
 
@@ -40,22 +39,23 @@ const Signup = () => {
         return setError('passwords do not match!');
       }
 
-
       setLoading(true);
 
-
       signup(emailRef.current.value, passwordRef.current.value)
-      .then(() => {
-        console.log(emailRef.current.value);
-        // const data = {
-        //   id: userObj.user.uid,
-        //   email: emailRef.current.value,
-        // };
-        // console.log(data);
-        // return axios.post('/seekers', data);
+      .then((userObj) => {
+        // console.log('user uid', userObj.user.uid);
+        // console.log('role,', role);
+        // console.log('signup email: ', emailRef.current.value);
+        const data = {
+          uuid: userObj.user.uid,
+          role: role,
+          email: emailRef.current.value,
+        };
+        console.log(data);
+        // return axios.post('http://localhost:3000/signup_login', data);
       })
       .then(() => {
-        history.push("/");
+        history.push("/dashboard");
       })
       .catch((error) => {
         setError(error.message);
@@ -64,14 +64,9 @@ const Signup = () => {
         setLoading(false);
       });
 
-
     }
 
     useEffect(() => {
-      let isSubscribed = true;
-      return () => {
-        isSubscribed = false;
-      };
     }, []);
 
 
@@ -91,8 +86,8 @@ const Signup = () => {
                     <TextField fullWidth label='Confirm Password' placeholder="Confirm your password" inputRef={passwordConfirmRef}/>
                     <FormControl component="fieldset" style={marginTop}>
                         <RadioGroup style={{ display: 'initial' }}>
-                            <FormControlLabel value="seeker" control={<Radio />} label="JobSeeker" />
-                            <FormControlLabel value="employer" control={<Radio />} label="Employer" />
+                            <FormControlLabel value="seeker" control={<Radio />} label="JobSeeker" checked={role === 'seeker'} onClick={() => setRole('seeker')}/>
+                            <FormControlLabel value="employer" control={<Radio />} label="Employer" checked={role === 'employer'} onClick={() =>setRole('employer')}/>
                         </RadioGroup>
                     </FormControl>
                     <Typography
@@ -100,7 +95,7 @@ const Signup = () => {
                         label="I accept the terms and conditions."
                     />
                     <Button disabled={loading} type='submit' variant='contained' onClick={SignUpHandler} color='primary'style={btnstyle}
-                    component={Link} to="/signin"
+                    component={Link} to="/dashboard"
                     >Sign up</Button>
                 </form>
                 <Typography>Already have an account?<Link to="/signin" >Sign In</Link>

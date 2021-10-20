@@ -35,7 +35,7 @@ function SocialMediaLogin() {
   useEffect(() => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
       if(user) {
-      console.log('socialmedia: ', user.email);
+      // console.log('socialmedia: ', user.email);
       // globalData.dispatch({ type: 'updateUserId', data: user.uid });
       }
 
@@ -65,7 +65,7 @@ function SocialMediaLogin() {
   return (
     <div>
       <Typography>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</Typography>
-      <Typography><Link to="/" >User Profile</Link></Typography>
+      <Typography><Link to="/dashboard" >Dashboard</Link></Typography>
       <Button onClick={logoutHandler}>Sign-out</Button>
     </div>
   );

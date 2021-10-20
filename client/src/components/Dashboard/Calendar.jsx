@@ -47,9 +47,6 @@ function Dashboard(props) {
     getToDoList()
   },[0])
 
-
-  //Thu Oct 28 2021 00:00:00 GMT-0700 (Pacific Daylight Time)
-
   function handleSubmit() {
     axios.post('/todo_list', {
       time: time,
@@ -60,9 +57,11 @@ function Dashboard(props) {
     })
   }
 
+  console.log(toDoList)
+
   function getToDoList() {
     axios.get('/todo_list').then((response =>
-      setToDoList(response)
+      setToDoList(response.rows)
     ))
   }
 
@@ -92,7 +91,9 @@ function Dashboard(props) {
                 hello
               </li>
               <li>
-                hhello2
+                {/* {toDoList && toDoList.map(item => (
+                  item.time, item.eventactivity
+                ))} */}
               </li>
             </ul>
           </Box>
