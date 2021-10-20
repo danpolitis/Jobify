@@ -12,6 +12,7 @@ import Footer from "./Footer.jsx"
 import Header from "./Header.jsx"
 import Home from "./Home.jsx"
 import Test from "./Test.jsx"
+import Notes from "./notes/Notes.jsx"
 import Dashboard from "./dashboard/Dashboard.jsx"
 import Theme from "../Theme/ThemeFile.js"
 import { AuthProvider } from './Auth/AuthContext.js';
@@ -49,6 +50,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
+              <Route path="/notes" component={Notes} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
