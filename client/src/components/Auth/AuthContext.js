@@ -14,12 +14,12 @@ export function AuthProvider({ children }) {
   // const globalData = useContext(GlobalContext);
 
   function signup(email, password) {
-    console.log('auth signup email:', email);
+    // console.log('auth signup email:', email);
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
   function login(email, password) {
-    console.log('auth login email:', email);
+    // console.log('auth login email:', email);
     return auth.signInWithEmailAndPassword(email, password);
   }
 

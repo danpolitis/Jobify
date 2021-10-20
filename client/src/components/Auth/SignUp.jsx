@@ -28,7 +28,7 @@ const Signup = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
-    const [role, setRole] = useState('seeker');
+    const [role, setRole] = useState(false);
 
      const SignUpHandler = (e) => {
        console.log(role);
@@ -47,13 +47,13 @@ const Signup = () => {
 
 
       signup(emailRef.current.value, passwordRef.current.value)
-      .then(() => {
+      .then((user) => {
+        console.log('user uid', user.uid);
         console.log('signup email: ', emailRef.current.value);
-        const data = {
-          email: emailRef.current.value,
-        };
-        console.log(data);
-        return axios.post('/signup', data);
+        // const data = {
+        //   email: emailRef.current.value,
+        // };
+        // return axios.post('/signup', data);
       })
       .then(() => {
         history.push("/");
@@ -88,7 +88,7 @@ const Signup = () => {
                     <FormControl component="fieldset" style={marginTop}>
                         <RadioGroup style={{ display: 'initial' }}>
                             <FormControlLabel value="seeker" control={<Radio />} label="JobSeeker" checked={role === 'seeker'} onClick={() => setRole('seeker')}/>
-                            <FormControlLabel value="employer" control={<Radio />} label="Employer" onClick={role === 'employer'} onClick={() =>setRole('employer')}/>
+                            <FormControlLabel value="employer" control={<Radio />} label="Employer" checked={role === 'employer'} onClick={() =>setRole('employer')}/>
                         </RadioGroup>
                     </FormControl>
                     <Typography
