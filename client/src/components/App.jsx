@@ -1,5 +1,5 @@
 import './App.css';
-import React from "react";
+import React, {useState} from "react";
 import { Route, Switch } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
@@ -14,9 +14,12 @@ import Home from "./Home.jsx"
 import Test from "./Test.jsx"
 import Theme from "../Theme/ThemeFile.js"
 import Dashboard from "./Dashboard/Dashboard.jsx"
+import LoggedInHeader from './LoggedInHeader.jsx'
 // Import component here
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = useState(true)
   return (
     <>
       <ThemeProvider theme={Theme}>
@@ -31,7 +34,9 @@ function App() {
           }}
         >
           <CssBaseline />
+          {loggedIn ? <LoggedInHeader/> :
           <Header />
+           }
           <div className="App">
           <Helmet>
             <title>Jobify</title>
@@ -40,7 +45,7 @@ function App() {
           </Helmet>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/test" component={Test} />
+              <Route path="/test" component={Dashboard} />
               <Route path="/dashboard" component={Dashboard} />
               {/* Add route here */}
             </Switch>
