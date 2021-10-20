@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid, CircularProgress } from "@mui/material";
+import { Grid } from "@mui/material";
 import PostListEntry from "./PostListEntry.jsx";
 
 function PostList({ jobs }) {

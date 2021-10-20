@@ -9,23 +9,23 @@ function PostListEntry({ job }) {
   return (
     !employerData
     ? <CircularProgress />
-    : <Card variant="outlined">
-      <Typography variant="subtitle2" align="left">
+    : <Card variant="outlined" sx={{ textAlign: "left", padding: "5% 10%" }}>
+      <Typography variant="subtitle2" >
         {employerData[0].uuid}
       </Typography>
-      <Typography variant="h6" align="left">
+      <Typography variant="h6">
         {title ? title : "Untitled"}
       </Typography>
-      <Typography variant="subtitle1" align="left">
+      <Typography variant="subtitle1">
         {`${employerData[0].city}, ${employerData[0].state}`}
       </Typography>
-      <Typography variant="subtitle1" fontWeightBold align="left">
+      <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
         {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(salary)}
       </Typography>
-      <Typography variant="body1" align="left">
+      <Typography variant="body1" sx={{ margin: "2% 0 2% 0"}}>
         {description}
       </Typography>
-      <Typography variant="body2" color="text.secondary" align="left">
+      <Typography variant="body2" color="text.secondary">
         {`Posted ${new Date(posted_date).toLocaleDateString('en-US')}`}
       </Typography>
     </Card>
