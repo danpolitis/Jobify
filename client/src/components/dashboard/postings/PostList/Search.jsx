@@ -8,12 +8,10 @@ function Search({ setRoute }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(e)
-    keyword.length > 0
-    ? setRoute(`keyword/${keyword}`)
-    : city.length > 0
-    ? setRoute(`city/${city}`)
-    : null;
+
+    if (keyword.length > 0 || city.length > 0) {
+      setRoute(`search/?keyword=${keyword}&city=${city}`)
+    }
   }
 
   return (

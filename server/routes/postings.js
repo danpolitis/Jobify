@@ -50,32 +50,27 @@ router.route("/employer/:employer_id")
     }
   });
 
-router.route("/keyword/:keyword")
+router.route("/search/:terms")
   .get(async (request, response) => {
-    const params = [request.params.keyword];
-    const result = await pool.query(
-      `SELECT * FROM postings
-        WHERE lower(field) LIKE LOWER('%' || $1 || '%')
-          OR lower(description) LIKE LOWER('%' || $1 || '%')
-          OR lower(title) LIKE LOWER('%' || $1 || '%')
-          OR lower(benefits) LIKE LOWER('%' || $1 || '%')
-          OR lower(requirements) LIKE LOWER('%' || $1 || '%');`,
-      params
-    )
-    try {
-      response.status(200).send(result);
-    } catch (error) {
-      console.error(error);
-    }
-  });
+    const { keyword, city } = request.params.terms;
+    const keywordSearchClause = `(
+      lower(field) LIKE LOWER("%${keyword}%")
+        OR lower(description) LIKE LOWER("%${keyword}%")
+        OR lower(title) LIKE LOWER("%${keyword}%")
+        OR lower(benefits) LIKE LOWER("%${keyword}%")
+        OR lower(requirements) LIKE LOWER("%${keyword}%")
+    )`;
+    const citySearchClause = `
+      lower(city) LIKE LOWER("%${city}%")
+    `;
+    const search =
+      keyword.length > 0
+      ? `SELECT * FROM postings WHERE ${keywordSearchClause};`
+      : city.length > 0
+      ? `SELECT * FROM postings WHERE ${citySearchClause};`
+      : `SELECT * FROM postings WHERE ${keywordSearchClause} AND ${citySearchClause};`;
 
-router.route("/city/:city")
-  .get(async (request, response) => {
-    const params = [request.params.city];
-    const result = await pool.query(
-      `SELECT * FROM postings WHERE lower(city) LIKE LOWER('%' || $1 || '%');`,
-      params
-    );
+    const result = await pool.query(search);
     try {
       response.status(200).send(result);
     } catch (error) {
