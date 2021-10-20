@@ -15,6 +15,7 @@ import Test from "./Test.jsx"
 import Notes from "./notes/Notes.jsx"
 import Dashboard from "./dashboard/Dashboard.jsx"
 import Theme from "../Theme/ThemeFile.js"
+import AddJob from "./AddJob/AddJob.jsx";
 import { AuthProvider } from './Auth/AuthContext.js';
 import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
@@ -52,12 +53,13 @@ function App() {
 
           <AuthProvider>
             <Switch>
-              <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
-              <Route path="/notes" component={Notes} />
-              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/new-post" component={AddJob} />
+              <Route exact path="/" component={Home} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/notes" component={Notes} />
               {/* Add route here */}
             </Switch>
           </AuthProvider>
