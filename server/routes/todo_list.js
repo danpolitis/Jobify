@@ -3,7 +3,7 @@ const pool = require("./pool");
 
 router.route('/')
   .get(async (request, response) => {
-    const params = [request.body.uuid;
+    const params = [request.body.uuid];
     const result = await pool.query(
       'SELECT * FROM todo_list WHERE uuid = $1', params
     )
