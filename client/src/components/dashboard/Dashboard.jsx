@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import Postings from "./postings/Postings.jsx";
+import Calendar from "./Calendar.jsx"
 
 function Dashboard() {
   return (
@@ -9,7 +10,7 @@ function Dashboard() {
         <Postings />
       </Grid>
       <Grid item xs={3}>
-        calendar component goes here
+        <Calendar/>
       </Grid>
     </Grid>
   );

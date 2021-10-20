@@ -1,0 +1,11 @@
+.react-calendar__month-view__weekdays {
+  color: gray;
+}
+
+.react-calendar__navigation button {
+  font-size: 1em;
+}
+
+.right-column {
+  float:right;
+}
