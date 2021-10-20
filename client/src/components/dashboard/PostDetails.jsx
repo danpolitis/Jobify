@@ -50,7 +50,6 @@ if (!job) {
           <Chip color="primary" label={job.city} />
           <Chip color="secondary" label={job.field} />
         </Stack>
-
       <Typography
         variant="h4"
         color="text.primary"

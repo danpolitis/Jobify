@@ -1,34 +1,17 @@
-import React from "react"
-import Typography from "@mui/material/Typography";
-import Grid from '@mui/material/Grid';
-import Container from "@mui/material/Container";
-import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
+import React from "react";
+import { Grid } from "@mui/material";
+import Postings from "./postings/Postings.jsx";
 
-import Post from "./Post.jsx"
-import PostDetails from "./PostDetails.jsx"
-
-function Dashboard(props) {
-  let placeholder = new Array(10).fill('Dummy Listing');
-  const posts = placeholder.map((item, index) => {
-  return <Post key = {index} title = {item} />
-  })
-
+function Dashboard() {
   return (
-    <Container sx={{padding:"25px 0"}}>
-
-    <Grid container spacing={2} >
-      <Grid item xs={4}>
-        <Stack>
-          {posts}
-        </Stack>
+    <Grid container spacing={2} sx={{ margin: "1% 0" }}>
+      <Grid item xs={9}>
+        <Postings />
       </Grid>
-      <Divider orientation="vertical" flexItem />
-      <Grid item xs={4} sx={{paddingLeft:"20px"}}>
-        <PostDetails postId = {5} />
+      <Grid item xs={3}>
+        calendar component goes here
       </Grid>
     </Grid>
-    </Container>
   );
 }
 
