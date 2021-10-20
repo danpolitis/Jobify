@@ -1,17 +1,17 @@
 const router = require("express").Router();
 const pool = require("./pool");
 
-router.route("/all").get(async (request, response) => {
-  const result = await pool.query("SELECT * FROM postings;");
-  try {
-    response.status(200).send(result);
-  } catch (error) {
-    console.error(error);
-  }
-});
+router.route("/all")
+  .get(async (request, response) => {
+    const result = await pool.query("SELECT * FROM postings;");
+    try {
+      response.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  });
 
-router
-  .route("/employer/:employer_id")
+router.route("/employer/:employer_id")
   .get(async (request, response) => {
     const employer_id = request.params.employer_id;
     const result = await pool.query(
@@ -23,7 +23,6 @@ router
       console.error(error);
     }
   })
-
   .post(async (request, response) => {
     const date = new Date();
     const status = true;
@@ -50,47 +49,62 @@ router
     }
   });
 
-router.route("/city/:city").get(async (request, response) => {
-  const params = [request.params.city];
-  const result = await pool.query(
-    `SELECT * FROM postings
-      WHERE city = UPPER($1)
-        OR city = LOWER($1)
-        OR city = INITCAP($1);`,
-    params
-  );
+router.route("/keyword/:keyword")
+  .get(async (request, response) => {
+    const params = [request.params.keyword];
+    const result = await pool.query(
+      `SELECT * FROM postings
+        WHERE lower(field) LIKE LOWER('%' || $1 || '%')
+          OR lower(description) LIKE LOWER('%' || $1 || '%')
+          OR lower(title) LIKE LOWER('%' || $1 || '%')
+          OR lower(benefits) LIKE LOWER('%' || $1 || '%')
+          OR lower(requirements) LIKE LOWER('%' || $1 || '%');`,
+      params
+    );
+    try {
+      response.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  });
 
-  try {
-    response.status(200).send(result);
-  } catch (error) {
-    console.error(error);
-  }
-});
+router.route("/city/:city")
+  .get(async (request, response) => {
+    const params = [request.params.city];
+    const result = await pool.query(
+      `SELECT * FROM postings WHERE lower(city) LIKE LOWER('%' || $1 || '%');`,
+      params
+    );
+    try {
+      response.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  });
 
-router.route("/posting_id/:id").put(async (request, response) => {
-  const id = request.params.id;
-  const result = await pool.query(
-    `UPDATE postings
-       SET status = NOT status
-       WHERE id = ${id};`
-  );
-
-  try {
-    response.status(200).send(result);
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-router.route("/posting_id/:id").get(async (request, response) => {
-  const id = request.params.id;
-  const result = await pool.query(`SELECT * FROM postings WHERE id = ${id};`);
-
-  try {
-    response.status(200).send(result.rows);
-  } catch (error) {
-    console.error(error);
-  }
-});
+router.route("/posting_id/:id")
+  .get(async (request, response) => {
+    const params = request.params.id;
+    const result = await pool.query(`SELECT * FROM postings WHERE id = $1;`,
+    params);
+    try {
+      response.status(200).send(result.rows);
+    } catch (error) {
+      console.error(error);
+    }
+  })
+  .put(async (request, response) => {
+    const id = request.params.id;
+    const result = await pool.query(
+      `UPDATE postings
+        SET status = NOT status
+        WHERE id = ${id};`
+    );
+    try {
+      response.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  });
 
 module.exports = router;
