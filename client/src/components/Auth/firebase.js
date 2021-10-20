@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 require('firebase/auth');
 
-const keys = require('../../../../authkey');
+const keys = require('../../../../authkey.js');
 
 const app = firebase.initializeApp({
   apiKey: keys.REACT_APP_FIREBASE_API_KEY,

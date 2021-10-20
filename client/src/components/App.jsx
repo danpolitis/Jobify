@@ -1,5 +1,5 @@
 import './App.css';
-import React from "react";
+import React, {useState} from "react";
 import { Route, Switch } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
@@ -21,10 +21,12 @@ import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
 import Blogs from "./blog/Blogs.jsx";
 import Community from "./community/Community.jsx";
+import LoggedInHeader from "./LoggedInHeader.jsx"
 // Import component here
 
 function App() {
 
+  const [loggedIn, setLoggedIn] = useState(true)
 
   return (
     <>
@@ -40,7 +42,9 @@ function App() {
           }}
         >
           <CssBaseline />
+          {loggedIn ? <LoggedInHeader/> :
           <Header />
+           }
           <div className="App">
           <Helmet>
             <title>Jobify</title>
