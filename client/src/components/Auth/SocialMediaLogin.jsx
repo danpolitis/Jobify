@@ -65,7 +65,7 @@ function SocialMediaLogin() {
   return (
     <div>
       <Typography>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</Typography>
-      <Typography><Link to="/" >User Profile</Link></Typography>
+      <Typography><Link to="/dashboard" >Dashboard</Link></Typography>
       <Button onClick={logoutHandler}>Sign-out</Button>
     </div>
   );

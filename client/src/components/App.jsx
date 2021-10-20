@@ -1,9 +1,5 @@
 import './App.css';
-<<<<<<< HEAD
-import React, { useReducer } from "react";
-=======
-import React, {useState} from "react";
->>>>>>> main
+import React, { useReducer, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
@@ -44,14 +40,11 @@ const reducer = (state, action) => {
 
 export const GlobalContext = React.createContext();
 
-function App() {
 
+function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-
-function App() {
-
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(false)
 
   return (
     <>

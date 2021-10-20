@@ -39,9 +39,7 @@ const Signup = () => {
         return setError('passwords do not match!');
       }
 
-
       setLoading(true);
-
 
       signup(emailRef.current.value, passwordRef.current.value)
       .then((userObj) => {
@@ -57,7 +55,7 @@ const Signup = () => {
         return axios.post('http://localhost:3000/signup_login', data);
       })
       .then(() => {
-        history.push("/");
+        history.push("/dashboard");
       })
       .catch((error) => {
         setError(error.message);

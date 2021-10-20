@@ -37,7 +37,6 @@ export default function SignIn() {
         // return axios.get('http://localhost:3000/signup_login');
       })
       .then(() => {
-        console.log(emailRef.current.value);
         history.push('/dashboard');
       })
       .catch((error) => {
