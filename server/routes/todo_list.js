@@ -18,10 +18,11 @@ router.route('/:uuid')
     const uuid = request.params.uuid;
     const time = request.body.time;
     const eventActivity = request.body.eventActivity;
-    const params = [uuid, time, eventActivity];
+    const date = request.body.date;
+    const params = [uuid, time, eventActivity, date];
     const result = await pool.query(
-      'INSERT INTO todo_list(uuid, time, eventActivity) \
-      VALUES($1, $2, $3);', params
+      'INSERT INTO todo_list(uuid, time, eventActivity, date) \
+      VALUES($1, $2, $3, $4);', params
     )
   })
 

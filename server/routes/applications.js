@@ -4,8 +4,9 @@ const pool = require('./pool');
 router.route('/:applicant_id')
   .get(async (request, response) => {
     const applicantId = request.params.applicant_id;
+    const params = [applicantId]
     const result = await pool.query(
-      `SELECT * FROM applications WHERE applicant_id = ${applicantId}`
+      'SELECT * FROM applications WHERE applicant_id = $1', params
     )
     try {
       response.status(200).send(result);

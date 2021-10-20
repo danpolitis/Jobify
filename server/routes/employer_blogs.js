@@ -4,9 +4,10 @@ const pool = require('./pool');
 router.route('/:poster_id')
   .get(async (request, response) => {
     const poster_id = request.params.poster_id;
+    const params = [posted_id];
     const result = await pool.query(
-      `SELECT * FROM employers_blogs
-       WHERE poster_id = ${poster_id};`
+      'SELECT * FROM employers_blogs \
+       WHERE poster_id = $1;', params
     )
     try {
       response.status(200).send(result);
