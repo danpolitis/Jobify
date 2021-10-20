@@ -11,14 +11,15 @@ export default AddJobForm = () => {
 
   const handleAddJobSubmit = (addJobForm, e) => {
     // e.preventDefault();
-    axios.post(`/postings/employer/${employer_id}`, addJobForm)
-      .then(() => {
-        setSubmitClicked(true);
-        setFormAccepted(true);
-      })
-      .catch((err) => {
-        setSubmitClicked(true);
-      });
+    axios.post(`http://localhost:3000/postings/employer/${employer_id}`, addJobForm)
+    .then(() => {
+      console.log('success');
+      setSubmitClicked(true);
+      setFormAccepted(true);
+    })
+    .catch((err) => {
+      setSubmitClicked(true);
+    });
   }
 
   return(
