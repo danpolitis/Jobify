@@ -26,7 +26,7 @@ function PostDetails({ postId }) {
   return (
     !job
     ? <CircularProgress />
-    : <Grid item xs={7}>
+    : <Grid item xs={7} sx={{border: "1px solid rgba(0, 0, 0, 0.12)"}}>
       <>
         <Stack
           spacing={{xs: 3}}
