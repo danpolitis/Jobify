@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { TextField, Button, Typography, Alert } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { GlobalContext } from '../App.jsx';
 
 export default AddJobForm = () => {
   const [ submitClicked, setSubmitClicked ] = useState(false);
   const [ formAccepted, setFormAccepted ] = useState(false);
   const [ errorSubmitting, setErroSubmitting ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const employer_id = 3; // temporary, probably get it from global state later
   const history = useHistory();
+  const { state } = useContext(GlobalContext);
 
   const handleAddJobSubmit = (addJobForm) => {
     setSubmitClicked(true);
 
-    axios.post(`http://localhost:3000/postings/employer/${employer_id}`, addJobForm)
+    axios.post(`http://localhost:3000/postings/employer/${state.userId}`, addJobForm)
       .then((res) => {
         setFormAccepted(true);
         history.push('/dashboard'); // need to test to see if it plays
