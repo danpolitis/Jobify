@@ -4,7 +4,7 @@ import Postings from "./postings/Postings.jsx";
 
 function Dashboard() {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} sx={{ margin: "1% 0" }}>
       <Grid item xs={9}>
         <Postings />
       </Grid>

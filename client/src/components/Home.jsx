@@ -43,11 +43,11 @@ function Home(props) {
       <form onSubmit={() => handleSubmit}>
         <label> What </label>
         <TextField className="homepage"
-          value={jobName} sx={{padding: "5px", minWidth: "10px"}} placeholder="Job title, company, keywords" onChange={e => setJobName(e.target.value)}></TextField>
+          value={jobName} sx={{ padding: "5px", minWidth: "10px" }}placeholder="Job title, company, keywords" onChange={e => setJobName(e.target.value)}></TextField>
       <label> Where </label>
         <TextField className="homepage"
-          value={zipCode} sx={{padding: "5px", minWidth: '10px'}}  placeholder="Enter zipcode" onChange={e => setZipCode(e.target.value)}></TextField>
-        <Button sx={{marginTop: "10px", marginLeft: "10px"}} type="submit" disableElevation onClick={handleSubmit} color="primary" variant="contained">Find jobs</Button>
+          value={zipCode} sx={{ padding: "5px", minWidth: "10px" }}placeholder="Enter zipcode" onChange={e => setZipCode(e.target.value)}></TextField>
+        <Button sx={{ margin: "2%" }} type="submit" disableElevation onClick={handleSubmit} color="primary" variant="contained">Find jobs</Button>
       </form>
       </Container>
     </div>
