@@ -53,7 +53,10 @@ router
 router.route("/city/:city").get(async (request, response) => {
   const params = [request.params.city];
   const result = await pool.query(
-    "SELECT * FROM postings WHERE city = $1;",
+    `SELECT * FROM postings
+      WHERE city = UPPER($1)
+        OR city = LOWER($1)
+        OR city = INITCAP($1);`,
     params
   );
 

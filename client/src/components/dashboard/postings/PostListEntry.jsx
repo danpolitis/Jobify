@@ -18,7 +18,7 @@ function PostListEntry({ job }) {
           {title ? title : "Untitled"}
         </Typography>
         <Typography variant="subtitle1">
-          {`${employerData[0].city}, ${employerData[0].state}`}
+          {city}
         </Typography>
         <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
           {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(salary)}
