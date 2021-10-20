@@ -30,7 +30,7 @@ router.route('/')
 
   .post(async (request, response) => {
     const uuid = request.body.uuid;
-    const role;
+    let role;
     if(request.body.isSeeker === 'seeker') {
       role = false;
     } else {
