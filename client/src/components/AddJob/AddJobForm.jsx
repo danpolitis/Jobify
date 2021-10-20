@@ -18,7 +18,7 @@ export default AddJobForm = () => {
     axios.post(`http://localhost:3000/postings/employer/${employer_id}`, addJobForm)
       .then((res) => {
         setFormAccepted(true);
-        history.push('/dashboard');
+        history.push('/dashboard'); // need to test to see if it plays
       })
       .catch((err) => {
         setErroSubmitting(true);
