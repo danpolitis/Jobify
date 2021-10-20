@@ -18,7 +18,7 @@ router
       `SELECT * FROM postings WHERE employer_id = ${employer_id};`
     );
     try {
-      response.status(200).send(result);
+      response.status(200).send(result.rows);
     } catch (error) {
       console.error(error);
     }
