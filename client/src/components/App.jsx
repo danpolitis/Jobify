@@ -72,9 +72,9 @@ function App() {
           <GlobalContext.Provider value={{ state, dispatch }}>
           <AuthProvider>
             <Switch>
+              <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
               <Route path="/new-post" component={AddJob} />
-              <Route exact path="/" component={Home} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
               <Route path="/blogs" component={Blogs} />

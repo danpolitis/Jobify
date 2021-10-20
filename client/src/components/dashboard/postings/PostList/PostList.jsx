@@ -4,7 +4,7 @@ import PostListEntry from "./PostListEntry.jsx";
 
 function PostList({ jobs }) {
   return (
-    <Grid item xs={6} sx={{ maxHeight: "80vh", overflow: "auto" }}>
+    <Grid item xs={5} sx={{ maxHeight: "80vh", overflow: "auto" }}>
       {
         jobs.map((job, i) => (
           <PostListEntry key={i} job={job} />
