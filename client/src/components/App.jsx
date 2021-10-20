@@ -1,5 +1,5 @@
 import './App.css';
-import React from "react";
+import React, { useReducer, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
@@ -21,10 +21,30 @@ import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
 import Blogs from "./blog/Blogs.jsx";
 import Community from "./community/Community.jsx";
-// Import component here
+import LoggedInHeader from "./LoggedInHeader.jsx"
+
+//Import component here
+
+const initialState = {
+  userId: '',
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'updateUserId':
+      return { ...state, userId: action.data };
+    default:
+      return state;
+  }
+};
+
+export const GlobalContext = React.createContext();
+
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
+  const [loggedIn, setLoggedIn] = useState(false)
 
   return (
     <>
@@ -40,14 +60,16 @@ function App() {
           }}
         >
           <CssBaseline />
+          {loggedIn ? <LoggedInHeader/> :
           <Header />
+           }
           <div className="App">
           <Helmet>
             <title>Jobify</title>
             <meta name="description" content="App Description" />
             <meta name="theme-color" content="#799496" />
           </Helmet>
-
+          <GlobalContext.Provider value={{ state, dispatch }}>
           <AuthProvider>
             <Switch>
               <Route path="/test" component={Test} />
@@ -62,6 +84,7 @@ function App() {
               {/* Add route here */}
             </Switch>
           </AuthProvider>
+          </GlobalContext.Provider>
           </div>
             <Footer sx={{ mt: 5 }} />
         </Box>
