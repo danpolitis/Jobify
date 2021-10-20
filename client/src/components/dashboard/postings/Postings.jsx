@@ -5,11 +5,10 @@ import PostList from "./PostList.jsx";
 import PostDetails from "./PostDetails.jsx";
 
 function Postings() {
-  const [ jobs, loading ] = useFetch(`http://localhost:3000/postings/all`);
-  console.log(jobs)
+  const jobs = useFetch(`http://localhost:3000/postings/all`);
 
   return (
-    loading
+    !jobs
     ? <CircularProgress />
     : <Grid container>
       <Grid container item>

@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { Grid, CircularProgress } from "@mui/material";
 import PostListEntry from "./PostListEntry.jsx";
 
 function PostList({ jobs }) {
-  if (!jobs) {
-    return <CircularProgress />;
-  }
-
   return (
     <Grid item xs={6}>
       {

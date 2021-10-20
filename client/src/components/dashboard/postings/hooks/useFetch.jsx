@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react'
 import 'regenerator-runtime/runtime'
 
 const useFetch = url => {
-  const [state, setState] = useState([null, false]);
+  const [state, setState] = useState(null);
     useEffect(() => {
-      setState([null, true]);
-
       (async () => {
         const data = await fetch(url)
           .then(res => res.json());
-        data.rows ? setState([data.rows, false]) : setState([data[0], false]);
+        data.rows ? setState(data.rows) : setState(data[0]);
       })();
     }, [url]);
 
