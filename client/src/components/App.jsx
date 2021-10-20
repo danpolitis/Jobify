@@ -48,12 +48,12 @@ function App() {
 
           <AuthProvider>
             <Switch>
-              <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
-              <Route path="/notes" component={Notes} />
-              <Route path="/dashboard" component={Dashboard} />
+              <Route exact path="/" component={Home} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/notes" component={Notes} />
               {/* Add route here */}
             </Switch>
           </AuthProvider>
