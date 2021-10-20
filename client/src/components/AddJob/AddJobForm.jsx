@@ -2,30 +2,34 @@ import React, { useState } from 'react';
 import { TextField, Button, Typography, Alert } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 export default AddJobForm = () => {
   const [ submitClicked, setSubmitClicked ] = useState(false);
   const [ formAccepted, setFormAccepted ] = useState(false);
+  const [ errorSubmitting, setErroSubmitting ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const employer_id = 3;
+  const employer_id = 3; // temporary, probably get it from global state later
+  const history = useHistory();
 
-  const handleAddJobSubmit = (addJobForm, e) => {
-    // e.preventDefault();
+  const handleAddJobSubmit = (addJobForm) => {
+    setSubmitClicked(true);
+
     axios.post(`http://localhost:3000/postings/employer/${employer_id}`, addJobForm)
-    .then(() => {
-      console.log('success');
-      setSubmitClicked(true);
-      setFormAccepted(true);
-    })
-    .catch((err) => {
-      setSubmitClicked(true);
-    });
+      .then((res) => {
+        setFormAccepted(true);
+        history.push('/dashboard');
+      })
+      .catch((err) => {
+        setErroSubmitting(true);
+        setSubmitClicked(false);
+      });
   }
 
   return(
     <>
-      {(submitClicked && formAccepted) && <Alert severity="success">A new job has been posted!</Alert>}
-      {(submitClicked && !formAccepted) && <Alert severity="error">Something went wrong with posting the job, please try again!</Alert>}
+      {formAccepted && <Alert severity="success">A new job has been posted!</Alert>}
+      {errorSubmitting && <Alert severity="error">Something went wrong with posting the job, please try again!</Alert>}
       <form onSubmit={handleSubmit(handleAddJobSubmit)} style={{ maxWidth: '500px' }}>
         <TextField
           id="add-job-title"
@@ -133,6 +137,7 @@ export default AddJobForm = () => {
           color="primary"
           variant="contained"
           disableElevation
+          disabled={submitClicked}
           style={{ marginTop: '16px' }}
         >Add New Job</Button>
       </form>
