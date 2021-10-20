@@ -50,8 +50,8 @@ export default function LoggedInHeader(props) {
           </Typography>
           <nav>
             <Link to="/">Home</Link>
+            <Link to="/dashboard">Name of User</Link>
           </nav>
-          <div padding-inline="10px 10px" > Name of User </div>
           <FormControl sx={{ my: 1, mx: 1.5 }}>
             <Select
               sx={{ maxHeight: "50px", maxWidth: "50px" }}
