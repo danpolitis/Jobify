@@ -4,6 +4,7 @@ const colors = require("colors");
 const logo = require("./logo.js");
 const cors = require("cors");
 const app = express();
+
 const port = process.env.PORT || 3000;
 const {
   applications,
@@ -41,9 +42,9 @@ app.get("/api", (req, res) => {
   res.json({ message: "👋 from Express!" });
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+// });
 
 app.listen(port, () => {
   console.log(
