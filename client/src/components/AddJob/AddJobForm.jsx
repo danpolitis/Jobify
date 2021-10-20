@@ -1,18 +1,26 @@
-import React from 'react';
-import { TextField, Button, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { TextField, Button, Typography, Alert } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
 export default AddJobForm = () => {
+  const [ submitClicked, setSubmitClicked ] = useState(false);
+  const [ formAccepted, setFormAccepted ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const handleAddJobSubmit = (addJobForm, e) => {
     // e.preventDefault();
-    console.log(errors, addJobForm);
+    axios.post(`/postings/employer/`, addJobForm)
+      .then(() => {
+        setSubmitClicked(true);
+        setFormAccepted(true);
+      });
   }
-  console.log (errors);
+
   return(
-    // <Grid>
+    <>
+      {(submitClicked && formAccepted) && <Alert severity="success">A new job has been posted!</Alert>}
+      {(submitClicked && formAccepted) && <Alert severity="error">Something went wrong with posting the job, please try again!</Alert>}
       <form onSubmit={handleSubmit(handleAddJobSubmit)} style={{ maxWidth: '500px' }}>
         <TextField
           id="add-job-title"
@@ -123,6 +131,6 @@ export default AddJobForm = () => {
           style={{ marginTop: '16px' }}
         >Add New Job</Button>
       </form>
-    // </Grid>
+    </>
   )
 };
