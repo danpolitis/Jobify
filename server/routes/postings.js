@@ -13,9 +13,9 @@ router.route("/all")
 
 router.route("/employer/:employer_id")
   .get(async (request, response) => {
-    const employer_id = request.params.employer_id;
+    const params = [request.params.employer_id];
     const result = await pool.query(
-      `SELECT * FROM postings WHERE employer_id = ${employer_id};`
+      `SELECT * FROM postings WHERE employer_id = $1;`, params
     );
     try {
       response.status(200).send(result);
@@ -60,7 +60,7 @@ router.route("/keyword/:keyword")
           OR lower(benefits) LIKE LOWER('%' || $1 || '%')
           OR lower(requirements) LIKE LOWER('%' || $1 || '%');`,
       params
-    );
+    )
     try {
       response.status(200).send(result);
     } catch (error) {
@@ -84,9 +84,10 @@ router.route("/city/:city")
 
 router.route("/posting_id/:id")
   .get(async (request, response) => {
-    const params = request.params.id;
+    const params = [request.params.id];
     const result = await pool.query(`SELECT * FROM postings WHERE id = $1;`,
-    params);
+      params
+    );
     try {
       response.status(200).send(result.rows);
     } catch (error) {
@@ -94,11 +95,12 @@ router.route("/posting_id/:id")
     }
   })
   .put(async (request, response) => {
-    const id = request.params.id;
+    const params = [request.params.id];
     const result = await pool.query(
       `UPDATE postings
         SET status = NOT status
-        WHERE id = ${id};`
+        WHERE id = $1;`,
+      params
     );
     try {
       response.status(200).send(result);

@@ -5,7 +5,7 @@ import Search from './Search.jsx'
 import PostList from "./PostList.jsx";
 import PostDetails from "./PostDetails.jsx";
 
-function Postings() {
+function Postings({ }) {
   const jobs = useFetch(`http://localhost:3000/postings/all`);
 
   return (
