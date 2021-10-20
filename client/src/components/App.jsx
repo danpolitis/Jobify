@@ -19,8 +19,8 @@ import AddJob from "./AddJob/AddJob.jsx";
 import { AuthProvider } from './Auth/AuthContext.js';
 import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
-import LoggedInHeader from "./LoggedInHeader.jsx"
-
+import Blogs from "./blog/Blogs.jsx";
+import Community from "./community/Community.jsx";
 // Import component here
 
 function App() {
@@ -58,6 +58,8 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
+              <Route path="/blogs" component={Blogs} />
+              <Route path="/community" component={Community} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/notes" component={Notes} />
               {/* Add route here */}
