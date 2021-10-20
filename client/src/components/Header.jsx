@@ -31,6 +31,7 @@ export default function Header() {
           </Typography>
           <nav>
             <Link to="/">Home</Link>
+            <Link to="/new-post">Add Job</Link>
             <Link to="/dashboard">Dashboard</Link>
           </nav>
           <Button
