@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "./firebase";
-// import { GlobalContext } from '../App.jsx';
+import { GlobalContext } from '../App.jsx';
 
 const AuthContext = React.createContext();
 
@@ -11,7 +11,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
-  // const globalData = useContext(GlobalContext);
+  const globalData = useContext(GlobalContext);
 
   function signup(email, password) {
     // console.log('auth signup email:', email);
@@ -44,9 +44,9 @@ export function AuthProvider({ children }) {
       if (user) {
         console.log('auth userId:', user.uid);
         setCurrentUser(user);
-        // globalData.dispatch({ type: 'updateUserId', data: user.uid });
+        globalData.dispatch({ type: 'updateUserId', data: user.uid });
       } else {
-        // globalData.dispatch({ type: 'updateUserId', data: '' });
+        globalData.dispatch({ type: 'updateUserId', data: '' });
       }
 
       if(loading) {

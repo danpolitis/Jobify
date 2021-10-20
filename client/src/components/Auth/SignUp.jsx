@@ -21,8 +21,6 @@ const Signup = () => {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    // const jobseekerRef = useRef(false);
-    // const employerRef = useRef(false);
     const { signup } = useAuth();
 
     const [error, setError] = useState('');
@@ -48,16 +46,16 @@ const Signup = () => {
 
       signup(emailRef.current.value, passwordRef.current.value)
       .then((userObj) => {
-        console.log('user uid', userObj.user.uid);
-        console.log('role,', role);
-        console.log('signup email: ', emailRef.current.value);
+        // console.log('user uid', userObj.user.uid);
+        // console.log('role,', role);
+        // console.log('signup email: ', emailRef.current.value);
         const data = {
           uuid: userObj.user.uid,
           role: role,
-          // email: emailRef.current.value,
+          email: emailRef.current.value,
         };
         console.log(data);
-        return axios.post('http://localhost:3000/', data);
+        return axios.post('http://localhost:3000/signup_login', data);
       })
       .then(() => {
         history.push("/");
