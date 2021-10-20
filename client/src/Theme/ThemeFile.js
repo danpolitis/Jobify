@@ -17,5 +17,4 @@ export const Theme = createTheme({
     fontFamily: ["Roboto Condensed", "sans-serif"].join(","),
   },
 });
-
 export default Theme;

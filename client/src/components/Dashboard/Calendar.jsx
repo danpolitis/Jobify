@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import Calendar from 'react-calendar'
+import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";

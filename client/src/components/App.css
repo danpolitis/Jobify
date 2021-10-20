@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap%22");
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap");
 .App {
   text-align: center;
 }
@@ -29,6 +28,7 @@ nav a {
   color: #fff;
   padding: 0 5px;
   text-decoration: none;
+  font-weight: 700;
 }
 
 @keyframes App-logo-spin {
