@@ -1,18 +1,9 @@
 import React from 'react';
 import axios, { post } from 'axios';
 
-class Upload extends React.Component {
-
-  constructor(props) {
-      super(props);
-      this.state = {
-        image: ''
-      }
-  }
-
-  onChange(e) {
-    let files = e.target.files;
-    let reader = new FileReader();
+const onChange = (e) => {
+  let files = e.target.files;
+  let reader = new FileReader();
 
     reader.readAsDataURL(files[0]);
 
@@ -24,16 +15,17 @@ class Upload extends React.Component {
       return post(url, formData)
         .then(response => console.warn('result: ', response));
     }
-  }
+}
 
-  render() {
+
+const Upload = (props) => {
+
     return (
-      <div onSubmit={this.onFormSubmit}>
+      <div onSubmit={console.log('submitted')}>
         <h3>Upload</h3>
-        <input type="file" name="file" onChange={(e) => this.onChange(e)} />
+        <input type="file" name="file" onChange={(e) => onChange(e)} />
       </div>
     )
-  }
 }
 
 export default Upload;

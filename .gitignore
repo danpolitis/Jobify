@@ -6,6 +6,7 @@ package-lock.json
 .DS_Store
 .DS_Store?
 *.log
+keen-opus-329616-274b8884dd65.json
 
 # builds
 client/build
