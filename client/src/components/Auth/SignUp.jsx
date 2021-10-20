@@ -52,7 +52,7 @@ const Signup = () => {
           email: emailRef.current.value,
         };
         console.log(data);
-        return axios.post('http://localhost:3000/signup_login', data);
+        // return axios.post('http://localhost:3000/signup_login', data);
       })
       .then(() => {
         history.push("/dashboard");
