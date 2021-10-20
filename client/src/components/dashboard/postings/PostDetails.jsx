@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import useFetch from "./Hooks/useFetch.jsx"
+import useFetch from "./hooks/useFetch.jsx"
 import Typography from "@mui/material/Typography";
 import CircularProgress from '@mui/material/CircularProgress';
 
