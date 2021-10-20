@@ -21,6 +21,7 @@ import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
 import Blogs from "./blog/Blogs.jsx";
 import Community from "./community/Community.jsx";
+import LoggedInHeader from "./LoggedInHeader.jsx"
 // Import component here
 
 function App() {

@@ -65,7 +65,7 @@ export default function LoggedInHeader(props) {
             <Link to="/test"> <MenuItem value={20}>Documents</MenuItem></Link>
             <Link to="/notes"> <MenuItem value={30}>Notes</MenuItem></Link>
             <Link to="/blogs"> <MenuItem value={40}>Blogs</MenuItem></Link>
-            <Link to="/communities"> <MenuItem value={40}>Communities</MenuItem></Link>
+            <Link to="/community"> <MenuItem value={40}>Community</MenuItem></Link>
             <Link to="/logout"> <MenuItem value={50}>Log Out</MenuItem></Link>
             </Select>
           </FormControl>
