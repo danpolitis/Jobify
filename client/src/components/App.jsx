@@ -1,5 +1,5 @@
 import './App.css';
-import React from "react";
+import React, {useState} from "react";
 import { Route, Switch } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
@@ -15,14 +15,18 @@ import Test from "./Test.jsx"
 import Notes from "./notes/Notes.jsx"
 import Dashboard from "./dashboard/Dashboard.jsx"
 import Theme from "../Theme/ThemeFile.js"
+import AddJob from "./AddJob/AddJob.jsx";
 import { AuthProvider } from './Auth/AuthContext.js';
 import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
-
+import Blogs from "./blog/Blogs.jsx";
+import Community from "./community/Community.jsx";
+import LoggedInHeader from "./LoggedInHeader.jsx"
 // Import component here
 
 function App() {
 
+  const [loggedIn, setLoggedIn] = useState(true)
 
   return (
     <>
@@ -38,7 +42,9 @@ function App() {
           }}
         >
           <CssBaseline />
+          {loggedIn ? <LoggedInHeader/> :
           <Header />
+           }
           <div className="App">
           <Helmet>
             <title>Jobify</title>
@@ -49,9 +55,12 @@ function App() {
           <AuthProvider>
             <Switch>
               <Route path="/test" component={Test} />
+              <Route path="/new-post" component={AddJob} />
               <Route exact path="/" component={Home} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
+              <Route path="/blogs" component={Blogs} />
+              <Route path="/community" component={Community} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/notes" component={Notes} />
               {/* Add route here */}
