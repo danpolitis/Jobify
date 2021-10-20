@@ -7,20 +7,24 @@ export default AddJobForm = () => {
   const [ submitClicked, setSubmitClicked ] = useState(false);
   const [ formAccepted, setFormAccepted ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const employer_id = 3;
 
   const handleAddJobSubmit = (addJobForm, e) => {
     // e.preventDefault();
-    axios.post(`/postings/employer/`, addJobForm)
+    axios.post(`/postings/employer/${employer_id}`, addJobForm)
       .then(() => {
         setSubmitClicked(true);
         setFormAccepted(true);
+      })
+      .catch((err) => {
+        setSubmitClicked(true);
       });
   }
 
   return(
     <>
       {(submitClicked && formAccepted) && <Alert severity="success">A new job has been posted!</Alert>}
-      {(submitClicked && formAccepted) && <Alert severity="error">Something went wrong with posting the job, please try again!</Alert>}
+      {(submitClicked && !formAccepted) && <Alert severity="error">Something went wrong with posting the job, please try again!</Alert>}
       <form onSubmit={handleSubmit(handleAddJobSubmit)} style={{ maxWidth: '500px' }}>
         <TextField
           id="add-job-title"
