@@ -8,8 +8,11 @@ router.route('/:poster_id')
       `SELECT * FROM employers_notes
        WHERE poster_id = ${poster_id};`
     )
+
     try {
-      response.status(200).send(result.rows);
+      response.status(200).send(result.rows.sort((a, b) => {
+        return Number(a.id) - Number(b.id)
+      }));
     } catch (error) {
       console.error(error);
     }
@@ -34,17 +37,18 @@ router.route('/:poster_id')
     }
   })
 
-router.route('/id/:id')
+router.route('/:id')
   .put(async (request, response) => {
     const id = request.params.id;
     const title = request.body.title;
     const body = request.body.body;
-    const params = [id, title, body];
+    const params = [id, body];
+
+    console.log(params);
 
     const result = pool.query(
       'UPDATE employers_notes \
-      SET title = $2 \
-      body = $3 \
+      SET body = $2 \
       WHERE id = $1',
       params)
     try {
@@ -56,6 +60,7 @@ router.route('/id/:id')
 
   .delete(async (request, response) => {
     const id = request.params.id;
+    console.log(id);
     const result = pool.query(
       `DELETE FROM employers_notes
        WHERE id = ${id};`

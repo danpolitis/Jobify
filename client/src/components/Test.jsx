@@ -8,7 +8,6 @@ function Test(props) {
     <Typography
       variant="h2"
       color="text.primary"
-      align="center"
       {...props}
     >
       Andy's Profile
