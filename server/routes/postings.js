@@ -21,7 +21,7 @@ router.route('/employer/:employer_id')
     request.body.description, date, status, request.body.title, request.body.benefits,
     request.body.requirements, request.body.city];
     const result = await pool.query(
-      'INSERT INTO postings (field, salary, employer_id, description, posted_date, status, title, benefits \
+      'INSERT INTO postings (field, salary, employer_id, description, posted_date, status, title, benefits, \
         requirements, city) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);'
     , params)
     try {
