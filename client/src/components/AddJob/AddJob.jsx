@@ -5,11 +5,10 @@ import AddJobForm from './AddJobForm.jsx';
 export default AddJob = () => {
   return (
     <>
-      {/* <Typography
+      <Typography
         variant="h3"
         color="text.primary"
-      >Add a new job</Typography> */}
-      <h3>Add a new job</h3>
+      >Add a new job</Typography>
       <Grid container alignItems="center" direction="column">
         <AddJobForm />
       </Grid>
