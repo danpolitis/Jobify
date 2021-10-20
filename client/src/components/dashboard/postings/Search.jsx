@@ -3,8 +3,8 @@ import { Grid, TextField, Button } from "@mui/material";
 import useFetch from "./hooks/useFetch.jsx";
 
 function Search() {
-  const [ keyword, setKeyword ] = useState('');
-  const [ city, setCity ] = useState('');
+  const [ keyword, setKeyword ] = useState("");
+  const [ city, setCity ] = useState("");
 
   return (
     <Grid item xs justifyContent="center">

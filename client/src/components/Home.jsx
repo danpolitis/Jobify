@@ -13,9 +13,8 @@ import InputLabel from '@mui/material/InputLabel';
 
 
 function Home(props) {
-
-  const [jobName, setJobName] = useState('')
-  const [zipCode, setZipCode] = useState('')
+  const [ keyword, setKeyword ] = useState("");
+  const [ city, setCity ] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -32,23 +31,41 @@ function Home(props) {
   return (
     <div>
       <Container justify="center">
-      <Typography
-        variant="h2"
-        color="text.secondary"
-        align="center"
-        sx={{marginTop: "100px", marginBottom: "30px", marginBottom: "75px"}}
-      >
-        Jobify
-      </Typography>
-      <form onSubmit={() => handleSubmit}>
-        <label> What </label>
-        <TextField className="homepage"
-          value={jobName} sx={{ padding: "5px", minWidth: "10px" }}placeholder="Job title, company, keywords" onChange={e => setJobName(e.target.value)}></TextField>
-      <label> Where </label>
-        <TextField className="homepage"
-          value={zipCode} sx={{ padding: "5px", minWidth: "10px" }}placeholder="Enter zipcode" onChange={e => setZipCode(e.target.value)}></TextField>
-        <Button sx={{ margin: "2%" }} type="submit" disableElevation onClick={handleSubmit} color="primary" variant="contained">Find jobs</Button>
-      </form>
+        <Typography
+          variant="h2"
+          color="text.secondary"
+          align="center"
+          sx={{marginTop: "100px", marginBottom: "30px", marginBottom: "75px"}}
+        >
+          Jobify
+        </Typography>
+        <form onSubmit={() => console.log('submitted')}>
+          <TextField
+            label="Keyword"
+            value={keyword}
+            sx={{ padding: "5px", minWidth: "10px" }}
+            placeholder="Job title, description, industry"
+            onChange={e => setKeyword(e.target.value)}
+            variant="outlined"
+          />
+          <TextField
+            label="City"
+            value={city}
+            sx={{ padding: "5px", minWidth: "10px" }}
+            placeholder="City"
+            onChange={e => setCity(e.target.value)}
+            variant="outlined"
+          />
+          <Button
+            sx={{ margin: "2%" }}
+            type="submit"
+            color="primary"
+            variant="contained"
+            disableElevation
+          >
+            Find jobs
+          </Button>
+        </form>
       </Container>
     </div>
   );
