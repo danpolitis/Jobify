@@ -1,6 +1,6 @@
 import React from "react"
 import { Card, CardContent, Typography, CircularProgress } from "@mui/material";
-import useFetch from "./hooks/useFetch.jsx"
+import useFetch from "../hooks/useFetch.jsx"
 
 function PostListEntry({ job }) {
   const { title, employer_id, city, salary, description, posted_date } = job;

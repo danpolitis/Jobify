@@ -1,9 +1,9 @@
 import React from "react";
 import { Grid, CircularProgress } from "@mui/material";
 import useFetch from "./hooks/useFetch.jsx";
-import Search from './Search.jsx'
-import PostList from "./PostList.jsx";
-import PostDetails from "./PostDetails.jsx";
+import Search from './PostList/Search.jsx'
+import PostList from "./PostList/PostList.jsx";
+import PostDetails from "./PostDetails/PostDetails.jsx";
 
 function Postings({ }) {
   const jobs = useFetch(`http://localhost:3000/postings/all`);

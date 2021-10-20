@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import useFetch from "./hooks/useFetch.jsx";
+import useFetch from "../hooks/useFetch.jsx";
 
 function Search() {
   const [ keyword, setKeyword ] = useState("");
   const [ city, setCity ] = useState("");
 
+  function handleSubmit() {
+    e.preventDefault();
+    console.log('submitted');
+  }
+
   return (
     <Grid item xs justifyContent="center">
-      <form onSubmit={() => console.log('submitted')}>
+      <form onSubmit={handleSubmit}>
       <TextField
         label="Keyword"
         value={keyword}
