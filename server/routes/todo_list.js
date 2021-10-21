@@ -4,6 +4,7 @@ const pool = require("./pool");
 router.route('/')
   .get(async (request, response) => {
     const uuid = request.body.uuid;
+
     const result = await pool.query(
       `SELECT * FROM todo_list WHERE uuid = ${uuid};`
     )

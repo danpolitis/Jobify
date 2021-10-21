@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
@@ -10,14 +10,17 @@ import {Editor, EditorState} from 'draft-js';
 import { convertFromRaw, convertToRaw } from 'draft-js';
 import Button from '@mui/material/Button';
 import 'regenerator-runtime/runtime'
+import { GlobalContext } from '../App.jsx';
 
 
 function Notes(props) {
+  const globalState = useContext(GlobalContext);
   const [notes, setNotes] = useState([])
   const [currentNote, setCurrentNote] = useState({})
-  const [currentUser, setCurrentUser] = useState(3)
+  const [currentUser, setCurrentUser] = useState(globalState.state.userId)
   const [isEmployer, setIsEmployer] = useState(true)
   const [body, setBody] = useState('')
+
 
   function getCurrentNotes() {
     if (isEmployer === true) {
