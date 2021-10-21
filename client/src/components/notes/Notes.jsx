@@ -18,22 +18,23 @@ function Notes(props) {
   const [notes, setNotes] = useState([])
   const [currentNote, setCurrentNote] = useState({})
   const [currentUser, setCurrentUser] = useState(globalState.state.userId)
-  const [isEmployer, setIsEmployer] = useState(true)
+  const [isEmployer, setIsEmployer] = useState('employer')
   const [body, setBody] = useState('')
 
 
   function getCurrentNotes() {
-    console.log(globalState.state.role)
-    if (isEmployer === true) {
+    if (isEmployer === 'employer') {
       axios.get(`http://localhost:3000/employer_notes/${currentUser}`)
         .then((results) => {
           setNotes(results.data)
         })
+        .catch((err) => {console.log(err)})
     } else {
       axios.get(`http://localhost:3000/seeker_notes/${currentUser}`)
         .then((results) => {
           setNotes(results.data)
         })
+        .catch((err) => {console.log(err)})
     }
   }
 
@@ -51,7 +52,7 @@ function Notes(props) {
 
 
   const save = (data) => {
-    if (isEmployer === true) {
+    if (isEmployer === 'employer') {
       axios.put(`http://localhost:3000/employer_notes/${currentNote.id}`, {
         body: data,
         title: currentNote.title

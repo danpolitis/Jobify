@@ -21,7 +21,7 @@ function Note(props) {
   }
 
   function handleDeleteNote(e) {
-    if (props.isEmployer === true){
+    if (props.isEmployer === 'employer'){
       axios.delete(`http://localhost:3000/employer_notes/${props.note.id}`)
         .then(() => {
           props.getCurrentNotes()

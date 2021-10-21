@@ -11,7 +11,7 @@ function CreateNote(props) {
 
   function handleAddNote(e) {
     e.preventDefault();
-    if (props.isEmployer === true){
+    if (props.isEmployer === 'employer'){
       props.handleClose()
       axios.post(`http://localhost:3000/employer_notes/${props.currentUser}`, {
         title: e.target.text.value
