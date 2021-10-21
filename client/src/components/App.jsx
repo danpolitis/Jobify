@@ -1,10 +1,7 @@
 import './App.css';
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import GlobalStyles from "@mui/material/GlobalStyles";
-import Container from "@mui/material/Container";
+import {Container, GlobalStyles, Typography, CssBaseline } from "@mui/material";
 import Box from '@mui/material/Box';
 import { ThemeProvider } from "@mui/material/styles";
 import { Helmet } from 'react-helmet';
@@ -47,10 +44,11 @@ const reducer = (state, action) => {
 export const GlobalContext = React.createContext();
 
 
+
+
+
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const [loggedIn, setLoggedIn] = useState(false)
 
   return (
     <>
@@ -66,9 +64,6 @@ function App() {
           }}
         >
           <CssBaseline />
-          {loggedIn ? <LoggedInHeader/> :
-          <Header />
-           }
           <div className="App">
           <Helmet>
             <title>Jobify</title>
@@ -76,6 +71,9 @@ function App() {
             <meta name="theme-color" content="#799496" />
           </Helmet>
           <GlobalContext.Provider value={{ state, dispatch }}>
+          {state.userId !== "" ? <LoggedInHeader/> :
+          <Header />
+           }
           <AuthProvider>
             <Switch>
               <Route exact path="/" component={Home} />
@@ -86,7 +84,7 @@ function App() {
               <Route path="/blogs" component={Blogs} />
               <Route path="/community" component={Community} />
               <Route path="/dashboard" component={Dashboard} />
-              <Route path="/notes" component={Notes} />
+              <Route path="/notes" component={() => <Notes lol='lol'/>} />
               {/* Add route here */}
             </Switch>
           </AuthProvider>
