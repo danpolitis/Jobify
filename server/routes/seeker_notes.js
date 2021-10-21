@@ -6,7 +6,7 @@ router.route('/:poster_id')
     const poster_id = request.params.poster_id;
     const params = [poster_id];
     const result = await pool.query(
-      'SELECT * FROM seeker_notes WHERE posted_id = $1', params
+      'SELECT * FROM seeker_notes WHERE poster_id = $1', params
     )
     try {
       response.status(200).send(result);

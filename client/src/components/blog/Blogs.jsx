@@ -13,13 +13,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
 const useStyles = makeStyles((theme) => ({
-  hero: {
-    position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "2rem",
-  },
   blogsContainer: {
     paddingTop: "2",
   },
@@ -31,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
-  const [currentUser, setCurrentUser] = useState(3);
+  const [currentUser, setCurrentUser] = useState(1);
   const [isEmployer, setIsEmployer] = useState(true);
 
   function getAllUserBlogs() {
@@ -39,14 +32,14 @@ export default function Blogs() {
       axios
         .get(`http://localhost:3000/employer_blogs/${currentUser}`)
         .then((results) => {
-          console.log("this is the results", results.data.fields);
-          setBlogs(results.data.fields);
+          console.log("this is the results", results.data.rows);
+          setBlogs(results.data.rows);
         });
     } else {
       axios
         .get(`http://localhost:3000/seeker_blogs/${currentUser}`)
         .then((results) => {
-          setBlogs(results.data.fields);
+          setBlogs(results.data.rows);
         });
     }
   }
@@ -57,8 +50,8 @@ export default function Blogs() {
 
   const classes = useStyles();
   return (
-    <Container maxWidth="lg" className={classes.blogsContainer}>
-      <Grid item md={3}>
+    <Container maxWidth="lg" direction="column" className={classes.blogsContainer} >
+      <Grid item >
       <Typography variant="h4">Selphie's Blogs</Typography>
       <BlogList currentUser={currentUser} isEmployer={isEmployer} blogs={blogs} />
 
