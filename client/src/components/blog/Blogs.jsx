@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';import axios from "axios";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import BlogList from "./BlogList";
 import { makeStyles } from "@mui/styles";
 import Toolbar from "@mui/material/Toolbar";
@@ -50,10 +51,24 @@ export default function Blogs() {
 
   const classes = useStyles();
   return (
-    <Container maxWidth="lg" direction="column" className={classes.blogsContainer} >
-      <Grid item >
-      <Typography variant="h4">Selphie's Blogs</Typography>
-      <BlogList currentUser={currentUser} isEmployer={isEmployer} posts={posts} getAllUserBlogs={getAllUserBlogs}/>
+    <Container
+      maxWidth="sm"
+      container
+      alignItems="center"
+      direction="column"
+      rowSpacing={10}
+      justify="center"
+      style={{ minHeight: "250" }}
+      className={classes.blogsContainer}
+    >
+      <Grid item md={12} xs={12} sm={10} xl={6}>
+        <Typography variant="h4">Selphie's Blogs</Typography>
+        <BlogList
+          currentUser={currentUser}
+          isEmployer={isEmployer}
+          posts={posts}
+          getAllUserBlogs={getAllUserBlogs}
+        />
       </Grid>
     </Container>
   );

@@ -45,8 +45,6 @@ router.route('/:id')
     const body = request.body.body;
     const params = [id, body];
 
-    console.log(params);
-
     const result = pool.query(
       'UPDATE employers_notes \
       SET body = $2 \
@@ -61,7 +59,6 @@ router.route('/:id')
 
   .delete(async (request, response) => {
     const id = request.params.id;
-    console.log(id);
     const result = pool.query(
       `DELETE FROM employers_notes
        WHERE id = ${id};`

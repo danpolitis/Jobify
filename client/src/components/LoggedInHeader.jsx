@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
@@ -13,6 +13,7 @@ import './Home.css';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import EmployerDropdown from './EmployerDropdown.jsx'
 import NativeSelect from "@mui/material/NativeSelect"
+import { GlobalContext } from "./App.jsx"
 
 
 
@@ -22,6 +23,8 @@ export default function LoggedInHeader(props) {
 
   const [dropDown, setDropDown] = useState('')
   const [isEmployer, setIsEmployer] = useState(false)
+  const { state } = useContext(GlobalContext);
+
 
   const handleChange = (event) => {
     setDropDown(event.target.value);
@@ -58,7 +61,7 @@ export default function LoggedInHeader(props) {
             <div>
             <Link to="/">Home</Link>
             <Link to="/dashboard" style={{padding: "15px"}}>Name of User</Link>
-            {isEmployer ? <span className="secondary">Employer</span> : <span color="secondary">Job Seeker</span>}
+            {state.role !== 'seeker' ? <span className="secondary">Employer</span> : <span className="secondary">Job Seeker</span>}
             </div>
           </nav>
           <FormControl sx={{ my: 1, mx: 1.5, midWidth: 80 }}>
@@ -67,16 +70,17 @@ export default function LoggedInHeader(props) {
               onChange={handleChange}
               label="Navigation"
               style={{minWidth: "100px", maxHeight: "55px", color: "white"}}
+              key={"anything"}
             >
-            {isEmployer ? <EmployerDropdown sx={{maxWidth: "150px"}}/> :
-            <>
+            {state.role !== 'seeker' ? <EmployerDropdown sx={{maxWidth: "150px"}}/> :
+            <div>
             <Link to="/dashboard"> <MenuItem value={20}>Dashboard</MenuItem></Link>
             <Link to="/documents"> <MenuItem value={30}>Documents</MenuItem></Link>
             <Link to="/notes"> <MenuItem value={40}>Notes</MenuItem></Link>
             <Link to="/blogs"> <MenuItem value={40}>Blogs</MenuItem></Link>
             <Link to="/community"> <MenuItem value={50}>Community</MenuItem></Link>
             <Link to="/logout"> <MenuItem value={50}>Log Out</MenuItem></Link>
-            </>
+            </div>
             }
             </Select>
           </FormControl>
