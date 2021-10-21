@@ -60,16 +60,22 @@ router.route("/search")
         OR lower(title) LIKE LOWER('%${keyword}%')
         OR lower(benefits) LIKE LOWER('%${keyword}%')
         OR lower(requirements) LIKE LOWER('%${keyword}%')
+        OR lower(uuid) LIKE LOWER ('%${keyword}%')
+        AND CAST(postings.employer_id AS int) = employers.id
     )`;
     const citySearchClause = `
-      lower(city) LIKE LOWER('%${city}%')
+      lower(postings.city) LIKE LOWER('%${city}%')
+        OR lower(employers.city) LIKE LOWER ('%${city}%')
     `;
     const search =
-      keyword.length > 0 && city.length === 0
-      ? `SELECT * FROM postings WHERE ${keywordSearchClause};`
-      : keyword.length === 0 && city.length > 0
-      ? `SELECT * FROM postings WHERE ${citySearchClause};`
-      : `SELECT * FROM postings WHERE ${keywordSearchClause} AND ${citySearchClause};`;
+      keyword && !city
+      ? `SELECT * FROM postings, employers
+        WHERE ${keywordSearchClause};`
+      : !keyword && city
+      ? `SELECT * FROM postings
+        WHERE ${citySearchClause};`
+      : `SELECT * FROM postings, employers
+        WHERE ${keywordSearchClause} AND ${citySearchClause};`;
 
     const result = await pool.query(search);
     try {
