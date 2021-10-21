@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Stack, Divider, Box, Button, Modal, IconButton } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { pink } from "@mui/material/colors";
 
 export default Applicant = ({ applicantInfo }) => {
   const [open, setOpen] = useState(false);
@@ -8,7 +10,7 @@ export default Applicant = ({ applicantInfo }) => {
   // detailed entry of each applicant
   // contact and reject buttons
   return (
-    <Grid item xs={7} sx={{border: "1px solid rgba(0, 0, 0, 0.12)"}}>
+    <Grid item xs={7}>
       <>
         <Stack
           spacing={{xs: 3}}
@@ -31,6 +33,7 @@ export default Applicant = ({ applicantInfo }) => {
           </Typography>
           <Stack direction="row" spacing={2}>
             <Button variant="contained" onClick={handleOpen}>Contact</Button>
+            <Button variant="contained">Reject</Button>
             <label htmlFor="icon-button-file">
               {/* <Input accept="image/*" id="icon-button-file" type="file" /> */}
               <IconButton sx={{ color: pink[500] }} aria-label="upload picture" component="span">
@@ -38,14 +41,13 @@ export default Applicant = ({ applicantInfo }) => {
               </IconButton>
             </label>
           </Stack>
-          <Divider></Divider>
           <Typography
             variant="h3"
             color="text.primary"
             align="center"
             sx={{fontSize:"18px", textAlign:"left"}}
           >
-            <strong>Qualifications</strong>
+            <strong>Experience</strong>
           </Typography>
           <Typography
             variant="h4"
@@ -53,16 +55,15 @@ export default Applicant = ({ applicantInfo }) => {
             align="center"
             sx={{fontSize:"18px", textAlign:"left"}}
           >
-            {applicantInfo.requirements}
+            {applicantInfo.years_exp}
           </Typography>
-          <Divider></Divider>
           <Typography
             variant="h3"
             color="text.primary"
             align="center"
             sx={{fontSize:"18px", textAlign:"left"}}
           >
-            <strong>Benifits</strong>
+            <strong>Education</strong>
           </Typography>
           <Typography
             variant="h4"
@@ -70,10 +71,9 @@ export default Applicant = ({ applicantInfo }) => {
             align="center"
             sx={{fontSize:"18px", textAlign:"left"}}
           >
-            {applicantInfo.benefits}
+            {applicantInfo.years_edu}
           </Typography>
-          <Divider></Divider>
-          <Typography
+          {/* <Typography
             variant="h3"
             color="text.primary"
             align="center"
@@ -88,9 +88,9 @@ export default Applicant = ({ applicantInfo }) => {
             sx={{fontSize:"18px", textAlign:"left"}}
           >
             {applicantInfo.description}
-          </Typography>
+          </Typography> */}
         </Stack>
-        <Modal
+        {/* <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
@@ -98,11 +98,11 @@ export default Applicant = ({ applicantInfo }) => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Apply For The Position
+              Contact the applicant
             </Typography>
             <ApplyForm />
           </Box>
-        </Modal>
+        </Modal> */}
       </>
     </Grid>
   )

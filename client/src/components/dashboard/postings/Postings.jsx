@@ -4,6 +4,7 @@ import useFetch from "./hooks/useFetch.jsx";
 import Search from './PostList/Search.jsx'
 import PostList from "./PostList/PostList.jsx";
 import PostDetails from "./PostDetails/PostDetails.jsx";
+import ApplicantsList from './ApplicantsList/ApplicantsList.jsx';
 
 function Postings({ }) {
   const [ searchRoute, setSearchRoute ] = useState("all");
@@ -23,8 +24,9 @@ function Postings({ }) {
       </Grid>
       <Grid container item rowSpacing={1} columnSpacing={2}>
         <PostList jobs={jobs} />
-        {/* another conditional here for if role is employer or seeker */}
+        {/* another conditional here for if role is employer or seeker to render applicants or post details*/}
         <PostDetails postId={jobs && jobs.length > 0 ? jobs[0].id : null} />
+        {/* <ApplicantsList /> */}
       </Grid>
     </Grid>
   );
