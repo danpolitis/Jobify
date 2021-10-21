@@ -72,7 +72,7 @@ router.route("/search")
       ? `SELECT * FROM postings, employers
         WHERE ${keywordSearchClause};`
       : !keyword && city
-      ? `SELECT * FROM postings
+      ? `SELECT * FROM postings, employers
         WHERE ${citySearchClause};`
       : `SELECT * FROM postings, employers
         WHERE ${keywordSearchClause} AND ${citySearchClause};`;

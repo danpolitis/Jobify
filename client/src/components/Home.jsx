@@ -8,25 +8,12 @@ import Container from "@mui/material/Container";
 import './Home.css';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
+import Search from './Search.jsx';
+import useFetch from './dashboard/postings/hooks/useFetch.jsx';
 
-
-
-
-function Home(props) {
-  const [ keyword, setKeyword ] = useState("");
-  const [ city, setCity ] = useState("");
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    // axios.get(`/${radioValue}/${gamerTag}/sessions`).then((response) => {
-    //   setProfile(response.data);
-    // }).then(setProfileExists(true))
-    //   .catch((err => {
-    //     setProfileExists(false)
-    //     setGamerTag('')
-    //     alert('username is invalid')
-    //   }))
-  }
+function Home() {
+  const [ searchRoute, setSearchRoute ] = useState("all");
+  const jobs = useFetch(`http://localhost:3000/postings/${searchRoute}`);
 
   return (
     <div>
@@ -39,33 +26,7 @@ function Home(props) {
         >
           Jobify
         </Typography>
-        <form onSubmit={() => console.log('submitted')}>
-          <TextField
-            label="Keyword"
-            value={keyword}
-            sx={{ padding: "5px", minWidth: "10px" }}
-            placeholder="Job title, description, industry"
-            onChange={e => setKeyword(e.target.value)}
-            variant="outlined"
-          />
-          <TextField
-            label="City"
-            value={city}
-            sx={{ padding: "5px", minWidth: "10px" }}
-            placeholder="City"
-            onChange={e => setCity(e.target.value)}
-            variant="outlined"
-          />
-          <Button
-            sx={{ margin: "2%" }}
-            type="submit"
-            color="primary"
-            variant="contained"
-            disableElevation
-          >
-            Find jobs
-          </Button>
-        </form>
+        <Search setRoute={setSearchRoute} />
       </Container>
     </div>
   );
