@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const pool = require('./pool');
 const path = require('path');
 const { createWriteStream } = require('fs');
 const { Storage } = require('@google-cloud/storage');
@@ -10,10 +9,11 @@ const storage = new Storage({
 
 router.route('/:user_id')
   .get(async (request, response) => {
+    console.log('in get request')
     const user_id = request.params.user_id;
+    const bucketName = 'hghaskjsdlkja';
 
     try {
-      fsDataToFile('test.pages', result.rows[0].encode);
       response.status(200).end();
     } catch (error) {
       console.error(error);
@@ -21,29 +21,37 @@ router.route('/:user_id')
   })
 
   .post(async (request, response) => {
+    console.log('in post');
+    console.log(request.files);
     const user_id = request.params.user_id;
-    const file = request.body.file;
-    const bucketName = 'cool-docs';
+    const file = request.files.file;
+    const fileName = file.name;
+    const bucketName = 'hghaskjsdlkja';
 
-    // async function createBucket() {
-    //   await storage.createBucket(bucketName);
-    //   console.log(`Bucket ${bucketName} created.`);
-    // }
-    // createBucket().catch(console.error);
-
-    const bucket = storage.bucket(bucketName);
-    const options = {
-      resumable: false,
-      contentType: 'auto'
+    createBucket = async() => {
+      // Creates the new bucket
+      await storage.createBucket(bucketName);
+      console.log(`Bucket ${bucketName} created.`);
     }
-
-    bucket.upload(file, options, function(err, file) {
-      if (err) {
-        console.log('error uploading: ', err);
-      } else {
-        console.log('file uploaded?');
+    createBucket().then(() => {
+      const testB = storage.bucket(bucketName);
+      const options = {
+        resumable: false,
+        contentType: 'auto'
       }
+
+      testB.upload(file.tempFilePath, options, function(err, file) {
+        if (err) {
+          console.log('error uploading: ', err);
+        } else {
+          console.log('file uploaded?');
+        }
+      })
     })
+
+    // .catch = (err) => {
+    //   console.log("error: ", err);
+    // }
 
 
     try {
