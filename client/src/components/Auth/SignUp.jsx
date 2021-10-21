@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect} from 'react';
+import React, { useRef, useState, useEffect, useContext} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from './AuthContext.js';
@@ -9,6 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { GlobalContext } from '../App.jsx';
 
 
 const Signup = () => {
@@ -23,13 +24,22 @@ const Signup = () => {
     const passwordConfirmRef = useRef();
     const { signup } = useAuth();
 
+    const globalData = useContext(GlobalContext);
+    const { role } = globalData.state;
+
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
-    const [role, setRole] = useState('seeker');
+    // const [role, setRole] = useState('seeker');
+
+    const handleRoleChange = (e) => {
+
+      console.log(e.target.value)
+      globalData.dispatch({ type: 'updateRole', data: e.target.value})
+
+    }
 
      const SignUpHandler = (e) => {
-
 
       e.preventDefault();
 
@@ -43,16 +53,13 @@ const Signup = () => {
 
       signup(emailRef.current.value, passwordRef.current.value)
       .then((userObj) => {
-        // console.log('user uid', userObj.user.uid);
-        // console.log('role,', role);
-        // console.log('signup email: ', emailRef.current.value);
         const data = {
           uuid: userObj.user.uid,
           role: role,
-          email: emailRef.current.value,
+          // email: emailRef.current.value,
         };
         console.log(data);
-        // return axios.post('http://localhost:3000/signup_login', data);
+        return axios.post('http://localhost:3000/signup_login', data);
       })
       .then(() => {
         history.push("/dashboard");
@@ -86,8 +93,12 @@ const Signup = () => {
                     <TextField fullWidth label='Confirm Password' placeholder="Confirm your password" inputRef={passwordConfirmRef}/>
                     <FormControl component="fieldset" style={marginTop}>
                         <RadioGroup style={{ display: 'initial' }}>
-                            <FormControlLabel value="seeker" control={<Radio />} label="JobSeeker" checked={role === 'seeker'} onClick={() => setRole('seeker')}/>
-                            <FormControlLabel value="employer" control={<Radio />} label="Employer" checked={role === 'employer'} onClick={() =>setRole('employer')}/>
+                            <FormControlLabel value="seeker" control={<Radio />} label="JobSeeker"
+                            // checked={role === 'seeker'}
+                            onClick={handleRoleChange}/>
+                            <FormControlLabel value="employer" control={<Radio />} label="Employer"
+                            // checked={role === 'seeker'}
+                            onClick={handleRoleChange}/>
                         </RadioGroup>
                     </FormControl>
                     <Typography

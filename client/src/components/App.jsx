@@ -27,12 +27,15 @@ import LoggedInHeader from "./LoggedInHeader.jsx"
 
 const initialState = {
   userId: '',
+  role: 'seeker',
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'updateUserId':
       return { ...state, userId: action.data };
+    case 'updateRole':
+      return { ...state, role: action.data};
     default:
       return state;
   }
