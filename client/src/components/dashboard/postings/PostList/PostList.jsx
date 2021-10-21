@@ -1,10 +1,10 @@
 import React from "react"
-import { Grid, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import PostListEntry from "./PostListEntry.jsx";
 
 function PostList({ jobs }) {
   return (
-    <Grid item xs={5} sx={{ maxHeight: "80vh", overflow: "auto" }}>
+    <Stack spacing={2} sx={{overflowY: "scroll"}}>
       {
         jobs.length > 0
         ? jobs.map((job, i) => (
@@ -12,7 +12,7 @@ function PostList({ jobs }) {
         ))
         : <Typography>No jobs match your search, try again!</Typography>
       }
-    </Grid>
+    </Stack>
   );
 }
 

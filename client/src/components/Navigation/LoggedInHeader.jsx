@@ -13,7 +13,7 @@ import './Home.css';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import EmployerDropdown from './EmployerDropdown.jsx'
 import NativeSelect from "@mui/material/NativeSelect"
-import { GlobalContext } from "./App.jsx"
+import { GlobalContext } from "../App.jsx"
 
 
 
@@ -88,5 +88,3 @@ export default function LoggedInHeader(props) {
     </>
   );
 }
-
-
