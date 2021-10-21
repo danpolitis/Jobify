@@ -88,7 +88,7 @@ export default function LoggedInHeader(props) {
             <Link to="/notes"> <MenuItem value={40}>Notes</MenuItem></Link>
             <Link to="/blogs"> <MenuItem value={40}>Blogs</MenuItem></Link>
             <Link to="/community"> <MenuItem value={50}>Community</MenuItem></Link>
-            <Link to="/logout"> <MenuItem value={50} onClick={logoutHandler}>Log Out</MenuItem></Link>
+            <Link to="/"> <MenuItem value={50} onClick={logoutHandler}>Log Out</MenuItem></Link>
             </div>
             }
             </Select>
