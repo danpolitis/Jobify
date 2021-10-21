@@ -55,7 +55,7 @@ const Signup = () => {
       .then((userObj) => {
         const data = {
           uuid: userObj.user.uid,
-          role: role,
+          isSeeker: role,
           // email: emailRef.current.value,
         };
         console.log(data);
