@@ -8,9 +8,9 @@ import Container from "@mui/material/Container";
 import './Home.css';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
-
-
-
+import { IconButton , Stack} from '@mui/material';
+import LoginIcon from '@mui/icons-material/Login';
+import { Link } from "react-router-dom";
 
 function Home(props) {
   const [ keyword, setKeyword ] = useState("");
@@ -33,11 +33,10 @@ function Home(props) {
       <Container justify="center">
         <Typography
           variant="h2"
-          color="text.secondary"
           align="center"
-          sx={{marginTop: "100px", marginBottom: "30px", marginBottom: "75px"}}
+          sx={{color: "#49475B", marginTop: "100px", marginBottom: "50px", fontWeight: "700"}}
         >
-          Jobify
+          Jobi<sup>fy</sup>
         </Typography>
         <form onSubmit={() => console.log('submitted')}>
           <TextField
@@ -66,6 +65,19 @@ function Home(props) {
             Find jobs
           </Button>
         </form>
+        <Stack sx={{width:"30%", margin:"50px auto"}}>
+          <Button variant="contained" size="large" startIcon={<LoginIcon />}>
+            Create An Account
+          </Button>
+          <Typography
+            variant="text"
+            color="text.primary"
+            align="center"
+            sx={{marginTop: "25px", marginBottom: "25px", fontWeight: "700"}}
+          >
+            <Link className="Homelinks" to="/new-post">Employers: Post a job</Link> – Your next hire is here
+          </Typography>
+        </Stack>
       </Container>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Grid, Typography, CircularProgress, Stack, Divider, Chip, Box, Button, Modal, IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { pink } from "@mui/material/colors";
 import useFetch from "../hooks/useFetch.jsx"
 import ApplyForm from "./ApplyForm.jsx"
@@ -56,7 +57,7 @@ function PostDetails({ postId }) {
             <label htmlFor="icon-button-file">
               {/* <Input accept="image/*" id="icon-button-file" type="file" /> */}
               <IconButton sx={{ color: pink[500] }} aria-label="upload picture" component="span">
-                <FavoriteIcon />
+                <FavoriteBorderIcon />
               </IconButton>
             </label>
           </Stack>
