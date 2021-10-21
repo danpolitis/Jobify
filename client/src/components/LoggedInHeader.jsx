@@ -17,8 +17,6 @@ import { GlobalContext } from "./App.jsx"
 
 
 
-
-
 export default function LoggedInHeader(props) {
 
   const [dropDown, setDropDown] = useState('')
@@ -33,6 +31,7 @@ export default function LoggedInHeader(props) {
   const navigationStyle = {
     color: "white",
   };
+
 
 
   return (
