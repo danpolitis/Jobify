@@ -58,17 +58,20 @@ export default function Blog(props) {
 
   return (
     <Card>
-      <CardHeader>
-        <Button
+      <Grid
+        container
+        direction="row"
+        justifyContent="flex-end"
+        alignItems="center"
+      >
+        <IconButton
           onClick={handleDeletePost}
           style={{ textAlign: "right", width: "48px" }}
           xs={2}
         >
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Button>
-      </CardHeader>
+          <DeleteIcon />
+        </IconButton>
+      </Grid>
       <Button
         onClick={(e) => {
           handleListClick(e, props.index, props.post);

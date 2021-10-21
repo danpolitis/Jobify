@@ -53,7 +53,7 @@ export default function Blogs() {
     <Container maxWidth="lg" direction="column" className={classes.blogsContainer} >
       <Grid item >
       <Typography variant="h4">Selphie's Blogs</Typography>
-      <BlogList currentUser={currentUser} isEmployer={isEmployer} posts={posts} />
+      <BlogList currentUser={currentUser} isEmployer={isEmployer} posts={posts} getAllUserBlogs={getAllUserBlogs}/>
       </Grid>
     </Container>
   );
