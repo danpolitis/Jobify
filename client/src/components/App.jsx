@@ -5,6 +5,7 @@ import {Container, GlobalStyles, Typography, CssBaseline } from "@mui/material";
 import Box from '@mui/material/Box';
 import { ThemeProvider } from "@mui/material/styles";
 import { Helmet } from 'react-helmet';
+import Documents from "./documents/documents.jsx";
 import Footer from "./Footer.jsx"
 import Header from "./Header.jsx"
 import Home from "./Home.jsx"
@@ -42,10 +43,6 @@ const reducer = (state, action) => {
 };
 
 export const GlobalContext = React.createContext();
-
-
-
-
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -85,6 +82,7 @@ function App() {
               <Route path="/community" component={Community} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/notes" component={() => <Notes lol='lol'/>} />
+              <Route path="/documents" component={Documents} />
               {/* Add route here */}
             </Switch>
           </AuthProvider>
