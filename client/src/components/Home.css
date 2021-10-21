@@ -6,3 +6,8 @@ div.homepage > div > input[type= "text"]{
 .nameOfuser {
   padding: 15px;
 }
+
+.secondary {
+  color: #E9EB9E;
+  font-weight: bold;
+}
