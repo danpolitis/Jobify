@@ -13,8 +13,8 @@ import './Home.css';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import EmployerDropdown from './EmployerDropdown.jsx'
 import NativeSelect from "@mui/material/NativeSelect"
-import { GlobalContext } from "./App.jsx"
-import { useAuth } from './Auth/AuthContext.js';
+import { GlobalContext } from "../App.jsx"
+import { useAuth } from '../Auth/AuthContext.js';
 
 
 export default function LoggedInHeader(props) {
@@ -98,5 +98,3 @@ export default function LoggedInHeader(props) {
     </>
   );
 }
-
-
