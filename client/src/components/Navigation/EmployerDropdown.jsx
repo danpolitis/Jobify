@@ -11,10 +11,25 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import './Home.css';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import { useAuth } from '../Auth/AuthContext.js';
 
 
 
 export default function EmployerDropdown() {
+  const { logout } = useAuth();
+  const [error, setError] = useState("");
+
+  const logoutHandler = (e) => {
+    // e.preventDefault();
+    logout()
+    .then(() => {
+      history.push("/");
+    })
+    .catch((error) => {
+      setError('Failed to log out');
+    })
+  }
+
   return (
     <div>
       <Link to="/dashboard"> <MenuItem value={20}>Dashboard</MenuItem></Link>
@@ -23,7 +38,7 @@ export default function EmployerDropdown() {
       <Link to="/notes"> <MenuItem value={40}>Notes</MenuItem></Link>
       <Link to="/blogs"> <MenuItem value={50}>Blogs</MenuItem></Link>
       <Link to="/community"> <MenuItem value={50}>Community</MenuItem></Link>
-      <Link to="/logout"> <MenuItem value={50}>Log Out</MenuItem></Link>
+      <Link to="/"> <MenuItem value={50} onClick={logoutHandler}>Log Out</MenuItem></Link>
     </div>
   )
 }
