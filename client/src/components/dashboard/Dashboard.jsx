@@ -6,7 +6,7 @@ import UserCalendar from "./UserCalendar.jsx"
 function Dashboard() {
   return (
     <Container>
-      <Grid container spacing={2} sx={{ margin: "1% 0" }}>
+      <Grid container spacing={2}>
         <Grid item xs={9}>
           <Postings />
         </Grid>

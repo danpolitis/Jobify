@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react"
 import Calendar from 'react-calendar'
-import 'react-calendar/dist/Calendar.css';
+import './Calendar.css';
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -8,6 +8,13 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import axios from 'axios';
 import { GlobalContext } from "../App.jsx"
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Checkbox from "@mui/material/Checkbox";
+
+
+
+
 
 
 
@@ -55,11 +62,29 @@ function UserCalendar(props) {
     setEventActivity('')
   }
 
+  function CheckboxList() {
+    const [checked, setChecked] = React.useState([0]);
+
+    const handleToggle = (value) => () => {
+      const currentIndex = checked.indexOf(value);
+      const newChecked = [...checked];
+
+      if (currentIndex === -1) {
+        newChecked.push(value);
+      } else {
+        newChecked.splice(currentIndex, 1);
+      }
+
+      setChecked(newChecked);
+    };
+  }
+
+
 
   return (
     <div>
       <Grid container >
-        <Box sx={{marginTop: "90px"}}>
+        <Box sx={{marginTop: "102px"}}>
           <Calendar
             onChange={setCalDate}
             value={calDate}/>
@@ -69,9 +94,9 @@ function UserCalendar(props) {
           <Button color="primary" variant="contained">Add event to date</Button>
           <Box>
             <Typography align-content="left" variant="h5" sx={{marginTop: "20px", textDecoration: "underline"}} component="h5">Things to do Today</Typography>
-            <ul>
-              <li>
-                hello
+            <ul className="checkmark">
+              <li className="checkmark">
+                hello22
               </li>
               <li>
                 {/* {toDoList && toDoList.map(item => (

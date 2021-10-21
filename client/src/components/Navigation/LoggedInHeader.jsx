@@ -58,7 +58,7 @@ export default function LoggedInHeader(props) {
             <div>
             <Link to="/">Home</Link>
             <Link to="/dashboard" style={{padding: "15px"}}>Name of User</Link>
-            {isEmployer ? <span className="secondary">Employer</span> : <span color="secondary">Job Seeker</span>}
+            {isEmployer ? <span className="secondary">Employer</span> : <span className="secondary">Job Seeker</span>}
             </div>
           </nav>
           <FormControl sx={{ my: 1, mx: 1.5, midWidth: 80 }}>
@@ -85,5 +85,3 @@ export default function LoggedInHeader(props) {
     </>
   );
 }
-
-
