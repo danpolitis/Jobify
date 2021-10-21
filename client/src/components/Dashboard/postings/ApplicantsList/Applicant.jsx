@@ -73,36 +73,7 @@ export default Applicant = ({ applicantInfo }) => {
           >
             {applicantInfo.years_edu}
           </Typography>
-          {/* <Typography
-            variant="h3"
-            color="text.primary"
-            align="center"
-            sx={{fontSize:"18px", textAlign:"left"}}
-          >
-            <strong>applicantInfo Description</strong>
-          </Typography>
-          <Typography
-            variant="h4"
-            color="text.primary"
-            align="center"
-            sx={{fontSize:"18px", textAlign:"left"}}
-          >
-            {applicantInfo.description}
-          </Typography> */}
         </Stack>
-        {/* <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Contact the applicant
-            </Typography>
-            <ApplyForm />
-          </Box>
-        </Modal> */}
       </>
     </Grid>
   )
