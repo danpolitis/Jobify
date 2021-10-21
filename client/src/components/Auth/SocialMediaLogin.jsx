@@ -34,10 +34,10 @@ function SocialMediaLogin() {
   // Listen to the Firebase Auth state and set the local state.
   useEffect(() => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-      if(user) {
-      // console.log('socialmedia: ', user.email);
-      // globalData.dispatch({ type: 'updateUserId', data: user.uid });
-      }
+      // if(user) {
+      // // console.log('socialmedia: ', user.email);
+      // // globalData.dispatch({ type: 'updateUserId', data: user.uid });
+      // }
 
       setIsSignedIn(!!user);
     });
