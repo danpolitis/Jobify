@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"
 import {Button, Grid, Box,Typography, TextField, Checkbox, ListItemText, ListItemIcon} from "@mui/material"
 import { GlobalContext } from "../App.jsx"
-import Calendar from 'react-calendar'
-import 'react-calendar/dist/Calendar.css';
+import Calendar from 'react-calendar';
 import axios from 'axios';
 import './Calendar.css';
 import uniqid from 'uniqid';
@@ -78,7 +77,7 @@ function UserCalendar(props) {
   return (
     <div>
       <Grid container >
-        <Box sx={{marginTop: "90px"}}>
+        <Box sx={{marginTop: "102px"}}>
           <Calendar
             onChange={setCalDate}
             value={calDate}/>

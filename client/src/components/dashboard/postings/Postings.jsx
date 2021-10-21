@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, CircularProgress } from "@mui/material";
+import { Grid, CircularProgress, Container, Typography } from "@mui/material";
 import useFetch from "./hooks/useFetch.jsx";
 import Search from './PostList/Search.jsx'
 import PostList from "./PostList/PostList.jsx";
@@ -14,21 +14,25 @@ function Postings({ }) {
   return (
     !jobs
     ? <CircularProgress />
-    : <Grid container>
-      <Grid container item>
-        {/* for employer might need to either get rid of search bar or include different function for it in component file */}
-        <Search setRoute={setSearchRoute} />
-      </Grid>
-      <Grid container item>
-        filter components go here
-      </Grid>
-      <Grid container item rowSpacing={1} columnSpacing={2}>
-        <PostList jobs={jobs} />
-        {/* another conditional here for if role is employer or seeker to render applicants or post details*/}
-        <PostDetails postId={jobs && jobs.length > 0 ? jobs[0].id : null} />
-        {/* <ApplicantsList /> */}
-      </Grid>
-    </Grid>
+      :  <>
+          <Grid>
+              <Search setRoute={setSearchRoute} />
+              <Typography
+              variant="h6"
+              align="center"
+            >
+              Filters
+            </Typography>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={5}  sx={{maxHeight: "100vh", overflowY:"scroll"}}>
+                <PostList jobs={jobs} />
+              </Grid>
+              <Grid item xs={7}>
+                <PostDetails postId={jobs && jobs.length > 0 ? jobs[0].id : null} />
+              </Grid>
+            </Grid>
+        </>
   );
 }
 
