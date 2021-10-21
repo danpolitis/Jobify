@@ -18,39 +18,21 @@ function UserCalendar(props) {
 
   const [employerPortal, setEmployerPortal] = useState("false")
   const [seekerPortal, setSeekerPortal] = useState("false")
-  //set states of calendar date
   const [calDate, setCalDate] = useState(new Date())
   const [eventActivity, setEventActivity] = useState("")
   const [time, setTime] = useState('')
   const [toDoList, setToDoList] = useState([])
   const { state } = useContext(GlobalContext);
 
-  // useEffect(() => {
-
-  // },[])
-
-
-  // function onChange1(calDate) {
-  //   //change results based on calendar date click
-  //   setCalDate(calDate)
-  //   const filteredResults = userResults.filter(result => {
-  //     const newResultFormat = new Date(result.created_at).toLocaleString().split(",")[0]
-  //     const newCalDateFormat = calDate.toLocaleString().split(",")[0]
-  //     return newResultFormat === newCalDateFormat
-  //   })
-  // }
-
-
-
-
   useEffect(() => {
     getToDoList()
-  },[0])
+  },[])
 
   function handleSubmit() {
-    axios.post('/todo_list', {
+    axios.post(`/todo_list/${state.userId}`, {
       time: time,
-      eventActivity: eventActivity
+      eventactivity: eventActivity,
+      date: calDate.slice(0,10)
     }).then(resetInputs())
     .catch(error => {
       console.log('error posting')
@@ -60,8 +42,10 @@ function UserCalendar(props) {
   // console.log(toDoList)
 
   function getToDoList() {
-    axios.get(`/todo_list/${state.userId}`).then((response =>
-      setToDoList(response.rows)
+    axios.get(`/todo_list/${state.userId}`).then(response =>
+      setToDoList(response.data)
+    ).catch(error => (
+      console.log('error', error)
     ))
   }
 
@@ -74,18 +58,17 @@ function UserCalendar(props) {
 
   return (
     <div>
-      <Grid container justifyContent="flex-end" sx={{ marginLeft: "10px"}}>
-        <Box sx={{ p: 2 }}>
+      <Grid container >
+        <Box sx={{marginTop: "90px"}}>
           <Calendar
             onChange={setCalDate}
-            value={calDate}
-            sx={{marginLeft: "150px"}} />
-          <input value={time} onChange={e => setTime(e.target.value)} type="time" min="09:00" max="18:00" required/>
-          <TextField sx={{marginLeft: "10px"}} placeholder="Enter event name" onChange={e => setEventActivity(e.target.value)}></TextField>
+            value={calDate}/>
+          <input value={time} style={{marginTop: "45px", marginRight: "25px", padding: "15px 15px"}} onChange={e => setTime(e.target.value)} type="time" min="09:00" max="18:00" required/>
+          <TextField sx={{marginTop: "45px"}} placeholder="Enter event name" onChange={e => setEventActivity(e.target.value)}></TextField>
           <p></p>
-          <Button sx={{ marginTop: "10px" }} color="primary" variant="contained">Add event to date</Button>
+          <Button color="primary" variant="contained">Add event to date</Button>
           <Box>
-            <Typography sx={{ padding: "7px" }} align-content="left" variant="h5" component="h5">Things to do Today</Typography>
+            <Typography align-content="left" variant="h5" sx={{marginTop: "20px", textDecoration: "underline"}} component="h5">Things to do Today</Typography>
             <ul>
               <li>
                 hello
