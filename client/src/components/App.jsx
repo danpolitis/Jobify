@@ -71,10 +71,10 @@ function App() {
             <meta name="theme-color" content="#799496" />
           </Helmet>
           <GlobalContext.Provider value={{ state, dispatch }}>
+          <AuthProvider>
           {state.userId !== "" ? <LoggedInHeader/> :
           <Header />
            }
-          <AuthProvider>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />

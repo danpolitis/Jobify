@@ -60,7 +60,7 @@ export default function LoggedInHeader(props) {
           <nav>
             <div>
             <Link to="/">Home</Link>
-            <Link to="/dashboard" style={{padding: "15px"}}>Name of User</Link>
+            <Link to="/dashboard" style={{padding: "15px"}}>{state.email}</Link>
             {state.role !== 'seeker' ? <span className="secondary">Employer</span> : <span className="secondary">Job Seeker</span>}
             </div>
           </nav>

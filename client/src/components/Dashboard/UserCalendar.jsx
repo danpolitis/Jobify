@@ -29,12 +29,17 @@ function UserCalendar(props) {
     getToDoList()
   },[])
 
-  function handleSubmit() {
+  const rawCalDate = calDate.toString()
+  const sliceDate = rawCalDate.slice(3,10)
+
+  function handleSubmit(e) {
+    e.preventDefault()
     axios.post(`http://localhost:3000/todo_list/2`, {
       time: time,
       eventactivity: eventActivity,
-      date: calDate.slice(0,10)
+      date: sliceDate
     }).then(resetInputs())
+    .then(getToDoList())
     .catch(error => {
       console.log('error posting')
     })
@@ -85,7 +90,7 @@ function UserCalendar(props) {
           <input value={time} style={{marginTop: "45px", marginRight: "25px", padding: "15px 15px"}} onChange={e => setTime(e.target.value)} type="time" min="09:00" max="18:00" required/>
           <TextField sx={{marginTop: "45px"}} placeholder="Enter event name" onChange={e => setEventActivity(e.target.value)}></TextField>
           <p></p>
-          <Button color="primary" variant="contained">Add event to date</Button>
+          <Button onClick={handleSubmit} color="primary" variant="contained">Add event to date</Button>
           <Box>
             <Typography align-content="left" variant="h5" sx={{marginTop: "20px", textDecoration: "underline"}} component="h5">Things to do Today</Typography>
             <ul className="checkmark">
