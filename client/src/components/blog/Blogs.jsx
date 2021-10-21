@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Blogs() {
-  const [blogs, setBlogs] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(1);
   const [isEmployer, setIsEmployer] = useState(true);
 
@@ -32,29 +32,28 @@ export default function Blogs() {
       axios
         .get(`http://localhost:3000/employer_blogs/${currentUser}`)
         .then((results) => {
-          console.log("this is the results", results.data.rows);
-          setBlogs(results.data.rows);
+          // console.log("this is the results", results.data.rows);
+          setPosts(results.data.rows);
         });
     } else {
       axios
         .get(`http://localhost:3000/seeker_blogs/${currentUser}`)
         .then((results) => {
-          setBlogs(results.data.rows);
+          setPosts(results.data.rows);
         });
     }
   }
 
   useEffect(() => {
     getAllUserBlogs();
-  }, []);
+  }, [posts]);
 
   const classes = useStyles();
   return (
     <Container maxWidth="lg" direction="column" className={classes.blogsContainer} >
       <Grid item >
       <Typography variant="h4">Selphie's Blogs</Typography>
-      <BlogList currentUser={currentUser} isEmployer={isEmployer} blogs={blogs} />
-
+      <BlogList currentUser={currentUser} isEmployer={isEmployer} posts={posts} />
       </Grid>
     </Container>
   );

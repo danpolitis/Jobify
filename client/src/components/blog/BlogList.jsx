@@ -1,16 +1,38 @@
-import React, { useState, useEffect } from 'react'
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import AddIcon from '@mui/icons-material/Add';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import React, { useState, useEffect } from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 
-import Blog from './Blog';
+import Blog from "./Blog";
 
-export default function BlogList() {
+export default function BlogList(props) {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  function handleOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
   return (
     <div>
-      Blogs
+      {props.posts.map((post, i) => {
+        return (
+          <Blog
+            setSelectedIndex={setSelectedIndex}
+            selectedIndex={selectedIndex}
+            setPosts={props.setPosts}
+            getAllUserBlogs={props.getAllUserBlogs}
+            isEmployer={props.isEmployer}
+            index={i}
+            key={i}
+            post={post}
+          />
+        );
+      })}
     </div>
-  )
+  );
 }
