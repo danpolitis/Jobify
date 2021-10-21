@@ -10,7 +10,7 @@ function Search({ setRoute }) {
     e.preventDefault();
 
     if (keyword.length > 0 || city.length > 0) {
-      setRoute(`search/?keyword=${keyword}&city=${city}`)
+      setRoute(`search?keyword=${keyword}&city=${city}`)
     }
   }
 
