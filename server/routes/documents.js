@@ -11,13 +11,17 @@ router.route('/:user_id')
   .get(async (request, response) => {
     console.log('in get request')
     const user_id = request.params.user_id;
-    const bucketName = 'hghaskjsdlkja';
+    const bucketName = 'hghaskjsdlkja3';
+    const bucket = storage.bucket(bucketName);
 
-    try {
-      response.status(200).end();
-    } catch (error) {
-      console.error(error);
-    }
+    bucket.getFiles().then(function(data) {
+      const files = data[0];
+      try {
+        response.status(200).send(files);
+      } catch (error) {
+        console.error(error);
+      }
+    })
   })
 
   .post(async (request, response) => {
@@ -26,36 +30,47 @@ router.route('/:user_id')
     const user_id = request.params.user_id;
     const file = request.files.file;
     const fileName = file.name;
-    const bucketName = 'hghaskjsdlkja';
+    const bucketName = 'hghaskjsdlkja3';
 
-    createBucket = async() => {
-      // Creates the new bucket
-      await storage.createBucket(bucketName);
-      console.log(`Bucket ${bucketName} created.`);
+    // createBucket = async() => {
+    //   // Creates the new bucket
+    //   await storage.createBucket(bucketName);
+    //   console.log(`Bucket ${bucketName} created.`);
+    // }
+    // createBucket().then(() => {
+    //   const testB = storage.bucket(bucketName);
+    //   const options = {
+    //     destination: fileName,
+    //     resumable: false,
+    //     contentType: 'auto'
+    //   }
+
+    //   testB.upload(file.tempFilePath, options, function(err, file) {
+    //     if (err) {
+    //       console.log('error uploading: ', err);
+    //     } else {
+    //       console.log('file uploaded?');
+    //     }
+    //   })
+    // })
+
+    const testB = storage.bucket(bucketName);
+    const options = {
+      destination: fileName,
+      resumable: false,
+      contentType: 'auto'
     }
-    createBucket().then(() => {
-      const testB = storage.bucket(bucketName);
-      const options = {
-        resumable: false,
-        contentType: 'auto'
-      }
 
-      testB.upload(file.tempFilePath, options, function(err, file) {
-        if (err) {
-          console.log('error uploading: ', err);
-        } else {
-          console.log('file uploaded?');
-        }
-      })
+    testB.upload(file.tempFilePath, options, function(err, file) {
+      if (err) {
+        console.log('error uploading: ', err);
+      } else {
+        console.log('file uploaded?');
+      }
     })
 
-    // .catch = (err) => {
-    //   console.log("error: ", err);
-    // }
-
-
     try {
-      response.status(200).end();
+      response.status(200).send('Uploaded');
     } catch (error) {
       console.error(error);
     }
