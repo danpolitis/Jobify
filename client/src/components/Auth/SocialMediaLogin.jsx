@@ -13,16 +13,16 @@ const uiConfig = {
   // Popup signin flow rather than redirect flow.
   signInFlow: 'popup',
   // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-  // signInSuccessUrl: "/",
+  signInSuccessUrl: "/dashboard",
   // We will display Google and Facebook as auth providers.
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.FacebookAuthProvider.PROVIDER_ID
   ],
-  callbacks: {
-    // Avoid redirects after sign-in.
-    signInSuccessWithAuthResult: () => false,
-  },
+  // callbacks: {
+  //   // Avoid redirects after sign-in.
+  //   signInSuccessWithAuthResult: () => false,
+  // },
 };
 
 function SocialMediaLogin() {
@@ -62,13 +62,13 @@ function SocialMediaLogin() {
       </div>
     );
   }
-  return (
-    <div>
-      <Typography>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</Typography>
-      <Typography><Link to="/dashboard" >Dashboard</Link></Typography>
-      <Button onClick={logoutHandler}>Sign-out</Button>
-    </div>
-  );
+  // return (
+  //   <div>
+  //     <Typography>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</Typography>
+  //     <Typography><Link to="/dashboard" >Dashboard</Link></Typography>
+  //     <Button onClick={logoutHandler}>Sign-out</Button>
+  //   </div>
+  // );
 }
 
 export default SocialMediaLogin;

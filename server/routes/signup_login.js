@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const pool = require('./pool');
 
-router.route('/:uuid')
+router.route('/')
   .get(async (request, response) => {
     const uuid = request.params.uuid;
     const params = [uuid];
@@ -30,8 +30,8 @@ router.route('/:uuid')
   })
 
   .post(async (request, response) => {
-    // console.log(request.body.uuid);
-    // console.log(request.body.role);
+    console.log(request.body.uuid);
+    console.log(request.body.role);
     const uuid = request.body.uuid;
     let role;
     if(request.body.isSeeker === 'seeker') {
@@ -39,7 +39,7 @@ router.route('/:uuid')
     } else {
       role = true;
     }
-    // console.log(role);
+    console.log(role);
     const result = await pool.query(
       `INSERT INTO uuids(uuid, role) VALUES (${uuid}, ${role});`
     )
