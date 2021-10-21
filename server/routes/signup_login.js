@@ -3,6 +3,8 @@ const pool = require('./pool');
 
 router.route('/')
   .get(async (request, response) => {
+    // console.log(request.body.uuid);
+    //should we use param? no sure how to send a get request body with axios
     const uuid = request.body.uuid;
     const result = await pool.query(
       `SELECT role FROM uuids WHERE uuid = ${uuid}`
@@ -29,6 +31,8 @@ router.route('/')
   })
 
   .post(async (request, response) => {
+    // console.log(request.body.uuid);
+    // console.log(request.body.isSeeker);
     const uuid = request.body.uuid;
     let role;
     if(request.body.isSeeker === 'seeker') {
@@ -36,6 +40,7 @@ router.route('/')
     } else {
       role = true;
     }
+    // console.log(role);
     const result = await pool.query(
       `INSERT INTO uuid(uuid, role) VALUES (${uuid}, ${role});`
     )

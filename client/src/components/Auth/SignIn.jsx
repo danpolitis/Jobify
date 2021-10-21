@@ -11,7 +11,7 @@ import { useAuth } from './AuthContext';
 
 export default function SignIn() {
 
-  const paperStyle = { padding: 20, height: '50vh', width: 380, margin: "20px auto" }
+  const paperStyle = { padding: 20, width: 380, margin: "20px auto" }
   const avatarStyle = { backgroundColor: '#1bbd7e' }
   const btnstyle = { margin: '15px 0' }
 
@@ -34,7 +34,7 @@ export default function SignIn() {
           uuid: userObj.user.uid,
         }
         console.log(data);
-        // return axios.get('http://localhost:3000/signup_login');
+        return axios.get('http://localhost:3000/signup_login', data);
       })
       .then(() => {
         history.push('/dashboard');
@@ -45,6 +45,8 @@ export default function SignIn() {
       .finally(() => {
         setLoading(false);
       });
+
+
   };
 
 
