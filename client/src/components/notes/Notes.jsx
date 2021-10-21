@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
@@ -10,26 +10,31 @@ import {Editor, EditorState} from 'draft-js';
 import { convertFromRaw, convertToRaw } from 'draft-js';
 import Button from '@mui/material/Button';
 import 'regenerator-runtime/runtime'
+import { GlobalContext } from '../App.jsx';
 
 
 function Notes(props) {
+  const globalState = useContext(GlobalContext);
   const [notes, setNotes] = useState([])
   const [currentNote, setCurrentNote] = useState({})
-  const [currentUser, setCurrentUser] = useState(3)
-  const [isEmployer, setIsEmployer] = useState(true)
+  const [currentUser, setCurrentUser] = useState(globalState.state.userId)
+  const [isEmployer, setIsEmployer] = useState('employer')
   const [body, setBody] = useState('')
 
+
   function getCurrentNotes() {
-    if (isEmployer === true) {
+    if (isEmployer === 'employer') {
       axios.get(`http://localhost:3000/employer_notes/${currentUser}`)
         .then((results) => {
           setNotes(results.data)
         })
+        .catch((err) => {console.log(err)})
     } else {
       axios.get(`http://localhost:3000/seeker_notes/${currentUser}`)
         .then((results) => {
           setNotes(results.data)
         })
+        .catch((err) => {console.log(err)})
     }
   }
 
@@ -47,10 +52,23 @@ function Notes(props) {
 
 
   const save = (data) => {
-    axios.put(`http://localhost:3000/employer_notes/${currentNote.id}`, {
-      body: data,
-      title: currentNote.title
-    })
+    if (isEmployer === 'employer') {
+      axios.put(`http://localhost:3000/employer_notes/${currentNote.id}`, {
+        body: data,
+        title: currentNote.title
+      })
+      .then(() => {
+        getCurrentNotes()
+      })
+    } else {
+      axios.put(`http://localhost:3000/seeker_notes/${currentNote.id}`, {
+        body: data,
+        title: currentNote.title
+      })
+      .then(() => {
+        getCurrentNotes()
+      })
+    }
   }
   useEffect(() => {
     if (currentNote !== undefined) {

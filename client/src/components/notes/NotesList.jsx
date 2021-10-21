@@ -18,6 +18,7 @@ function NotesList(props) {
 
   function handleClose() {
     setOpen(false)
+    props.getCurrentNotes()
   }
 
   return (
@@ -28,7 +29,7 @@ function NotesList(props) {
           </ListItemIcon>
         </ListItemButton>
         {props.notes.map((note, i) => {
-          return <Note setSelectedIndex={setSelectedIndex} selectedIndex={selectedIndex} index={i} key={i} note={note} setCurrentNote={props.setCurrentNote} getCurrentNotes={props.getCurrentNotes}/>
+          return <Note setSelectedIndex={setSelectedIndex} selectedIndex={selectedIndex} index={i} key={note.id} note={note} setCurrentNote={props.setCurrentNote} getCurrentNotes={props.getCurrentNotes} isEmployer={props.isEmployer} />
         })}
         <CreateNote handleClose={handleClose} open={open} currentUser={props.currentUser} isEmployer={props.isEmployer} getCurrentNotes={props.getCurrentNotes}/>
       </List>
