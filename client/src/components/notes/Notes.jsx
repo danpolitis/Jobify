@@ -50,13 +50,23 @@ function Notes(props) {
 
 
   const save = (data) => {
-    axios.put(`http://localhost:3000/employer_notes/${currentNote.id}`, {
-      body: data,
-      title: currentNote.title
-    })
-    .then(() => {
-      getCurrentNotes()
-    })
+    if (isEmployer === true) {
+      axios.put(`http://localhost:3000/employer_notes/${currentNote.id}`, {
+        body: data,
+        title: currentNote.title
+      })
+      .then(() => {
+        getCurrentNotes()
+      })
+    } else {
+      axios.put(`http://localhost:3000/seeker_notes/${currentNote.id}`, {
+        body: data,
+        title: currentNote.title
+      })
+      .then(() => {
+        getCurrentNotes()
+      })
+    }
   }
   useEffect(() => {
     if (currentNote !== undefined) {

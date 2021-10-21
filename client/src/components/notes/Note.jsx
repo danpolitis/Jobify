@@ -21,10 +21,17 @@ function Note(props) {
   }
 
   function handleDeleteNote(e) {
-    axios.delete(`http://localhost:3000/employer_notes/${props.note.id}`)
+    if (props.isEmployer === true){
+      axios.delete(`http://localhost:3000/employer_notes/${props.note.id}`)
+        .then(() => {
+          props.getCurrentNotes()
+        })
+    } else {
+      axios.delete(`http://localhost:3000/seeker_notes/${props.note.id}`)
       .then(() => {
         props.getCurrentNotes()
       })
+    }
   }
 
   return (

@@ -20,7 +20,13 @@ function CreateNote(props) {
         props.getCurrentNotes()
       })
     } else {
-      // axios.post(`http://localhost:3000/employer_notes/${props.currentUser}`)
+      props.handleClose()
+      axios.post(`http://localhost:3000/seeker_notes/${props.currentUser}`, {
+        title: e.target.text.value
+      })
+      .then(() => {
+        props.getCurrentNotes()
+      })
     }
   }
 
