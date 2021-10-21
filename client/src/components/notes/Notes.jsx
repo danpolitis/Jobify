@@ -23,6 +23,7 @@ function Notes(props) {
 
 
   function getCurrentNotes() {
+    console.log(globalState.state.role)
     if (isEmployer === true) {
       axios.get(`http://localhost:3000/employer_notes/${currentUser}`)
         .then((results) => {

@@ -15,10 +15,10 @@ router.route("/employer/:employer_id")
   .get(async (request, response) => {
     const params = [request.params.employer_id];
     const result = await pool.query(
-      `SELECT * FROM postings WHERE employer_id = $1;`, params
+      'SELECT * FROM postings WHERE employer_id = $1;', params
     );
     try {
-      response.status(200).send(result);
+      response.status(200).send(result.rows);
     } catch (error) {
       console.error(error);
     }

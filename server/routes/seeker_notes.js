@@ -4,9 +4,9 @@ const pool = require('./pool');
 router.route('/:poster_id')
   .get(async (request, response) => {
     const poster_id = request.params.poster_id;
+    const params = [poster_id];
     const result = await pool.query(
-      `SELECT * FROM seeker_notes
-       WHERE poster_id = ${poster_id};`
+      'SELECT * FROM seeker_notes WHERE posted_id = $1', params
     )
     try {
       response.status(200).send(result);

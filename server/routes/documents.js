@@ -6,8 +6,9 @@ const pool = require('./pool');
 router.route('/:user_id')
   .get(async (request, response) => {
     const user_id = request.params.user_id;
+    const params = [user_id];
     const result = await pool.query(
-      `SELECT * FROM documents WHERE user_id = ${user_id}`
+      'SELECT * FROM documents WHERE user_id = $1', params
     )
     try {
       response.status(200).send(result);
