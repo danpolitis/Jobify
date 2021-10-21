@@ -29,6 +29,8 @@ router.route('/')
   })
 
   .post(async (request, response) => {
+    // console.log(request.body.uuid);
+    // console.log(request.body.isSeeker);
     const uuid = request.body.uuid;
     let role;
     if(request.body.isSeeker === 'seeker') {
@@ -36,6 +38,7 @@ router.route('/')
     } else {
       role = true;
     }
+    // console.log(role);
     const result = await pool.query(
       `INSERT INTO uuid(uuid, role) VALUES (${uuid}, ${role});`
     )
