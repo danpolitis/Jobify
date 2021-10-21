@@ -2,17 +2,15 @@ import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import useFetch from "./dashboard/postings/hooks/useFetch.jsx";
 
-function Search() {
-  const [ searchRoute, setSearchRoute ] = useState("all");
+function Search({ setRoute }) {
   const [ keyword, setKeyword ] = useState("");
   const [ city, setCity ] = useState("");
-  const jobs = useFetch(`http://localhost:3000/postings/${searchRoute}`);
 
   function handleSubmit(e) {
     e.preventDefault();
 
     if (keyword.length > 0 || city.length > 0) {
-      setSearchRoute(`search?keyword=${keyword}&city=${city}`)
+      setRoute(`search?keyword=${keyword}&city=${city}`)
     }
   }
 
