@@ -15,8 +15,10 @@ import AddJob from "./AddJob/AddJob.jsx";
 import { AuthProvider } from './Auth/AuthContext.js';
 import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
+import SignOut from "./Auth/SignOut.jsx";
 import Blogs from "./blog/Blogs.jsx";
 import Community from "./community/Community.jsx";
+import Documents from "./documents/documents.jsx";
 import LoggedInHeader from "./Navigation/LoggedInHeader.jsx"
 
 //Import component here
@@ -24,7 +26,7 @@ import LoggedInHeader from "./Navigation/LoggedInHeader.jsx"
 const initialState = {
   userId: '',
   role: 'seeker',
-//   email:'',
+  email:'',
 }
 
 const reducer = (state, action) => {
@@ -33,8 +35,8 @@ const reducer = (state, action) => {
       return { ...state, userId: action.data };
     case 'updateRole':
       return { ...state, role: action.data};
-      // case 'updateEmail':
-      //   return { ...state, email: action.data};
+      case 'updateEmail':
+        return { ...state, email: action.data};
     default:
       return state;
   }
@@ -42,32 +44,8 @@ const reducer = (state, action) => {
 
 export const GlobalContext = React.createContext();
 
-
-
-
-
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  // const [loggedIn, setLoggedIn] = useState(false)
-
-
-  // console.log('123', state.userId)
-
-
-
-  // function grabUserId() {
-  //   if (state.userId === "") {
-  //     setLoggedIn(false)
-  //   } else {
-  //     setLoggedIn(true)
-  //   }
-  // }
-
-  // useEffect(() => (
-  //   setLoggedIn()
-  // ),[state.userId])
-
 
   return (
     <>
@@ -89,10 +67,10 @@ function App() {
             <meta name="description" content="App Description" />
             <meta name="theme-color" content="#799496" />
           </Helmet>
+          <GlobalContext.Provider value={{ state, dispatch }}>
           {state.userId !== "" ? <LoggedInHeader/> :
           <Header />
            }
-          <GlobalContext.Provider value={{ state, dispatch }}>
           <AuthProvider>
             <Switch>
               <Route exact path="/" component={Home} />
@@ -100,10 +78,12 @@ function App() {
               <Route path="/new-post" component={AddJob} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
+              <Route path="/logout" component={SignOut} />
               <Route path="/blogs" component={Blogs} />
               <Route path="/community" component={Community} />
               <Route path="/dashboard" component={Dashboard} />
-              <Route path="/notes" component={Notes} />
+              <Route path="/notes" component={() => <Notes lol='lol'/>} />
+              <Route path="/documents" component={Documents} />
               {/* Add route here */}
             </Switch>
           </AuthProvider>

@@ -66,7 +66,7 @@ function Home(props) {
           </Button>
         </form>
         <Stack sx={{width:"30%", margin:"50px auto"}}>
-          <Button variant="contained" size="large" startIcon={<LoginIcon />}>
+          <Button href="/signup" variant="contained" size="large" startIcon={<LoginIcon />}>
             Create An Account
           </Button>
           <Typography

@@ -1,17 +1,10 @@
 import React, { useState, useEffect, useContext } from "react"
-import Calendar from 'react-calendar'
-import './Calendar.css';
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import axios from 'axios';
+import {Button, Grid, Box,Typography, TextField, Checkbox, ListItemText, ListItemIcon} from "@mui/material"
 import { GlobalContext } from "../App.jsx"
-import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Checkbox from "@mui/material/Checkbox";
-
+import Calendar from 'react-calendar';
+import axios from 'axios';
+import './Calendar.css';
+import uniqid from 'uniqid';
 
 
 
@@ -36,7 +29,7 @@ function UserCalendar(props) {
   },[])
 
   function handleSubmit() {
-    axios.post(`/todo_list/${state.userId}`, {
+    axios.post(`http://localhost:3000/todo_list/2`, {
       time: time,
       eventactivity: eventActivity,
       date: calDate.slice(0,10)
@@ -49,8 +42,8 @@ function UserCalendar(props) {
   // console.log(toDoList)
 
   function getToDoList() {
-    axios.get(`/todo_list/${state.userId}`).then(response =>
-      setToDoList(response.data)
+    axios.get(`http://localhost:3000/todo_list/2`).then(response =>
+      setToDoList(response.data.rows)
     ).catch(error => (
       console.log('error', error)
     ))
@@ -95,14 +88,11 @@ function UserCalendar(props) {
           <Box>
             <Typography align-content="left" variant="h5" sx={{marginTop: "20px", textDecoration: "underline"}} component="h5">Things to do Today</Typography>
             <ul className="checkmark">
-              <li className="checkmark">
-                hello22
-              </li>
-              <li>
-                {/* {toDoList && toDoList.map(item => (
-                  item.time, item.eventactivity
-                ))} */}
-              </li>
+                {toDoList && toDoList.map(item =>  (
+              <div key={uniqid()}>
+                  <li>{item.time.slice(1)} - {item.eventactivity}</li>
+              </div>
+                ))}
             </ul>
           </Box>
         </Box>
