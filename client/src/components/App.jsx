@@ -68,17 +68,18 @@ function App() {
             <meta name="theme-color" content="#799496" />
           </Helmet>
           <GlobalContext.Provider value={{ state, dispatch }}>
+
+          <AuthProvider>
           {state.userId !== "" ? <LoggedInHeader/> :
           <Header />
            }
-          <AuthProvider>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
               <Route path="/new-post" component={AddJob} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
-              <Route path="/logout" component={SignOut} />
+              {/* <Route path="/logout" component={SignOut} /> */}
               <Route path="/blogs" component={Blogs} />
               <Route path="/community" component={Community} />
               <Route path="/dashboard" component={Dashboard} />
