@@ -21,7 +21,7 @@ function Postings({ }) {
       </Grid>
       <Grid container item rowSpacing={1} columnSpacing={2}>
         <PostList jobs={jobs} />
-        <PostDetails postId={jobs && jobs.length > 0 ? jobs[0].id : null} />
+        <PostDetails postId={jobs.length > 0 ? jobs[0].id : null} />
       </Grid>
     </Grid>
   );
