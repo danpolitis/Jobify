@@ -6,10 +6,23 @@ div.homepage > div > input[type="text"] {
 .nameOfuser {
   padding: 15px;
 }
-h2.css {
-  text-decoration: underline;
+h2 sup {
+  /* text-decoration: underline; */
+  /* text-decoration: overline; */
+  /* text-decoration-style: dotted; */
+  /* text-decoration-color: #000000; */
+  background-color: #49475b;
+  padding: 2px 4px;
+  color: #eee;
+  font-size: 40px;
+  border-radius: 5px;
 }
 
 .Homelinks {
   color: #49475b;
+}
+
+.secondary {
+  color: #e9eb9e;
+  font-weight: bold;
 }
