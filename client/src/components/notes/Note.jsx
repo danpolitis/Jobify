@@ -17,13 +17,21 @@ function Note(props) {
   function handleListClick(event, index, note) {
     props.setSelectedIndex(index)
     props.setCurrentNote(note)
+    props.getCurrentNotes()
   }
 
   function handleDeleteNote(e) {
-    axios.delete(`http://localhost:3000/employer_notes/${props.note.id}`)
+    if (props.isEmployer === 'employer'){
+      axios.delete(`http://localhost:3000/employer_notes/${props.note.id}`)
+        .then(() => {
+          props.getCurrentNotes()
+        })
+    } else {
+      axios.delete(`http://localhost:3000/seeker_notes/${props.note.id}`)
       .then(() => {
         props.getCurrentNotes()
       })
+    }
   }
 
   return (

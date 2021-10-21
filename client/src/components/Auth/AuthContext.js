@@ -42,11 +42,14 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        console.log('auth userId:', user.uid);
+        // console.log('auth userId:', user.uid);
+        // console.log('signup email:', user.email);
         setCurrentUser(user);
         globalData.dispatch({ type: 'updateUserId', data: user.uid });
+        globalData.dispatch({ type: 'updateEmail', data: user.email });
       } else {
         globalData.dispatch({ type: 'updateUserId', data: '' });
+        globalData.dispatch({ type: 'updateEmail', data: '' });
       }
 
       if(loading) {

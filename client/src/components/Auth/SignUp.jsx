@@ -73,8 +73,8 @@ const Signup = () => {
 
     }
 
-    useEffect(() => {
-    }, []);
+    // useEffect(() => {
+    // }, []);
 
 
 
@@ -105,9 +105,8 @@ const Signup = () => {
                         // control={<Checkbox name="checkedA" />}
                         label="I accept the terms and conditions."
                     />
-                    <Button disabled={loading} type='submit' variant='contained' onClick={SignUpHandler} color='primary'style={btnstyle}
-                    component={Link} to="/dashboard"
-                    >Sign up</Button>
+                    <Button disabled={loading} type='submit' variant='contained' onClick={SignUpHandler} color='primary'style={btnstyle}>
+                    <Link to="dashboard" style={{ textDecoration: 'none', color: '#FFF' }}>Sign up</Link></Button>
                 </form>
                 <Typography>Already have an account?<Link to="/signin" >Sign In</Link>
                 </Typography>

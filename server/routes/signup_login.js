@@ -3,9 +3,10 @@ const pool = require('./pool');
 
 router.route('/')
   .get(async (request, response) => {
-    const uuid = request.body.uuid;
+    const uuid = request.params.uuid;
+    const params = [uuid];
     const result = await pool.query(
-      `SELECT role FROM uuids WHERE uuid = ${uuid}`
+      'SELECT role FROM uuids WHERE uuid = $1', params
     )
     if (result.rows[0] === false) {
       const secondResult = await pool.query(
@@ -29,8 +30,8 @@ router.route('/')
   })
 
   .post(async (request, response) => {
-    // console.log(request.body.uuid);
-    // console.log(request.body.isSeeker);
+    console.log(request.body.uuid);
+    console.log(request.body.role);
     const uuid = request.body.uuid;
     let role;
     if(request.body.isSeeker === 'seeker') {
@@ -38,9 +39,9 @@ router.route('/')
     } else {
       role = true;
     }
-    // console.log(role);
+    console.log(role);
     const result = await pool.query(
-      `INSERT INTO uuid(uuid, role) VALUES (${uuid}, ${role});`
+      `INSERT INTO uuids(uuid, role) VALUES (${uuid}, ${role});`
     )
     try {
       response.status(200).send(result);
