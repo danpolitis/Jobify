@@ -108,7 +108,7 @@ router.route("/posting_id/:id")
     } catch (error) {
       console.error(error);
     }
-  });
+  })
 
   .delete(async (request, response) => {
     const params = [request.params.id];
