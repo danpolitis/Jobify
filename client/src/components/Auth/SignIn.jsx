@@ -2,7 +2,7 @@ import React, {
   useRef, useState, useEffect,
 } from 'react';
 import axios from 'axios';
-import { Grid, Paper, Avatar, TextField, Button, Typography, Alert } from '@mui/material';
+import { Grid, Paper, Avatar, TextField, Button, Typography, Alert, Divider} from '@mui/material';
 import { Link, useHistory } from 'react-router-dom';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -49,6 +49,8 @@ export default function SignIn() {
 
   };
 
+  useEffect(() => {
+  }, []);
 
   return (
     <>
@@ -66,7 +68,7 @@ export default function SignIn() {
             <Button type='submit' color='primary' variant="contained" style={btnstyle} component={Link} to="/dashboard" onClick={signInHandler}>Sign in</Button>
           </form>
           {/* <Typography ><Link href="#" >Forgot password ?</Link></Typography> */}
-          <Typography color="primary">-----------------------------or-----------------------------</Typography>
+          <Divider />
           <SocialMediaLogin />
           <Typography> Do you have an account ?
             <Link to="/signup" >

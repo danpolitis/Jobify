@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const upload = require('express-fileupload');
 const colors = require("colors");
 const logo = require("./logo.js");
 const cors = require("cors");
@@ -25,9 +26,13 @@ app.use(
   })
 );
 app.use(express.static(path.resolve(__dirname, "..client/build")));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
+app.use(express.urlencoded({ extended: false, limit: '25mb' }));
+app.use(express.json({limit: '25mb'}));
+app.use(cors());
+app.use(upload({
+  useTempFiles : true,
+  tempFileDir : '/tmp/'
+}));
 app.use("/applications", applications);
 app.use("/documents", documents);
 app.use("/employers", employers);
