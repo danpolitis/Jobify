@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const pool = require('./pool');
 
-router.route('/:applicant_id')
+router.route('/applicant/:applicant_id')
   .get(async (request, response) => {
     const applicantId = request.params.applicant_id;
     const params = [applicantId]
@@ -15,7 +15,7 @@ router.route('/:applicant_id')
     }
   })
 
-router.route('/:posting_id')
+router.route('/employer/:posting_id')
   .get(async (request, response) => {
     const postingId = request.params.posting_id;
     const result = await pool.query(
