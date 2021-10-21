@@ -34,7 +34,7 @@ export default function SignIn() {
           uuid: userObj.user.uid,
         }
         console.log(data);
-        return axios.get('http://localhost:3000/signup_login', data);
+        // return axios.get('http://localhost:3000/signup_login', data);
       })
       .then(() => {
         history.push('/dashboard');
