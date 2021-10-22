@@ -19,6 +19,15 @@ function Filter({ list }) {
   });
   let queryUrl = `search?`;
 
+  const options = {
+    wi_time: ['Last 24 hours', 'Last 3 days', 'Last 7 days', 'Last 14 days'],
+    field: list.reduce((fields, job) => {
+      if (!fields.includes(job.field)) {
+        return job.field
+      }
+    }, []),
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     Object.keys(terms).map((term, i) => {

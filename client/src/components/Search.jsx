@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import useFetch from "./dashboard/postings/hooks/useFetch.jsx";
+import useFetch from "./dash/postings/hooks/useFetch.jsx";
 
 function Search({ setRoute }) {
   const [ terms, setTerms ] = useState({
