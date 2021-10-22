@@ -16,7 +16,7 @@ function Postings({ pid, search }) {
   const { state } = useContext(GlobalContext);
 
   useEffect(() => {
-    state.role === 'seeker'
+    !state.role
       ? setJobs(useFetch(`http://localhost:3000/postings/${searchRoute}`))
       : axios.get(`http://localhost:3000/postings/employer/${state.userId}`)
         .then((data) => {
@@ -40,11 +40,11 @@ function Postings({ pid, search }) {
         </Grid>
         <Grid container spacing={2}>
           {
-            jobs.length === 0 && state.role === 'seeker'
+            jobs.length === 0 && !state.role
             ? <Grid item xs={12} justifyContent="center">
               <Typography>No jobs matched your search, try again!</Typography>
             </Grid>
-            : jobs.length === 0 && state.role === 'employer'
+            : jobs.length === 0 && state.role
               ? <Grid item xs={12} justifyContent="center">
                   <Typography>You have no job postings! <Link to="/new-post">Add a job!</Link></Typography>
                 </Grid>
@@ -54,7 +54,7 @@ function Postings({ pid, search }) {
                   </Grid>
                   <Grid item xs={7}>
                     {
-                      state.role === 'seeker'
+                      !state.role
                         ? <PostDetails postId={pid ? pid : jobs[0].id} />
                         : <ApplicantsList postId={jobs && jobs.length > 0 ? jobs[0].id : null}/>
                     }
