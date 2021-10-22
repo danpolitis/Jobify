@@ -78,6 +78,8 @@ export default function Blogs() {
     <ThemeProvider theme={theme}>
       <Container
         // container
+        paddingTop="20px"
+        margin="20px"
         maxWidth="md"
         alignItems="center"
         direction="column"
@@ -95,7 +97,7 @@ export default function Blogs() {
           <Box className={classes.hero}>
             <Box>{isEmployer ? "Company Blog" : "Personal Blog"}</Box>
           </Box>
-          <Grid item md={12} xs={12} sm={8} xl={5}>
+          <Grid item md={10} xs={10} sm={10} xl={10} padding="20px">
             <BlogList
               currentUser={currentUser}
               isEmployer={isEmployer}

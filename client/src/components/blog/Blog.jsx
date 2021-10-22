@@ -13,12 +13,14 @@ import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import Box from "@mui/material/Box";
+
 
 const useStyles = makeStyles((theme) => ({
   icon: {
     position: "relative",
     top: 10,
-    left: 400,
+    left: 365,
   },
   blogTitle: {
     fontWeight: 350,
@@ -87,8 +89,10 @@ export default function Blog(props) {
       <Typography variant="h4">{props.post.title}</Typography>
       <CardContent>
         <List>{props.post.body}</List>
-        {`Created on: ${stringd}`}
       </CardContent>
+      <Box sx={{fontWeight: 'bold', fontSize: 16, display:"flex-end"}}>
+        {`Created on: ${stringd}`}
+      </Box>
     </Card>
   );
 }
