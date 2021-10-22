@@ -9,7 +9,7 @@ import Header from "./Navigation/Header.jsx"
 import Home from "./Navigation/Home.jsx"
 import Test from "./Navigation/Test.jsx"
 import Notes from "./notes/Notes.jsx"
-import Dashboard from "./dashboard/Dashboard.jsx"
+import Dashboard from "./dash/Dashboard.jsx"
 import Theme from "../Theme/ThemeFile.js"
 import AddJob from "./AddJob/AddJob.jsx";
 import { AuthProvider } from './Auth/AuthContext.js';

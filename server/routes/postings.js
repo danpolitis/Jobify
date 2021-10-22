@@ -28,6 +28,8 @@ router.route("/employer/:employer_id")
     const status = true;
     const params = [
       request.body.field,
+      request.body.type,
+      request.body.exp_level,
       request.body.salary,
       request.params.employer_id,
       request.body.description,
@@ -39,7 +41,19 @@ router.route("/employer/:employer_id")
       request.body.city,
     ];
     const result = await pool.query(
-      `INSERT INTO postings (field, salary, employer_id, description, posted_date, status, title, benefits, requirements, city)
+      `INSERT INTO postings (
+        field,
+        type,
+        exp_level,
+        salary,
+        employer_id,
+        description,
+        posted_date,
+        status,
+        title,
+        benefits,
+        requirements,
+        city)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`,
       params
     );
@@ -52,31 +66,52 @@ router.route("/employer/:employer_id")
 
 router.route("/search")
   .get(async (request, response) => {
-    const { keyword, city } = request.query;
-    const fields = `
-    postings.id, title, employer_id, postings.city, salary, description, posted_date
-    `
-    const keywordSearchClause = `(
-      lower(field) LIKE LOWER('%${keyword}%')
-        OR lower(description) LIKE LOWER('%${keyword}%')
-        OR lower(title) LIKE LOWER('%${keyword}%')
-        OR lower(benefits) LIKE LOWER('%${keyword}%')
-        OR lower(requirements) LIKE LOWER('%${keyword}%')
-        OR lower(uuid) LIKE LOWER ('%${keyword}%')
-        AND CAST(postings.employer_id AS int) = employers.id
-    )`;
-    const citySearchClause = `
-      lower(postings.city) LIKE LOWER('%${city}%')
+    const {
+      keyword,
+      city,
+      wi_time,
+      field,
+      type,
+      exp_level,
+      min_salary,
+    } = request.query;
+
+    let search = `SELECT
+      postings.id,
+      title,
+      employer_id,
+      postings.city,
+      salary,
+      description,
+      posted_date
+        FROM postings, employers
+        WHERE
     `;
-    const search =
-      keyword && !city
-      ? `SELECT ${fields} FROM postings, employers
-        WHERE ${keywordSearchClause};`
-      : !keyword && city
-      ? `SELECT ${fields} FROM postings
-        WHERE ${citySearchClause};`
-      : `SELECT ${fields} FROM postings, employers
-        WHERE ${keywordSearchClause} AND ${citySearchClause};`;
+
+    const clause = {
+      keyword: `(
+        lower(field) LIKE LOWER('%${keyword}%')
+          OR lower(description) LIKE LOWER('%${keyword}%')
+          OR lower(title) LIKE LOWER('%${keyword}%')
+          OR lower(benefits) LIKE LOWER('%${keyword}%')
+          OR lower(requirements) LIKE LOWER('%${keyword}%')
+          OR lower(uuid) LIKE LOWER ('%${keyword}%')
+          AND postings.employer_id ::int = employers.id
+      )`,
+      city: `lower(postings.city) LIKE LOWER('%${city}%')`,
+      wi_time: `posted_date <= NOW() + INTERVAL ${wi_time}`,
+      field: `field = ${field}`,
+      type: `type = ${type}`,
+      exp_level: `exp_level = ${exp_level}`,
+      min_salary: `salary >= ${min_salary}::int AND salary < ${min_salary}::int + 20000`
+    };
+
+    Object.keys(request.query).map((column, i) => {
+      search += ` ${clause[column]} AND`;
+      if (i === Object.keys(request.query).length - 1) {
+        search = search.slice(0, search.length - 4) + ';';
+      }
+    });
 
     const result = await pool.query(search);
     try {
@@ -112,7 +147,6 @@ router.route("/posting_id/:id")
       console.error(error);
     }
   })
-
   .delete(async (request, response) => {
     const params = [request.params.id];
     const firstResult = await pool.query(

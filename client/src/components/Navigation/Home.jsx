@@ -3,7 +3,7 @@ import { Typography, Button, Box, Grid, TextField, Container, Input, InputLabel,
 import LoginIcon from '@mui/icons-material/Login';
 import { Link, Redirect } from "react-router-dom";
 import Search from '../Search.jsx';
-import useFetch from '../dashboard/postings/hooks/useFetch.jsx';
+import useFetch from '../dash/postings/hooks/useFetch.jsx';
 import './Home.css';
 
 function Home() {
