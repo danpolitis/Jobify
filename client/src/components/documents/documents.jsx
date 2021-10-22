@@ -32,6 +32,7 @@ const Documents = () => {
     getDocs()
   }, [])
 
+
   useEffect(() => {
     console.log('files: ', files);
   }, [files])
@@ -63,7 +64,8 @@ const Documents = () => {
     <Container
       id="Upload Document"
       fullWidth
-      margin="normal">
+      margin="normal"
+      >
     <Typography variant="h4">Upload Document</Typography>
     <div>
       <Upload/>
