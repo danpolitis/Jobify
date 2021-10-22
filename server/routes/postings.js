@@ -107,11 +107,11 @@ router.route("/search")
     };
 
     Object.keys(request.query).map((column, i) => {
-      search += ` ${clause[column]}`
-      if (i === request.query.length - 1) {
-        search += ';'
+      search += ` ${clause[column]} AND`;
+      if (i === Object.keys(request.query).length - 1) {
+        search = search.slice(0, search.length - 4) + ';';
       }
-    })
+    });
 
     const result = await pool.query(search);
     try {
