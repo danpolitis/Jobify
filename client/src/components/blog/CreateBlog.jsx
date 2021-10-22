@@ -22,7 +22,7 @@ import {
 const useStyles = makeStyles((theme) => ({
   fab: {
     position: "fixed",
-    bottom: 10,
+    bottom: 80,
     right: 10,
   },
   container: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     height: 600,
     backgroundColor: "white",
     position: "absolute",
-    boxShadow: 15,
+    boxShadow: 24,
     top: 0,
     bottom: 0,
     left: 0,
@@ -123,17 +123,17 @@ export default function CreateBlog(props) {
                 style={{ width: "100%" }}
               />
             </div>
-            <div className={classes.item}>
+            {/* <div className={classes.item}>
               <TextField
                 select
                 label="Visibility"
-                onChange={(e) => setPublic(e.target.value)}
                 value="Public"
+                onChange={(e) => setPublic(e.target.value)}
               >
                 <MenuItem value="Public">Public</MenuItem>
                 <MenuItem value="Private">Private</MenuItem>
               </TextField>
-            </div>
+            </div> */}
             <div className={classes.item}>
               <Button
                 type="submit"

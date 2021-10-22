@@ -18,7 +18,8 @@ import { GlobalContext } from "../App";
 
 const useStyles = makeStyles((theme) => ({
   blogsContainer: {
-    paddingTop: "2",
+    paddingTop: 10,
+
   },
   blogTitle: {
     fontWeight: 350,
@@ -33,10 +34,12 @@ export default function Blogs() {
   const globalState = useContext(GlobalContext);
   const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(globalState.state.userId);
-  const [isEmployer, setIsEmployer] = useState(globalState.state.role === 'employer');
+  const [isEmployer, setIsEmployer] = useState(
+    globalState.state.role === "employer"
+  );
 
   function getAllUserBlogs() {
-    if (isEmployer === 'employer') {
+    if (isEmployer === "employer") {
       axios
         .get(`http://localhost:3000/employer_blogs/${currentUser}`)
         .then((results) => {
@@ -59,18 +62,25 @@ export default function Blogs() {
   const classes = useStyles();
   return (
     <Container
-    // container
-      maxWidth="lg"
+      // container
+      maxWidth="md"
       alignItems="center"
       direction="column"
-      spacing={0}
       justify="center"
-      style={{ minHeight: 250 }}
+      style={{ minHeight: 400 }}
       className={classes.blogsContainer}
     >
-      <Grid className={classes.items}>
-        <Typography variant="h4">{(isEmployer ? 'Company Blog' : 'Personal Blog')}</Typography>
-        <Grid item md={12} xs={12} sm={10} xl={6}>
+      <Grid
+        className={classes.items}
+        container
+        direction="column"
+        justifyContent="center"
+        alignitems="center"
+      >
+        <Typography variant="h4">
+          {isEmployer ? "Company Blog" : "Personal Blog"}
+        </Typography>
+        <Grid item md={12} xs={12} sm={8} xl={5} >
           <BlogList
             currentUser={currentUser}
             isEmployer={isEmployer}

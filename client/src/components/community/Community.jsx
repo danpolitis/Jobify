@@ -12,17 +12,10 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
-import BlogList from "../blog/BlogList";
+import BlogList from "./BlogList";
 import { GlobalContext } from "../App";
 
 const useStyles = makeStyles((theme) => ({
-  hero: {
-    position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "2rem",
-  },
   blogsContainer: {
     paddingTop: "2",
   },

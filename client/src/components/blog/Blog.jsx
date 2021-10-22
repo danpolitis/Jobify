@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ListItem, ListItemText, List, Divider } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardHeader from "@mui/material/CardHeader";
@@ -10,11 +12,23 @@ import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
-import { ListItem, ListItemText, List, Divider } from "@mui/material";
 import axios from "axios";
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    position: 'relative',
+    top: 10,
+    left: 400,
+  },
+  blogTitle: {
+    fontWeight: 350,
+    paddingBottom: "2",
+  },
+}));
 
 export default function Blog(props) {
   const date = new Date(props.post.created);
+  const classes = useStyles();
   const monthNames = [
     "January",
     "February",
@@ -58,39 +72,20 @@ export default function Blog(props) {
   }
 
   return (
-    <div>
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-end"
-        alignItems="center"
+    <Card sx={{backgroundColor:"#efefef"}}>
+      <IconButton
+        onClick={handleDeletePost}
+        size="medium"
+        className={classes.icon}
       >
-        <IconButton
-          onClick={handleDeletePost}
-          style={{ textAlign: "right", width: "48px" }}
-          xs={2}
-        >
-          <DeleteIcon />
-        </IconButton>
-      </Grid>
+        <DeleteIcon />
+      </IconButton>
+
       <Typography variant="h4">{props.post.title}</Typography>
       <CardContent>
-        <List>
-          <React.Fragment>
-            {/* <Typography sx={{display:'inline'}} component="span" variant="body2" color="text.secondary" noWrap="true"> */}
-            {props.post.body}
-            {/* </Typography> */}
-          </React.Fragment>
-        </List>
-      </CardContent>
-      <Grid
-        container
-        direction="flex-end"
-        justifyContent="flex-end"
-        alignItems="center"
-      >
+        <List>{props.post.body}</List>
         {`Created on: ${stringd}`}
-      </Grid>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
