@@ -37,8 +37,6 @@ function UserCalendar(props) {
       })
   }
 
-  // console.log(toDoList)
-
   function getToDoList() {
     axios.get(`http://localhost:3000/todo_list/${state.userId}`).then(response =>
       setToDoList(response.data.rows)
@@ -76,22 +74,23 @@ function UserCalendar(props) {
 
   return (
     <div>
-      <Grid container >
-        <Box sx={{ marginTop: "102px" }}>
-          <Calendar
-            onChange={(val,e) => calDateHandler(val)}
-            value={calDate} />
-          <input value={time} style={{ marginTop: "45px", marginRight: "25px", padding: "15px 15px" }} onChange={changeTime} type="time" min="00:00" max="23:59" required />
-          <TextField sx={{ marginTop: "45px" }} value={eventActivity} placeholder="Enter event name" onChange={e => setEventActivity(e.target.value)}></TextField>
-          <p></p>
-          <Button onClick={handleSubmit} color="primary" variant="contained">Add event to date</Button>
-          <Box>
-            <Typography align-content="left" variant="h5" sx={{marginTop: "20px", textDecoration: "underline" }} component="h5">Things to do on {calDate.toLocaleDateString()}</Typography>
-            <p> </p>
-              {toDoList && toDoList.filter(x => x.date !== null && x.date.slice(0,x.date.indexOf('T')) === calDateView.toISOString().slice(0,calDateView.toISOString().indexOf('T'))).map(item => (
-                <ToDoListEntry key={uniqid()} getToDoList={getToDoList} item={item}/>
-              ))}
-          </Box>
+      <Grid
+        container
+        sx={{ marginTop: '120px' }}
+      >
+        <Calendar
+          onChange={(val,e) => calDateHandler(val)}
+          value={calDate} />
+        <input value={time} style={{ marginTop: "45px", marginRight: "25px", padding: "15px 15px" }} onChange={changeTime} type="time" min="00:00" max="23:59" required />
+        <TextField sx={{ marginTop: "45px" }} value={eventActivity} placeholder="Enter event name" onChange={e => setEventActivity(e.target.value)}></TextField>
+        <p></p>
+        <Button onClick={handleSubmit} color="primary" variant="contained">Add event to date</Button>
+        <Box>
+          <Typography align-content="left" variant="h5" sx={{marginTop: "20px", textDecoration: "underline" }} component="h5">Things to do on {calDate.toLocaleDateString()}</Typography>
+          <p> </p>
+            {toDoList && toDoList.filter(x => x.date !== null && x.date.slice(0,x.date.indexOf('T')) === calDateView.toISOString().slice(0,calDateView.toISOString().indexOf('T'))).map(item => (
+              <ToDoListEntry key={uniqid()} getToDoList={getToDoList} item={item}/>
+            ))}
         </Box>
       </Grid>
     </div>

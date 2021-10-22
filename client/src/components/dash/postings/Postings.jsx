@@ -22,12 +22,7 @@ function Postings({ pid, search }) {
     : <>
       <Grid>
         <Search setRoute={setSearchRoute} />
-          <Typography
-          variant="h6"
-          align="center"
-        >
         <Filter route={searchRoute} setRoute={setSearchRoute} />
-        </Typography>
         </Grid>
         <Grid container spacing={2}>
           {

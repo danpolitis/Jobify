@@ -1,5 +1,5 @@
 import React, { useReducer, useState, createContext } from "react";
-import { useParams, Redirect } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Grid, Container } from "@mui/material";
 import Postings from "./postings/Postings.jsx";
 import UserCalendar from "./UserCalendar.jsx";
@@ -11,7 +11,8 @@ const initialState = {
   addedJob: false,
   removePost: false,
   renewedPost: false,
-  rejectApplicant: false
+  rejectApplicant: false,
+  searched: false
 }
 
 const reducer = (state, action) => {
@@ -24,6 +25,8 @@ const reducer = (state, action) => {
       return {...state, renewedPost: action.data};
     case 'rejectApplicant':
       return { ...state, rejectApplicant: action.data};
+    case 'searched':
+      return { ...state, searched: action.data};
     default:
       return state;
   }
