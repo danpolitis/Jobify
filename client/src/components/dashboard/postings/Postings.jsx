@@ -29,7 +29,8 @@ function Postings({ }) {
                 <PostList jobs={jobs} />
               </Grid>
               <Grid item xs={7}>
-                <PostDetails postId={jobs && jobs.length > 0 ? jobs[0].id : null} />
+                {/* <PostDetails postId={jobs && jobs.length > 0 ? jobs[0].id : null} /> */}
+                <ApplicantsList />
               </Grid>
             </Grid>
         </>

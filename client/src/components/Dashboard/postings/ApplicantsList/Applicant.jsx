@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Typography, Stack, Divider, Box, Button, Modal, IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { pink } from "@mui/material/colors";
+import Email from "../../../Email.jsx"
 
 export default Applicant = ({ applicantInfo }) => {
   const [open, setOpen] = useState(false);
@@ -32,8 +33,8 @@ export default Applicant = ({ applicantInfo }) => {
             {applicantInfo.email}
           </Typography>
           <Stack direction="row" spacing={2}>
-            <Button variant="contained" onClick={handleOpen}>Contact</Button>
-            <Button variant="contained">Reject</Button>
+            <Email name='Contact' />
+            <Email name='Reject' />
             <label htmlFor="icon-button-file">
               {/* <Input accept="image/*" id="icon-button-file" type="file" /> */}
               <IconButton sx={{ color: pink[500] }} aria-label="upload picture" component="span">

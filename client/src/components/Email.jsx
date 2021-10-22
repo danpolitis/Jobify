@@ -35,8 +35,8 @@ function Email(props) {
 
   return (
     <div>
-    <Button variant="outlined" onClick={handleClickOpen}>
-      Email
+    <Button variant="contained" onClick={handleClickOpen}>
+      {props.name}
     </Button>
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Send Email</DialogTitle>
