@@ -28,7 +28,19 @@ const useStyles = makeStyles((theme) => ({
   },
   item: {
     marginBottom: theme.spacing(3),
-
+  },
+  hero: {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.theminimalists.com/wp-content/uploads/2019/01/how-to-start-a-blog-in-2020-1.jpg')`,
+    height: "500px",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#fff",
+    fontSize: "4rem",
   },
 }));
 
@@ -80,9 +92,9 @@ export default function Blogs() {
           justifyContent="center"
           alignitems="center"
         >
-          <Typography variant="h4">
-            {isEmployer ? "Company Blog" : "Personal Blog"}
-          </Typography>
+          <Box className={classes.hero}>
+            <Box>{isEmployer ? "Company Blog" : "Personal Blog"}</Box>
+          </Box>
           <Grid item md={12} xs={12} sm={8} xl={5}>
             <BlogList
               currentUser={currentUser}
