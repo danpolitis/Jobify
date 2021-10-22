@@ -11,8 +11,7 @@ const initialState = {
   addedJob: false,
   removePost: false,
   renewedPost: false,
-  rejectApplicant: false,
-  searched: false
+  rejectApplicant: false
 }
 
 const reducer = (state, action) => {
@@ -25,8 +24,6 @@ const reducer = (state, action) => {
       return {...state, renewedPost: action.data};
     case 'rejectApplicant':
       return { ...state, rejectApplicant: action.data};
-    case 'searched':
-      return { ...state, searched: action.data};
     default:
       return state;
   }

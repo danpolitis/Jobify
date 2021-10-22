@@ -2,20 +2,17 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Grid, TextField, Button } from "@mui/material";
 import useFetch from "./dash/postings/hooks/useFetch.jsx";
-import { DashboardContext } from './dash/Dashboard.jsx';
 
 function Search({ setRoute }) {
   const [ terms, setTerms ] = useState({
     keyword: '',
     city: ''
   });
-  const { dashboardDispatch } = useContext(DashboardContext);
   const history = useHistory();
   let queryUrl = `search?`;
 
   function handleSubmit(e) {
     e.preventDefault();
-    dashboardDispatch({ type: 'searched', data: false });
     history.push('/dashboard');
     if (terms.keyword === '' && terms.city === '') {
       setRoute("all");
