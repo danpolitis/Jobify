@@ -15,12 +15,10 @@ router.route('/:uuid')
   })
 
   .post(async (request, response) => {
-    console.log('in post');
     const uuid = request.params.uuid;
     const time = request.body.time;
     const eventActivity = request.body.eventActivity;
     const date = request.body.date;
-    console.log(uuid, time, eventActivity, date);
     const params = [uuid, time, eventActivity, date];
     const result = await pool.query(
       'INSERT INTO todo_list(uuid, time, eventActivity, date) \
@@ -28,6 +26,19 @@ router.route('/:uuid')
     )
     try {
       response.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  })
+
+router.route('/list_id/:id')
+  .delete(async (request, response) => {
+    const params = [request.params.id];
+    const result = await pool.query(
+      'DELETE FROM todo_list WHERE id = $1', params
+    )
+    try {
+      response.status(202).send(result);
     } catch (error) {
       console.error(error);
     }
