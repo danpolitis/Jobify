@@ -8,14 +8,13 @@ import ApplicantsList from './ApplicantsList/ApplicantsList.jsx';
 import useFetch from "./hooks/useFetch.jsx"
 import { GlobalContext } from '../../App.jsx';
 
-function Postings({ }) {
-  const [ searchRoute, setSearchRoute ] = useState("all");
+function Postings({ pid, search }) {
+  const [ searchRoute, setSearchRoute ] = useState(search ? search : "all");
   const { state } = useContext(GlobalContext);
   const url = state.role === 'seeker'
     ? `http://localhost:3000/postings/${searchRoute}`
     : `http://localhost:3000/postings/employer/${state.userId}`
   const jobs = useFetch(url);
-  // also needs context or something to be passed up & down to change details/applicants
 
   return (
     !jobs
@@ -43,7 +42,7 @@ function Postings({ }) {
               <Grid item xs={7}>
                 {
                   state.role === 'seeker'
-                    ? <PostDetails postId={jobs && jobs.length > 0 ? jobs[0].id : null} />
+                    ? <PostDetails postId={pid ? pid : jobs[0].id} />
                     : <ApplicantsList postId={jobs && jobs.length > 0 ? jobs[0].id : null}/>
                 }
               </Grid>

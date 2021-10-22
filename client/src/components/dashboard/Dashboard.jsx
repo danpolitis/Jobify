@@ -2,6 +2,7 @@ import React, { useReducer, createContext } from "react";
 import { Grid, Container } from "@mui/material";
 import Postings from "./postings/Postings.jsx";
 import UserCalendar from "./UserCalendar.jsx";
+import { useParams } from "react-router-dom";
 import DashboardAlerts from './DashboardAlerts.jsx';
 
 export const DashboardContext = createContext();
@@ -30,14 +31,15 @@ const reducer = (state, action) => {
 
 function Dashboard() {
   const [ state, dispatch ] = useReducer(reducer, initialState);
+  const { id } = useParams();
 
   return (
     <DashboardContext.Provider value={{ dashboardState: state, dashboardDispatch: dispatch }}>
       <Container>
         <DashboardAlerts />
-        <Grid container spacing={2} sx={{ margin: "1% 0" }}>
+        <Grid container spacing={2}>
           <Grid item xs={9}>
-            <Postings />
+            <Postings pid = {id} search={location.state} />
           </Grid>
           <Grid item xs={3}>
             <UserCalendar/>

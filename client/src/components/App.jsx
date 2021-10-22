@@ -80,7 +80,7 @@ function App() {
               <Route path="/signin" component={SignIn} />
               <Route path="/blogs" component={Blogs} />
               <Route path="/community" component={Community} />
-              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/dashboard/:id?" component={Dashboard} />
               <Route path="/notes" component={() => <Notes lol='lol'/>} />
               <Route path="/documents" component={Documents} />
               {/* Add route here */}

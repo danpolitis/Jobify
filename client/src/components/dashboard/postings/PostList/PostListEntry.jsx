@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react"
-import { Card, CardContent, Typography, CircularProgress, Button } from "@mui/material";
-import axios from 'axios';
+import { Link } from "react-router-dom";
+import { Card, CardContent, Typography, CircularProgress, Button, GlobalStyles } from "@mui/material";
 import useFetch from "../hooks/useFetch.jsx"
 import { GlobalContext } from '../../../App.jsx';
 import { DashboardContext } from '../../Dashboard.jsx';
@@ -28,7 +28,13 @@ function PostListEntry({ job }) {
   return (
     !employerData
     ? <CircularProgress />
-    : <Card variant="outlined" sx={{ textAlign: "left" }}>
+    :
+    <>
+    <GlobalStyles
+          styles={{textDecoration:"none"}}
+    />
+    <Link to={`/dashboard/${id}`}>
+    <Card className="joblist" variant="outlined" sx={{ textAlign: "left" }}>
       <CardContent>
         <Typography variant="subtitle2" sx={{fontWeight:"700", color:"#49475B", textTransform:"uppercase"}}>
           {employerData[0].uuid}
@@ -60,6 +66,8 @@ function PostListEntry({ job }) {
         </Typography>
       </CardContent>
     </Card>
+    </Link>
+    </>
   );
 }
 
