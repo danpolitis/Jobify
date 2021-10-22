@@ -38,7 +38,7 @@ export default function Header() {
           <Button
             href="/signin"
             variant="contained"
-            sx={{ my: 1, mx: 1.5 }}
+            sx={{ my: 1, mx: 1.5, backgroundColor: "#49475B" }}
           >
             Login / Sign Up
           </Button>

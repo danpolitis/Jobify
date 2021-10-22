@@ -4,7 +4,7 @@ div.homepage > div > input[type="text"] {
 }
 
 
-body {
+body.jobify {
   background-image: url("https://static.vecteezy.com/system/resources/previews/002/036/080/original/spot-light-background-gallery-theater-interior-3d-realistic-background-illustration-free-vector.jpg");
   background-size: cover;
   background-size: 100%;

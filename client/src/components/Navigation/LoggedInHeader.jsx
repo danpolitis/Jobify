@@ -48,10 +48,10 @@ export default function LoggedInHeader(props) {
     <>
       <AppBar
         position="static"
-        color="primary"
         elevation={0}
         sx={{
           borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+          backgroundColor: "rgba(121, 148, 150, 0.7)"
         }}
       >
         <Toolbar sx={{ flexWrap: "wrap" }}>
@@ -64,6 +64,7 @@ export default function LoggedInHeader(props) {
               display: "flex",
             }}
           >
+            Jobi<sup>fy</sup>
           </Typography>
           <nav>
             <div>

@@ -44,7 +44,7 @@ function PostListEntry({ job }) {
           {title ? title : "Untitled"}
         </Typography>
         {
-          state.role === 'employer' &&
+          state.role &&
             <Button
               variant="contained"
               disableElevation
@@ -53,13 +53,13 @@ function PostListEntry({ job }) {
               {!removeClicked ? 'Remove' : 'Add'}
             </Button>
         }
-        <Typography variant="subtitle1">
+        <Typography variant="subtitle1" sx={{ color:"#49475B" }}>
           {city}
         </Typography>
-        <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+        <Typography variant="subtitle1" sx={{ fontWeight: "bold", color:"#49475B" }}>
           {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(salary)}
         </Typography>
-        <Typography variant="body1" sx={{ margin: "2% 0 2% 0"}}>
+        <Typography variant="body1" sx={{ margin: "2% 0 2% 0", color:"#49475B" }}>
           {description.length > 100 ? description.substring(0, 100) + "..." : description}
         </Typography>
         <Typography variant="body2" color="text.secondary">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { makeStyles } from "@mui/styles";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,14 +12,10 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
+import BlogList from "./BlogList";
+import { GlobalContext } from "../App";
+
 const useStyles = makeStyles((theme) => ({
-  hero: {
-    position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "2rem",
-  },
   blogsContainer: {
     paddingTop: "2",
   },
@@ -27,181 +23,81 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 350,
     paddingBottom: "2",
   },
+  hero: {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.redd.it/0c4jejunxhd51.jpg')`,
+    height: "500px",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#fff",
+    fontSize: "4rem",
+  },
 }));
 
 function Community(props) {
   const classes = useStyles();
-  // const [posts, setPosts] = useState([])
-  // const [currentUser, setCurrentUser] = useState(3)
-  // const [isEmployer, setIsEmployer] = useState(true)
+  const globalState = useContext(GlobalContext);
+  const [posts, setPosts] = useState([]);
+  const [currentUser, setCurrentUser] = useState(globalState.state.userId);
+  const [isEmployer, setIsEmployer] = useState(
+    globalState.state.role === "true"
+  );
 
-  // function getAllBlogs() {
-  //   if (isEmployer === true) {
-  //     axios.get(`http://localhost:3000/employer_blogs/${currentUser}`)
-  //       .then((results) => {
-  //         setPosts(results.data)
-  //       })
-  //   } else {
-  //     axios.get(`http://localhost:3000/seeker_blogs/${currentUser}`)
-  //       .then((results) => {
-  //         setPosts(results.data)
-  //       })
-  //   }
-  // }
+  function getAllBlogs() {
+    if (isEmployer === "true") {
+      axios
+        .get(`http://localhost:3000/employer_blogs/all/${currentUser}`)
+        .then((results) => {
+          // console.log("this is the results", results.data.rows);
+          setPosts(results.data.rows);
+        });
+    } else {
+      axios
+        .get(`http://localhost:3000/employer_blogs/all/${currentUser}`)
+        .then((results) => {
+          setPosts(results.data.rows);
+        });
+    }
+  }
 
-  // useEffect(() => {
-  //   getAllBlogs()
-  // })
+  useEffect(() => {
+    getAllBlogs();
+  }, []);
 
   return (
-    <div>
-      <Box className={classes.hero}>
-        <Box>Community Blog</Box>
-      </Box>
-      <Container maxWidth="lg" className={classes.blogsContainer}>
-        {/* <Typography variant="h4">Articles</Typography> */}
-        <Grid
-          container
-          rowSpacing={8}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: "200" }}
-        >
-          <Grid item md={12} xs={12} sm={10} xl={6}>
-            <Card fullWidth sx={{ maxWidth: 345 }}>
-              <CardContent>
-                <Typography variant="h4" className={classes.blogTitle}>
-                  Lorem ipsum
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  noWrap="true"
-                >
-                  This blog post shows a few different types of content that are
-                  supported and styled with Material styles. Basic typography,
-                  images, and code are all supported. You can extend these by
-                  modifying Markdown.js. Cum sociis natoque penatibus et magnis
-                  dis parturient montes, nascetur ridiculus mus. Aenean eu leo
-                  quam. Pellentesque ornare sem lacinia quam venenatis
-                  vestibulum. Sed posuere consectetur est at lobortis. Cras
-                  mattis consectetur purus sit amet fermentum. Curabitur blandit
-                  tempus porttitor. Nullam quis risus eget urna mollis ornare
-                  vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id
-                  elit. Etiam porta sem malesuada magna mollis euismod. Cras
-                  mattis consectetur purus sit amet fermentum. Aenean lacinia
-                  bibendum nulla sed consectetur.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Typography variant="subtitle2">John Doe</Typography>
-                <Typography variant="subtitle2" color="textSecondary">
-                  Oct 20, 2021
-                </Typography>
-                <Button
-                  size="small"
-                  style={{ textAlign: "right", paddingLeft: "120px" }}
-                >
-                  Share
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item md={12} xs={12} sm={10} xl={6}>
-            <Card fullWidth sx={{ maxWidth: 345 }}>
-              <CardContent>
-                <Typography variant="h4" className={classes.blogTitle}>
-                  Garden Festival Committee
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  noWrap="true"
-                >
-                  Hi! My name is Selphie Tilmitt! I just transferred here from
-                  Trabia Garden. I was on the Garden Festival Committee there,
-                  so I'm excited to join
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Typography variant="subtitle2">Selphie Tilmitt</Typography>
-                <Typography variant="subtitle2" color="textSecondary">
-                  Oct 20, 2021
-                </Typography>
-                <Button
-                  size="small"
-                  style={{ textAlign: "right", paddingLeft: "120px" }}
-                >
-                  Share
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item md={12} xs={12} sm={10} xl={6}>
-            <Card fullWidth sx={{ maxWidth: 345 }}>
-              <CardContent>
-                <Typography variant="h4" className={classes.blogTitle}>
-                  Timber Maniac
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  noWrap="true"
-                >
-                  Sir Laguna writes about the time he went to the editor of
-                  Timber Maniacs. He borught an article entitled 'Alcohol Will
-                  Change You' but it got rejected.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Typography variant="subtitle2">Sir Laguna</Typography>
-                <Typography variant="subtitle2" color="textSecondary">
-                  Oct 20, 2021
-                </Typography>
-                <Button
-                  size="small"
-                  style={{ textAlign: "right", paddingLeft: "120px" }}
-                >
-                  Share
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item md={12} xs={12} sm={10} xl={6}>
-            <Card fullWidth sx={{ maxWidth: 345 }}>
-              <CardContent>
-                <Typography variant="h4" className={classes.blogTitle}>
-                  Ipsum
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  noWrap="true"
-                >
-                  Est eaque reiciendis ut tempore quidem qui molestiae quod? Ut
-                  quae nesciunt id recusandae unde ut laudantium quia est
-                  molestiae earum qui molestiae quibusdam vel molestiae labore
-                  id assumenda dolor.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Typography variant="subtitle2">Jane Doe</Typography>
-                <Typography variant="subtitle2" color="textSecondary">
-                  Oct 20, 2021
-                </Typography>
-                <Button
-                  size="small"
-                  style={{ textAlign: "right", paddingLeft: "120px" }}
-                >
-                  Share
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
+    <Container
+      // container
+      maxWidth="lg"
+      alignItems="center"
+      direction="column"
+      justify="center"
+      style={{ minHeight: 250 }}
+      className={classes.blogsContainer}
+    >
+      <Grid
+        className={classes.items}
+        container
+        direction="column"
+        justifyContent="center"
+        alignitems="center"
+      >
+        <Box className={classes.hero}>
+          <Box>Community Blog</Box>
+        </Box>
+        <Grid item md={12} xs={12} sm={10} xl={6}>
+          <BlogList
+            currentUser={currentUser}
+            isEmployer={isEmployer}
+            posts={posts}
+            getAllUserBlogs={getAllBlogs}
+          />
         </Grid>
-      </Container>
-    </div>
+      </Grid>
+    </Container>
   );
 }
 

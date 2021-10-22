@@ -26,7 +26,8 @@ export default function Footer() {
               mt: "auto",
               py: [3],
               minWidth: "100%",
-              backgroundColor: "#799496"
+              backgroundColor: "rgba(121, 148, 150, 0.7)"
+
             }}
           >
             <Copyright sx={{ mt: 5 }} />

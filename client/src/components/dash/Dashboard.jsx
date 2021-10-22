@@ -1,5 +1,5 @@
 import React, { useReducer, useState, createContext } from "react";
-import { useParams, Redirect } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Grid, Container } from "@mui/material";
 import Postings from "./postings/Postings.jsx";
 import UserCalendar from "./UserCalendar.jsx";
@@ -16,8 +16,6 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'addedJob':
-      return {...state, addedJob: action.data};
     case 'removePost':
       return { ...state, removePost: action.data};
     case 'renewedPost':
