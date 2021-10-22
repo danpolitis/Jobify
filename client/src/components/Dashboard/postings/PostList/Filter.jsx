@@ -8,17 +8,17 @@ function Filter({ list }) {
   // type: (full, part, contract, internship)
   // experience level: (entry, mid, senior)
 
-  const [ filter, setFilter ] = useState("");
-  const [ searchRoute, setSearchRoute ] = useState("all");
+  // const [ filter, setFilter ] = useState("");
+  // const [ searchRoute, setSearchRoute ] = useState("all");
 
   const user = useContext(GlobalContext);
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (keyword.length > 0 || city.length > 0) {
-      setSearchRoute(`search?keyword=${keyword}&city=${city}`)
-    }
+    // if (keyword.length > 0 || city.length > 0) {
+    //   setSearchRoute(`search?keyword=${keyword}&city=${city}`)
+    // }
   }
 
   return (
