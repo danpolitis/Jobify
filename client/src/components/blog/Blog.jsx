@@ -16,13 +16,16 @@ import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
-    position: 'relative',
+    position: "relative",
     top: 10,
     left: 400,
   },
   blogTitle: {
     fontWeight: 350,
     paddingBottom: "2",
+  },
+  items: {
+    paddingBottom: "100",
   },
 }));
 
@@ -72,7 +75,7 @@ export default function Blog(props) {
   }
 
   return (
-    <Card sx={{backgroundColor:"#efefef"}}>
+    <Card sx={{ backgroundColor: "#efefef" }} className={classes.items}>
       <IconButton
         onClick={handleDeletePost}
         size="medium"

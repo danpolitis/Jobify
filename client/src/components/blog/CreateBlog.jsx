@@ -4,12 +4,7 @@ import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 import Container from "@mui/material/Container";
 import Fab from "@mui/material/Fab";
-
-// import Grid from "@mui/material/Grid";
-// import MenuItem from "@mui/material/MenuItem"
-// import Modal from "@mui/material/Modal";
-// import Tooltip from "@mui/material/Tooltip";
-// import TextField from "@mui/material/TextField";
+import MuiAlert from '@mui/material/Alert';
 import {
   Button,
   Grid,
@@ -17,7 +12,13 @@ import {
   MenuItem,
   Tooltip,
   TextField,
+  Snackbar,
+  Stack
 } from "@mui/material";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -51,33 +52,33 @@ export default function CreateBlog(props) {
   const [public, setPublic] = useState("Public");
   const [open, setOpen] = useState(false);
 
-  const handleClose = () => setOpen(false)
+  const handleClose = () => setOpen(false);
   function handleCreatePost(e, reason) {
     e.preventDefault();
     const toggle = () => setOpen(false);
 
     if (props.isEmployer === true) {
       axios
-      .post(`http://localhost:3000/employer_blogs/${props.currentUser}`, {
-        title: title,
-        body: body,
-        // public: public
-      })
-      .then(() => {
-        props.getAllUserBlogs();
-      })
-      .then(() => toggle());
+        .post(`http://localhost:3000/employer_blogs/${props.currentUser}`, {
+          title: title,
+          body: body,
+          // public: public
+        })
+        .then(() => {
+          props.getAllUserBlogs();
+        })
+        .then(() => toggle());
     } else {
       axios
-      .post(`http://localhost:3000/seeker_blogs/${props.currentUser}`, {
-        title: title,
-        body: body,
-        // public: public
-      })
-      .then(() => {
-        props.getAllUserBlogs();
-      })
-      .then(() => toggle());
+        .post(`http://localhost:3000/seeker_blogs/${props.currentUser}`, {
+          title: title,
+          body: body,
+          // public: public
+        })
+        .then(() => {
+          props.getAllUserBlogs();
+        })
+        .then(() => toggle());
     }
   }
 

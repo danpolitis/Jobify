@@ -23,6 +23,19 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 350,
     paddingBottom: "2",
   },
+  hero: {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.redd.it/0c4jejunxhd51.jpg')`,
+    height: "500px",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#fff",
+    fontSize: "4rem",
+  },
 }));
 
 function Community(props) {
@@ -31,11 +44,11 @@ function Community(props) {
   const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(globalState.state.userId);
   const [isEmployer, setIsEmployer] = useState(
-    globalState.state.role === "employer"
+    globalState.state.role === "true"
   );
 
   function getAllBlogs() {
-    if (isEmployer === "employer") {
+    if (isEmployer === "true") {
       axios
         .get(`http://localhost:3000/employer_blogs/all/${currentUser}`)
         .then((results) => {
@@ -72,7 +85,9 @@ function Community(props) {
         justifyContent="center"
         alignitems="center"
       >
-        <Typography variant="h4">Community Blog</Typography>
+        <Box className={classes.hero}>
+          <Box>Community Blog</Box>
+        </Box>
         <Grid item md={12} xs={12} sm={10} xl={6}>
           <BlogList
             currentUser={currentUser}
