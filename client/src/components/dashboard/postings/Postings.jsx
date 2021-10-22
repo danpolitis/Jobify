@@ -6,7 +6,7 @@ import PostList from "./PostList/PostList.jsx";
 import PostDetails from "./PostDetails/PostDetails.jsx";
 import ApplicantsList from './ApplicantsList/ApplicantsList.jsx';
 
-function Postings({ }) {
+function Postings(props) {
   const [ searchRoute, setSearchRoute ] = useState("all");
   // should fetch diff post list depending on if role is seeker or employer
   const jobs = useFetch(`http://localhost:3000/postings/${searchRoute}`);
@@ -29,7 +29,7 @@ function Postings({ }) {
                 <PostList jobs={jobs} />
               </Grid>
               <Grid item xs={7}>
-                <PostDetails postId={jobs && jobs.length > 0 ? jobs[0].id : null} />
+                <PostDetails postId={props.pid ? props.pid : jobs && jobs.length > 0 ? jobs[0].id : null} />
               </Grid>
             </Grid>
         </>

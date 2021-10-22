@@ -20,6 +20,7 @@ const style = {
 };
 
 function PostDetails({ postId }) {
+  console.log(postId)
   const job = useFetch(`http://localhost:3000/postings/posting_id/${postId}`);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
