@@ -110,6 +110,21 @@ router.route("/posting_id/:id")
     } catch (error) {
       console.error(error);
     }
-  });
+  })
+
+  .delete(async (request, response) => {
+    const params = [request.params.id];
+    const firstResult = await pool.query(
+      'DELETE FROM postings WHERE id = $1', params
+    );
+    const secondResult = await pool.query(
+      'DELETE FROM applications WHERE posting_id = $1', params
+    );
+    try {
+      response.status(202).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  })
 
 module.exports = router;

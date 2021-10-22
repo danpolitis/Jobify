@@ -15,7 +15,6 @@ import AddJob from "./AddJob/AddJob.jsx";
 import { AuthProvider } from './Auth/AuthContext.js';
 import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
-import SignOut from "./Auth/SignOut.jsx";
 import Blogs from "./blog/Blogs.jsx";
 import Community from "./community/Community.jsx";
 import Documents from "./documents/documents.jsx";
@@ -68,17 +67,17 @@ function App() {
             <meta name="theme-color" content="#799496" />
           </Helmet>
           <GlobalContext.Provider value={{ state, dispatch }}>
+
+          <AuthProvider>
           {state.userId !== "" ? <LoggedInHeader/> :
           <Header />
            }
-          <AuthProvider>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
               <Route path="/new-post" component={AddJob} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
-              <Route path="/logout" component={SignOut} />
               <Route path="/blogs" component={Blogs} />
               <Route path="/community" component={Community} />
               <Route path="/dashboard" component={Dashboard} />
