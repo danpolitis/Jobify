@@ -20,7 +20,6 @@ const style = {
 };
 
 function PostDetails({ postId }) {
-  console.log(postId)
   const job = useFetch(`http://localhost:3000/postings/posting_id/${postId}`);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -41,9 +40,8 @@ function PostDetails({ postId }) {
         </Typography>
           <Typography
             variant="h4"
-            color="text.primary"
             align="center"
-            sx={{fontWeight:"700", textAlign:"left", marginTop:"15px"}}
+            sx={{fontWeight:"700", textAlign:"left", marginTop:"15px", color:"#49475B"}}
           >
             {job.title}
           </Typography>
@@ -74,26 +72,26 @@ function PostDetails({ postId }) {
           <Divider></Divider>
           <Typography
             variant="h3"
-            color="text.primary"
+            // color="text.primary"
             align="center"
-            sx={{fontSize:"18px", textAlign:"left"}}
+            sx={{fontSize:"18px", textAlign:"left", color:"#49475B"}}
           >
             <strong>Qualifications</strong>
           </Typography>
           <Typography
-            variant="h4"
+            variant="body1"
             color="text.secondary"
             align="center"
-            sx={{fontSize:"18px", textAlign:"left"}}
+            sx={{textAlign:"left"}}
           >
             {job.requirements}
           </Typography>
           <Divider></Divider>
           <Typography
             variant="h3"
-            color="text.primary"
+            // color="text.primary"
             align="center"
-            sx={{fontSize:"18px", textAlign:"left"}}
+            sx={{fontSize:"18px", textAlign:"left", color:"#49475B"}}
           >
             <strong>Benefits</strong>
           </Typography>
@@ -108,9 +106,9 @@ function PostDetails({ postId }) {
           <Divider></Divider>
           <Typography
             variant="h3"
-            color="text.primary"
+            // color="text.primary"
             align="center"
-            sx={{fontSize:"18px", textAlign:"left"}}
+            sx={{fontSize:"18px", textAlign:"left", color:"#49475B"}}
           >
             <strong>Job Description</strong>
           </Typography>

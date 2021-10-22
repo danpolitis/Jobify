@@ -1,3 +1,4 @@
-.joblist a > * {
-  text-decoration: none;
+a:hover .joblist,
+a.active .joblist {
+  background-color: #acc196;
 }

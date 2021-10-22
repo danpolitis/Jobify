@@ -36,7 +36,7 @@ function Search({ setRoute }) {
         variant="outlined"
       />
       <Button
-        sx={{ margin: "2%" }}
+        sx={{ margin: "5px", padding:"15px 30px", fontWeight:"700", textShadow:"0 1px 1px rgba(0, 0, 0, 0.6)" }}
         type="submit"
         color="primary"
         variant="contained"

@@ -1,7 +1,8 @@
 import React from "react"
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Card, CardContent, Typography, CircularProgress, Chip, GlobalStyles } from "@mui/material";
 import useFetch from "../hooks/useFetch.jsx"
+import './Posts.css';
 
 function PostListEntry({ job }) {
   const { id, title, employer_id, city, salary, description, posted_date } = job;
@@ -15,13 +16,13 @@ function PostListEntry({ job }) {
     <GlobalStyles
           styles={{textDecoration:"none"}}
     />
-    <Link to={`/dashboard/${id}`}>
+    <NavLink to={`/dashboard/${id}`}>
     <Card className="joblist" variant="outlined" sx={{ textAlign: "left" }}>
       <CardContent>
         <Typography variant="subtitle2" sx={{fontWeight:"700", color:"#49475B", textTransform:"uppercase"}}>
           {employerData[0].uuid}
         </Typography>
-        <Typography variant="h5" sx={{fontWeight:"700"}}>
+        <Typography variant="h5" sx={{fontWeight:"700", color:"#49475B"}}>
           {title ? title : "Untitled"}
         </Typography>
         <Typography variant="subtitle1">
@@ -38,7 +39,7 @@ function PostListEntry({ job }) {
         </Typography>
       </CardContent>
     </Card>
-    </Link>
+    </NavLink>
     </>
   );
 }
