@@ -28,6 +28,7 @@ const initialState = {
   userId: '',
   role: 'seeker',
   email:'',
+  company:''
 }
 
 const reducer = (state, action) => {
@@ -36,8 +37,8 @@ const reducer = (state, action) => {
       return { ...state, userId: action.data };
     case 'updateRole':
       return { ...state, role: action.data};
-      case 'updateEmail':
-        return { ...state, email: action.data};
+    case 'updateEmail':
+      return { ...state, email: action.data};
     default:
       return state;
   }

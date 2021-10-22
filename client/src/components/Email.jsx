@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -7,11 +7,15 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
+import { GlobalContext } from './App.jsx';
 
 function Email(props) {
   const [open, setOpen] = useState(false);
   const [contactEmail, setContactEmail] = useState('')
   const [message, setMessage] = useState('')
+
+  const globalState = useContext(GlobalContext)
+  const { email } = globalState.state
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,7 +33,8 @@ function Email(props) {
   const sendEmail = () => {
     axios.post('http://localhost:3000/email', {
       subject: 'Jobify Message from DanInc',
-      message: `This message is a no-reply. Please get in contact with the employer using this email: ${contactEmail} \n\n ${message}`
+      message: `This message is a no-reply. Please get in contact with the employer using this email: ${contactEmail} \n\n ${message}`,
+      email: props.email
     })
   }
 

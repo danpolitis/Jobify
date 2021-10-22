@@ -16,7 +16,7 @@ router.route('/')
 
     let mailDetails = {
       from: 'JobifyCentral@gmail.com',
-      to: 'danpolitis@gmail.com',
+      to: request.body.email,
       subject: request.body.subject,
       text: request.body.message
     };
