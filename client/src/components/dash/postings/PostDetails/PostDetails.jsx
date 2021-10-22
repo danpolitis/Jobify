@@ -6,7 +6,16 @@ import { pink } from "@mui/material/colors";
 import useFetch from "../hooks/useFetch.jsx"
 import ApplyForm from "./ApplyForm.jsx"
 import { GlobalContext } from '../../../App.jsx';
-
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  EmailIcon,
+  FacebookIcon,
+  LinkedinIcon,
+  TwitterIcon
+} from "react-share";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -29,6 +38,7 @@ function PostDetails({ postId }) {
   const handleClose = () => setOpen(false);
   const globalData = useContext(GlobalContext);
   const uid = globalData.state.userId;
+  const shareUrl = `http://localhost:1234/dashboard/${postId}`;
 
   return (
     !job
@@ -41,6 +51,44 @@ function PostDetails({ postId }) {
           <Typography variant="body2" color="text.secondary" sx={{textAlign:"left"}}>
           {`Posted On: ${new Date(job.posted_date).toLocaleDateString('en-US')}`}
         </Typography>
+        <Stack direction="row" spacing={1}>
+        <Typography
+            variant="h4"
+            color="text.primary"
+            align="center"
+            sx={{fontSize:"18px", textAlign:"left", color:"#49475B" }}
+          >
+            <strong>Share&nbsp;&nbsp;</strong>
+          </Typography>
+        <EmailShareButton
+            url={shareUrl}
+            quote={job.title}
+            className="Demo__some-network__share-button"
+          >
+            <EmailIcon size={32} />
+          </EmailShareButton>
+        <FacebookShareButton
+            url={shareUrl}
+            quote={job.title}
+            className="Demo__some-network__share-button"
+          >
+            <FacebookIcon size={32} />
+          </FacebookShareButton>
+          <TwitterShareButton
+            url={shareUrl}
+            quote={job.title}
+            className="Demo__some-network__share-button"
+          >
+            <TwitterIcon size={32} />
+          </TwitterShareButton>
+          <LinkedinShareButton
+            url={shareUrl}
+            quote={job.title}
+            className="Demo__some-network__share-button"
+          >
+            <LinkedinIcon size={32} />
+          </LinkedinShareButton>
+        </Stack>
           <Typography
             variant="h4"
             align="center"
