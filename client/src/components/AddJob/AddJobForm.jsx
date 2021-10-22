@@ -4,6 +4,10 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { GlobalContext } from '../App.jsx';
+<<<<<<< HEAD
+=======
+import { DashboardContext } from '../dash/Dashboard.jsx';
+>>>>>>> main
 
 export default AddJobForm = ({ setErrorStatus }) => {
   const [ submitClicked, setSubmitClicked ] = useState(false);

@@ -4,10 +4,11 @@ const pool = require('./pool');
 router.route('/:poster_id')
   .get(async (request, response) => {
     const poster_id = request.params.poster_id;
-    const params = [posted_id];
+    const params = [poster_id];
+    console.log('params', params)
     const result = await pool.query(
       'SELECT * FROM seekers_blogs \
-       WHERE poster_id = $1;'
+       WHERE poster_id = $1;', params
     )
     try {
       response.status(200).send(result);
@@ -26,7 +27,7 @@ router.route('/:poster_id')
     const params = [poster_id, title, body, created, public]
 
     const result = pool.query(
-      'INSERT INTO seeker_blogs(poster_id, title, body, created, public) \
+      'INSERT INTO seekers_blogs(poster_id, title, body, created, public) \
        VALUES ($1, $2, $3, $4, $5);', params)
 
     try {
@@ -36,7 +37,6 @@ router.route('/:poster_id')
     }
   })
 
-router.route('/id/:id')
   .put(async (request, response) => {
     const id = request.params.id;
     const title = request.body.title;
@@ -46,7 +46,7 @@ router.route('/id/:id')
     const params = [id, title, body, public]
 
     const result = pool.query(
-      'UPDATE seeker_blogs \
+      'UPDATE seekers_blogs \
        SET title = $2, \
            body = $3, \
            public = $4 \
@@ -59,11 +59,14 @@ router.route('/id/:id')
   })
 
   .delete(async (request, response) => {
-    const id = request.params.id;
+    const id = request.params.poster_id;
+    const params = [id];
+
     const result = pool.query(
-      `DELETE FROM seeker_blogs
-       WHERE id = ${id};`
+      'DELETE FROM seekers_blogs \
+       WHERE id = $1;', params
     )
+    console.log(params);
     try {
       response.status(202).send(result);
     } catch (error) {

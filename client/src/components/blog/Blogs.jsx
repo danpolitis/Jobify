@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';import axios from "axios";
-import BlogList from "./BlogList";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import { makeStyles } from "@mui/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -12,41 +12,45 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
+import BlogList from "./BlogList";
+import CreateBlog from "./CreateBlog";
+import { GlobalContext } from "../App";
+
 const useStyles = makeStyles((theme) => ({
-  hero: {
-    position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "2rem",
-  },
   blogsContainer: {
-    paddingTop: "2",
+    paddingTop: 10,
+
   },
   blogTitle: {
     fontWeight: 350,
     paddingBottom: "2",
   },
+  item: {
+    marginBottom: theme.spacing(3),
+  },
 }));
 
 export default function Blogs() {
-  const [blogs, setBlogs] = useState([]);
-  const [currentUser, setCurrentUser] = useState(3);
-  const [isEmployer, setIsEmployer] = useState(true);
+  const globalState = useContext(GlobalContext);
+  const [posts, setPosts] = useState([]);
+  const [currentUser, setCurrentUser] = useState(globalState.state.userId);
+  const [isEmployer, setIsEmployer] = useState(
+    globalState.state.role === "employer"
+  );
 
   function getAllUserBlogs() {
-    if (isEmployer === true) {
+    if (isEmployer === "employer") {
       axios
         .get(`http://localhost:3000/employer_blogs/${currentUser}`)
         .then((results) => {
-          console.log("this is the results", results.data.fields);
-          setBlogs(results.data.fields);
+          // console.log("this is the results", results.data.rows);
+          setPosts(results.data.rows);
         });
     } else {
       axios
         .get(`http://localhost:3000/seeker_blogs/${currentUser}`)
         .then((results) => {
-          setBlogs(results.data.fields);
+          setPosts(results.data.rows);
         });
     }
   }
@@ -57,12 +61,39 @@ export default function Blogs() {
 
   const classes = useStyles();
   return (
-    <Container maxWidth="lg" className={classes.blogsContainer}>
-      <Grid item md={3}>
-      <Typography variant="h4">Selphie's Blogs</Typography>
-      <BlogList currentUser={currentUser} isEmployer={isEmployer} blogs={blogs} />
-
+    <Container
+      // container
+      maxWidth="md"
+      alignItems="center"
+      direction="column"
+      justify="center"
+      style={{ minHeight: 400 }}
+      className={classes.blogsContainer}
+    >
+      <Grid
+        className={classes.items}
+        container
+        direction="column"
+        justifyContent="center"
+        alignitems="center"
+      >
+        <Typography variant="h4">
+          {isEmployer ? "Company Blog" : "Personal Blog"}
+        </Typography>
+        <Grid item md={12} xs={12} sm={8} xl={5} >
+          <BlogList
+            currentUser={currentUser}
+            isEmployer={isEmployer}
+            posts={posts}
+            getAllUserBlogs={getAllUserBlogs}
+          />
+        </Grid>
       </Grid>
+      <CreateBlog
+        currentUser={currentUser}
+        isEmployer={isEmployer}
+        getAllUserBlogs={getAllUserBlogs}
+      />
     </Container>
   );
 }

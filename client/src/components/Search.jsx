@@ -1,16 +1,28 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import useFetch from "./dashboard/postings/hooks/useFetch.jsx";
+import useFetch from "./dash/postings/hooks/useFetch.jsx";
 
 function Search({ setRoute }) {
-  const [ keyword, setKeyword ] = useState("");
-  const [ city, setCity ] = useState("");
+  const [ terms, setTerms ] = useState({
+    keyword: '',
+    city: ''
+  });
+  let queryUrl = `search?`;
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    if (keyword.length > 0 || city.length > 0) {
-      setRoute(`search?keyword=${keyword}&city=${city}`)
+    if (terms.keyword === '' && terms.city === '') {
+      setRoute("all");
+    } else {
+      Object.keys(terms).map((term, i) => {
+        if (i < Object.keys(terms).length - 1) {
+          queryUrl += '&';
+        }
+        if (terms[term].length > 0) {
+          queryUrl += `${term}=${terms[term]}`
+        }
+      });
+      setRoute(queryUrl);
     }
   }
 
@@ -20,23 +32,23 @@ function Search({ setRoute }) {
       <TextField
         name="keyword"
         label="Keyword"
-        value={keyword}
+        value={terms.keyword}
         sx={{ padding: "5px", width: "30%" }}
         placeholder="Job title, description, industry..."
-        onChange={e => setKeyword(e.target.value)}
+        onChange={e => setTerms({ ...terms, [e.target.name]: e.target.value })}
         variant="outlined"
       />
       <TextField
         name="city"
         label="City"
-        value={city}
+        value={terms.city}
         sx={{ padding: "5px", width: "30%" }}
         placeholder="City"
-        onChange={e => setCity(e.target.value)}
+        onChange={e => setTerms({ ...terms, [e.target.name]: e.target.value })}
         variant="outlined"
       />
       <Button
-        sx={{ margin: "2%" }}
+        sx={{ margin: "5px", padding:"15px 30px", fontWeight:"700", textShadow:"0 1px 1px rgba(0, 0, 0, 0.6)" }}
         type="submit"
         color="primary"
         variant="contained"

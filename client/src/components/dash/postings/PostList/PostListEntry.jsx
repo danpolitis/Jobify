@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react"
-import { Link } from "react-router-dom";
-import { Card, CardContent, Typography, CircularProgress, Button, GlobalStyles } from "@mui/material";
+import React, { useState, useContext, createContext } from "react";
+import { NavLink } from "react-router-dom";
+import { Card, CardContent, Typography, CircularProgress, Chip, Button, GlobalStyles } from "@mui/material";
 import useFetch from "../hooks/useFetch.jsx"
 import { GlobalContext } from '../../../App.jsx';
 import { DashboardContext } from '../../Dashboard.jsx';
+import './Posts.css';
 
 function PostListEntry({ job }) {
   const [ removeClicked, setRemoveClicked ] = useState(false);
@@ -33,13 +34,13 @@ function PostListEntry({ job }) {
     <GlobalStyles
           styles={{textDecoration:"none"}}
     />
-    <Link to={`/dashboard/${id}`}>
+    <NavLink to={`/dashboard/${id}`}>
     <Card className="joblist" variant="outlined" sx={{ textAlign: "left" }}>
       <CardContent>
         <Typography variant="subtitle2" sx={{fontWeight:"700", color:"#49475B", textTransform:"uppercase"}}>
           {employerData[0].uuid}
         </Typography>
-        <Typography variant="h5" sx={{fontWeight:"700"}}>
+        <Typography variant="h5" sx={{fontWeight:"700", color:"#49475B"}}>
           {title ? title : "Untitled"}
         </Typography>
         {
@@ -66,7 +67,7 @@ function PostListEntry({ job }) {
         </Typography>
       </CardContent>
     </Card>
-    </Link>
+    </NavLink>
     </>
   );
 }
