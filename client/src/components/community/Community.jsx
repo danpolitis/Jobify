@@ -31,11 +31,11 @@ function Community(props) {
   const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(globalState.state.userId);
   const [isEmployer, setIsEmployer] = useState(
-    globalState.state.role === "employer"
+    globalState.state.role === "true"
   );
 
   function getAllBlogs() {
-    if (isEmployer === "employer") {
+    if (isEmployer === "true") {
       axios
         .get(`http://localhost:3000/employer_blogs/all/${currentUser}`)
         .then((results) => {
