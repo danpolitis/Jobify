@@ -1,27 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Applicant from './Applicant.jsx';
 import { Grid, CircularProgress, Divider, Stack } from '@mui/material';
-// pass down or usecontext for posting id
-export default ApplicantsList = () => {
-  // fetch list of applicants to a job posting
-  // map list of applicants and render
-  // const applicants = useFetch(`http://localhost:3000/applications/`);
-  const applicants = [{
-    name: 'John Doe',
-    email: 'sdhjlgf@guisjdh.com',
-    years_exp: '4',
-    years_edu: "Bachelor's"
-  }, {
-    name: 'Joe Schmoe',
-    email: 'asdghrje@guisjdh.com',
-    years_exp: '2',
-    years_edu: "Master's"
-  }, {
-    name: 'Jane Dane',
-    email: 'asdfghethrtah@afdg.com',
-    years_exp: '6',
-    years_edu: "Master's"
-  }]
+
+export default ApplicantsList = ({ postId }) => {
+  const applicants = useFetch(`http://localhost:3000/applications/employer/${postId}`);
 
   return (
     !applicants
