@@ -10,8 +10,6 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 
 
-
-
 function Home(props) {
   const [ keyword, setKeyword ] = useState("");
   const [ city, setCity ] = useState("");

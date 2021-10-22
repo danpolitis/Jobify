@@ -21,7 +21,9 @@ import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
 import Blogs from "./blog/Blogs.jsx";
 import Community from "./community/Community.jsx";
-import LoggedInHeader from "./LoggedInHeader.jsx"
+import LoggedInHeader from "./LoggedInHeader.jsx";
+import Email from './Email.jsx';
+import Chat from './Chat.jsx';
 
 //Import component here
 
@@ -108,6 +110,8 @@ function App() {
               <Route path="/community" component={Community} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/notes" component={() => <Notes lol='lol'/>} />
+              <Route path='/email' component={Email} />
+              <Route path='/chat' component={Chat} />
               {/* Add route here */}
             </Switch>
           </AuthProvider>
