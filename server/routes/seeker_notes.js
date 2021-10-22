@@ -23,7 +23,6 @@ router.route('/:poster_id')
     const body = request.body.body;
     const created = new Date();
     const params = [poster_id, title, body, created]
-    console.log(params)
 
     const result = pool.query(
       'INSERT INTO seekers_notes(poster_id, title, body, created) \

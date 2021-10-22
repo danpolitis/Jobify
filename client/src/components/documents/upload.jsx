@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios, { post } from 'axios';
+import { GlobalContext } from '../App.jsx';
 
-const Upload = (props) => {
+const Upload = ( {submitted, setSubmitted} ) => {
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('Choose File');
+  const { state } = useContext(GlobalContext);
 
   const onChange = e => {
     setFile(e.target.files[0]);
@@ -12,11 +14,13 @@ const Upload = (props) => {
 
   const onSubmit = async e => {
     e.preventDefault();
+    console.log('in submit function');
+    setSubmitted(submitted + 1);
     const formData = new FormData();
     formData.append('file', file);
 
     try {
-      res = await axios.post('http://127.0.0.1:3000/documents/1', formData, {
+      res = await axios.post(`http://127.0.0.1:3000/documents/${state.userId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

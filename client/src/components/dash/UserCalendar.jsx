@@ -8,14 +8,6 @@ import uniqid from 'uniqid';
 import ToDoListEntry from "./ToDoListEntry.jsx"
 import moment from 'moment';
 
-
-
-
-
-
-
-
-
 function UserCalendar(props) {
 
   const [employerPortal, setEmployerPortal] = useState("false")

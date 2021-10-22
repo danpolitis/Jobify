@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Grid, Typography, Stack, Divider, Box, Button, Modal, IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { pink } from "@mui/material/colors";
+import Email from "../../../Email.jsx"
+import { GlobalContext } from '../../../App.jsx';
+
 
 export default Applicant = ({ applicantInfo }) => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   // detailed entry of each applicant
   // contact and reject buttons
+
   return (
     <Grid item xs={7}>
       <>
@@ -32,8 +33,8 @@ export default Applicant = ({ applicantInfo }) => {
             {applicantInfo.email}
           </Typography>
           <Stack direction="row" spacing={2}>
-            <Button variant="contained" onClick={handleOpen}>Contact</Button>
-            <Button variant="contained">Reject</Button>
+            <Email name='Contact' email={applicantInfo.email} />
+            <Email name='Reject' email={applicantInfo.email} />
             <label htmlFor="icon-button-file">
               {/* <Input accept="image/*" id="icon-button-file" type="file" /> */}
               <IconButton sx={{ color: pink[500] }} aria-label="upload picture" component="span">

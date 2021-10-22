@@ -4,21 +4,23 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { GlobalContext } from '../App.jsx';
+import { DashboardContext } from '../dash/Dashboard.jsx';
 
 export default AddJobForm = () => {
   const [ submitClicked, setSubmitClicked ] = useState(false);
-  const [ formAccepted, setFormAccepted ] = useState(false);
   const [ errorSubmitting, setErroSubmitting ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const history = useHistory();
   const { state } = useContext(GlobalContext);
+  const { dashboardDispatch } = useContext(DashboardContext);
 
   const handleAddJobSubmit = (addJobForm) => {
+    setErroSubmitting(false);
     setSubmitClicked(true);
 
     axios.post(`http://localhost:3000/postings/employer/${state.userId}`, addJobForm)
       .then((res) => {
-        setFormAccepted(true);
+        dashboardDispatch({ type: 'addedJob', data: true });
         history.push('/dashboard'); // need to test to see if it plays
       })
       .catch((err) => {
@@ -29,7 +31,6 @@ export default AddJobForm = () => {
 
   return(
     <>
-      {formAccepted && <Alert severity="success">A new job has been posted!</Alert>}
       {errorSubmitting && <Alert severity="error">Something went wrong with posting the job, please try again!</Alert>}
       <form onSubmit={handleSubmit(handleAddJobSubmit)} style={{ maxWidth: '500px' }}>
         <TextField

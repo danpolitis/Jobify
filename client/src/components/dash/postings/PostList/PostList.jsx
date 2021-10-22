@@ -1,5 +1,5 @@
 import React from "react"
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import PostListEntry from "./PostListEntry.jsx";
 
 function PostList({ jobs }) {
