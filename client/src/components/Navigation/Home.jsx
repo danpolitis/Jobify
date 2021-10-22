@@ -23,7 +23,7 @@ function Home() {
         </Typography>
         <Search setRoute={setSearchRoute} />
         <Stack sx={{width:"30%", margin:"50px auto"}}>
-          <Button href="/signup" variant="contained" size="large" startIcon={<LoginIcon />}>
+          <Button href="/signin" variant="contained" size="large" startIcon={<LoginIcon />}>
             Create An Account
           </Button>
           <Typography

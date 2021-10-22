@@ -1,15 +1,22 @@
 import React from "react"
-import { Card, CardContent, Typography, CircularProgress, Chip } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Card, CardContent, Typography, CircularProgress, Chip, GlobalStyles } from "@mui/material";
 import useFetch from "../hooks/useFetch.jsx"
 
 function PostListEntry({ job }) {
-  const { title, employer_id, city, salary, description, posted_date } = job;
+  const { id, title, employer_id, city, salary, description, posted_date } = job;
   const employerData = useFetch(`http://localhost:3000/employers/${employer_id}`)
 
   return (
     !employerData
     ? <CircularProgress />
-    : <Card variant="outlined" sx={{ textAlign: "left" }}>
+    :
+    <>
+    <GlobalStyles
+          styles={{textDecoration:"none"}}
+    />
+    <Link to={`/dashboard/${id}`}>
+    <Card className="joblist" variant="outlined" sx={{ textAlign: "left" }}>
       <CardContent>
         <Typography variant="subtitle2" sx={{fontWeight:"700", color:"#49475B", textTransform:"uppercase"}}>
           {employerData[0].uuid}
@@ -31,6 +38,8 @@ function PostListEntry({ job }) {
         </Typography>
       </CardContent>
     </Card>
+    </Link>
+    </>
   );
 }
 

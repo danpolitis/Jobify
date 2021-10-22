@@ -7,7 +7,7 @@ import PostDetails from "./PostDetails/PostDetails.jsx";
 import ApplicantsList from './ApplicantsList/ApplicantsList.jsx';
 import useFetch from "./hooks/useFetch.jsx";
 
-function Postings({ search }) {
+function Postings({ pid, search }) {
   const [ searchRoute, setSearchRoute ] = useState(search ? search : "all");
   // should fetch diff post list depending on if role is seeker or employer
   const jobs = useFetch(`http://localhost:3000/postings/${searchRoute}`);
@@ -37,7 +37,7 @@ function Postings({ search }) {
                 <PostList jobs={jobs} />
               </Grid>
               <Grid item xs={7}>
-                <PostDetails postId={jobs[0].id} />
+                <PostDetails postId={pid ? pid : jobs[0].id} />
               </Grid>
             </>
           }
