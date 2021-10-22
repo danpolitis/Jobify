@@ -1,8 +1,8 @@
-import React, { useReducer, createContext } from "react";
+import React, { useReducer, useState, createContext } from "react";
+import { useParams, Redirect } from "react-router-dom";
 import { Grid, Container } from "@mui/material";
 import Postings from "./postings/Postings.jsx";
 import UserCalendar from "./UserCalendar.jsx";
-import { useParams } from "react-router-dom";
 import DashboardAlerts from './DashboardAlerts.jsx';
 
 export const DashboardContext = createContext();
@@ -30,11 +30,19 @@ const reducer = (state, action) => {
 };
 
 function Dashboard() {
+  const [ searched, setSearched ] = useState(false);
   const [ state, dispatch ] = useReducer(reducer, initialState);
   const { id } = useParams();
 
   return (
-    <DashboardContext.Provider value={{ dashboardState: state, dashboardDispatch: dispatch }}>
+    searched
+    ? <Redirect
+      to={{
+        pathname: "/dashboard",
+        state: searchRoute
+      }}
+    />
+    : <DashboardContext.Provider value={{ dashboardState: state, dashboardDispatch: dispatch }}>
       <Container>
         <DashboardAlerts />
         <Grid container spacing={2}>

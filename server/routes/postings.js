@@ -147,7 +147,6 @@ router.route("/posting_id/:id")
       console.error(error);
     }
   })
-
   .delete(async (request, response) => {
     const params = [request.params.id];
     const firstResult = await pool.query(
