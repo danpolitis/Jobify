@@ -10,7 +10,7 @@ function Dashboard({ location }) {
     <Container>
       <Grid container spacing={2}>
         <Grid item xs={9}>
-          <Postings pid = {id} search={location.state} />
+          <Postings pid={id} search={location.state} />
         </Grid>
         <Grid item xs={3}>
           <UserCalendar/>
