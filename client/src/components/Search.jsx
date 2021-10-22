@@ -30,8 +30,8 @@ function Search({ setRoute }) {
   }
 
   return (
-    <Grid item xs justifyContent="center">
-      <form onSubmit={handleSubmit}>
+    <Grid item xs className="backgroundText">
+      <form className="backgroundText" onSubmit={handleSubmit}>
       <TextField
         name="keyword"
         label="Keyword"

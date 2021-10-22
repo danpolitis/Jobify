@@ -62,8 +62,6 @@ function UserCalendar(props) {
       let calDateString = prev.toLocaleString('en-US').slice(0,prev.toLocaleString('en-US').indexOf(','))
       let timeString = e.target.value
       let newDate = calDateString + ' ' + timeString + ':00'
-      console.log('prevdate', calDateString)
-      console.log('lolng', `${calDate.getFullYear()}-${(calDate.getMonth() + 1).toString().padStart(2,'0')}-${calDate.getDate()}`)
       return new Date(newDate)
     })
   }
@@ -109,14 +107,14 @@ function UserCalendar(props) {
         sx={{
           border:"1px solid rgba(0, 0, 0, 0.12)",
           borderRadius: "2px",
-          marginTop: "50%",
+          marginTop: "25%",
           padding:"10px",
           width: "100%"
         }}
       >
       <Typography
         variant="h5"
-        sx={{margin: "0 10% 20% 10%", fontWeight: "700", color: "#49475B" }}
+        sx={{margin: "0 10% 0% 10%", fontWeight: "700", color: "#49475B" }}
       >
         Today:
       </Typography>
