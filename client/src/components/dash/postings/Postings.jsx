@@ -12,18 +12,12 @@ import { GlobalContext } from '../../App.jsx';
 
 function Postings({ pid, search }) {
   const [ searchRoute, setSearchRoute ] = useState(search ? search : "all");
-  const [ jobs, setJobs ] = useState([]);
   const { state } = useContext(GlobalContext);
 
-  useEffect(() => {
-    !state.role
-      ? setJobs(useFetch(`http://localhost:3000/postings/${searchRoute}`))
-      : axios.get(`http://localhost:3000/postings/employer/${state.userId}`)
-        .then((data) => {
-          console.log(data.data);
-          setJobs(data.data);
-        });
-  }, []);
+  const url = state.role === false
+    ? `http://localhost:3000/postings/${searchRoute}`
+    : `http://localhost:3000/postings/employer/${state.userId}`
+  const jobs = useFetch(url);
 
   return (
     !jobs

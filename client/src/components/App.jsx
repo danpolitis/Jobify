@@ -26,7 +26,7 @@ import LoggedInHeader from "./Navigation/LoggedInHeader.jsx"
 
 const initialState = {
   userId: '',
-  role: 'seeker',
+  role: false,
   email:'',
   company:''
 }

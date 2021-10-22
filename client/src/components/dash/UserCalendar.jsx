@@ -114,7 +114,7 @@ function UserCalendar(props) {
       >
       <Typography
         variant="h5"
-        sx={{margin: "0 10% 20% 10%", fontWeight: "700", color: "#49475B" }}
+        sx={{margin: "0 10% 0% 10%", fontWeight: "700", color: "#49475B" }}
       >
         Today:
       </Typography>

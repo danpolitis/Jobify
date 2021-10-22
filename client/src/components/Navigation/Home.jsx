@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { Typography, Button, Box, Grid, TextField, Container, Input, InputLabel, IconButton, Stack } from "@mui/material";
 import LoginIcon from '@mui/icons-material/Login';
 import { Link, Redirect } from "react-router-dom";
@@ -6,13 +6,28 @@ import Search from '../Search.jsx';
 import useFetch from '../dash/postings/hooks/useFetch.jsx';
 import './Home.css';
 import { GlobalContext } from "../App.jsx"
+import axios from 'axios';
 import { Helmet } from 'react-helmet';
-
 
 function Home() {
   const [searchRoute, setSearchRoute] = useState("all");
   const { state } = useContext(GlobalContext);
+  const globalData = useContext(GlobalContext);
   const jobs = useFetch(`http://localhost:3000/postings/${searchRoute}`);
+
+  const getRole = () => {
+    axios.get(`http://localhost:3000/signup_login/${state.userId}`)
+      .then((results) => {
+        console.log(results)
+        globalData.dispatch({ type: 'updateRole', data: results.data.rows[0].role})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  useEffect(() => {
+    getRole()
+  }, [])
 
   return (
     searchRoute === 'all'
@@ -25,6 +40,7 @@ function Home() {
         </Helmet>
 
         <Container justify="center">
+          <Stack>
           <Typography
             variant="h2"
             align="center"
@@ -38,8 +54,7 @@ function Home() {
               ? <Typography
               variant="text"
               color="text.secondary"
-              align="center"
-              sx={{ fontStyle: 'italic', marginTop: "90px", marginBottom: "25px", fontWeight: "700" }}
+              sx={{ fontSize: "xx-large", fontStyle: 'italic', marginTop: "100px", marginBottom: "25px", fontWeight: "700" }}
             >
               Your next hire is here
             </Typography>
@@ -78,6 +93,7 @@ function Home() {
                 }
               </Stack>
           }
+          </Stack>
         </Container>
       </div>
       : <Redirect
