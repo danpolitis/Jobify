@@ -23,7 +23,7 @@ function Postings({ search }) {
           variant="h6"
           align="center"
         >
-        <Filter />
+        <Filter list={jobs} />
         </Typography>
         </Grid>
         <Grid container spacing={2}>
