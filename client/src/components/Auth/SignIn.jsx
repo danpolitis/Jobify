@@ -33,7 +33,7 @@ export default function SignIn() {
         const data = {
           uuid: userObj.user.uid,
         }
-        console.log(data);
+        // console.log(data);
         // return axios.get('http://localhost:3000/signup_login', data);
       })
       .then(() => {
@@ -70,7 +70,7 @@ export default function SignIn() {
           {/* <Typography ><Link href="#" >Forgot password ?</Link></Typography> */}
           <Divider />
           <SocialMediaLogin />
-          <Typography> Do you have an account ?
+          <Typography> Do you have an account?
             <Link to="/signup" >
               Sign Up
             </Link>

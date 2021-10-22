@@ -11,15 +11,19 @@ function Search({ setRoute }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    Object.keys(terms).map((term, i) => {
-      if (i < Object.keys(terms).length - 1) {
-        queryUrl += '&';
-      }
-      if (terms[term].length > 0) {
-        queryUrl += `${term}=${terms[term]}`
-      }
-    });
-    setRoute(queryUrl);
+    if (terms.keyword === '' && terms.city === '') {
+      setRoute("all");
+    } else {
+      Object.keys(terms).map((term, i) => {
+        if (i < Object.keys(terms).length - 1) {
+          queryUrl += '&';
+        }
+        if (terms[term].length > 0) {
+          queryUrl += `${term}=${terms[term]}`
+        }
+      });
+      setRoute(queryUrl);
+    }
   }
 
   return (

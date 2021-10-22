@@ -2,7 +2,7 @@
   "name": "jobify",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "start": "nodemon server/index.js",
     "start:react": "parcel serve client/dist/index.html --open --dist-dir client/build  --no-cache",
