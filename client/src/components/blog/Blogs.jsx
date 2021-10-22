@@ -19,9 +19,6 @@ import { GlobalContext } from "../App";
 import theme from "../../Theme/ThemeFile.js";
 
 const useStyles = makeStyles((theme) => ({
-  blogsContainer: {
-    paddingTop: 10,
-  },
   blogTitle: {
     fontWeight: 350,
     paddingBottom: "2",
@@ -78,12 +75,13 @@ export default function Blogs() {
     <ThemeProvider theme={theme}>
       <Container
         // container
+        paddingTop="20px"
+        margin="20px"
         maxWidth="md"
         alignItems="center"
         direction="column"
         justify="center"
         style={{ minHeight: 400 }}
-        className={classes.blogsContainer}
       >
         <Grid
           className={classes.items}
@@ -95,7 +93,7 @@ export default function Blogs() {
           <Box className={classes.hero}>
             <Box>{isEmployer ? "Company Blog" : "Personal Blog"}</Box>
           </Box>
-          <Grid item md={12} xs={12} sm={8} xl={5}>
+          <Grid item md={10} xs={10} sm={10} xl={10} padding="20px">
             <BlogList
               currentUser={currentUser}
               isEmployer={isEmployer}

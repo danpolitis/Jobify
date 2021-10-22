@@ -36,7 +36,7 @@ function PostDetails({ postId }) {
     : <>
         <Stack
           spacing={{xs: 3}}
-          sx={{border:"1px solid rgba(0, 0, 0, 0.12)", borderRadius: "2px", padding:"10px"}}
+          sx={{border:"1px solid rgba(0, 0, 0, 0.12)", borderRadius: "2px", padding:"10px" }}
         >
           <Typography variant="body2" color="text.secondary" sx={{textAlign:"left"}}>
           {`Posted On: ${new Date(job.posted_date).toLocaleDateString('en-US')}`}
@@ -44,7 +44,7 @@ function PostDetails({ postId }) {
           <Typography
             variant="h4"
             align="center"
-            sx={{fontWeight:"700", textAlign:"left", marginTop:"15px", color:"#49475B"}}
+            sx={{fontWeight:"700", textAlign:"left", marginTop:"15px", color:"#49475B" }}
           >
             {job.title}
           </Typography>
@@ -56,7 +56,7 @@ function PostDetails({ postId }) {
             variant="h4"
             color="text.primary"
             align="center"
-            sx={{fontSize:"18px", textAlign:"left"}}
+            sx={{fontSize:"18px", textAlign:"left", color:"#49475B" }}
           >
             <strong>Salary:</strong> {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(job.salary)}
           </Typography>
@@ -82,7 +82,7 @@ function PostDetails({ postId }) {
             variant="h3"
             // color="text.primary"
             align="center"
-            sx={{fontSize:"18px", textAlign:"left", color:"#49475B"}}
+            sx={{fontSize:"18px", textAlign:"left", color:"#49475B" }}
           >
             <strong>Qualifications</strong>
           </Typography>
@@ -99,7 +99,7 @@ function PostDetails({ postId }) {
             variant="h3"
             // color="text.primary"
             align="center"
-            sx={{fontSize:"18px", textAlign:"left", color:"#49475B"}}
+            sx={{fontSize:"18px", textAlign:"left", color:"#49475B" }}
           >
             <strong>Benefits</strong>
           </Typography>
@@ -107,7 +107,7 @@ function PostDetails({ postId }) {
             variant="body1"
             color="text.secondary"
             align="center"
-            sx={{textAlign:"left"}}
+            sx={{textAlign:"left", color:"#49475B" }}
           >
             {job.benefits}
           </Typography>
@@ -116,7 +116,7 @@ function PostDetails({ postId }) {
             variant="h3"
             // color="text.primary"
             align="center"
-            sx={{fontSize:"18px", textAlign:"left", color:"#49475B"}}
+            sx={{fontSize:"18px", textAlign:"left", color:"#49475B" }}
           >
             <strong>Job Description</strong>
           </Typography>

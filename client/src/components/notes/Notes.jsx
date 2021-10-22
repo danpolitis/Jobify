@@ -84,14 +84,16 @@ function Notes(props) {
 
 
   return (
+    <Container>
     <Grid container>
       <Grid item md={3} style={{marginLeft: '14px'}}>
-          <Typography variant='h4'>Add Notes</Typography>
+          <Typography sx={{color: "#EFEFEF"}} variant='h4'>Add Notes</Typography>
           <NotesList currentUser={currentUser} isEmployer={isEmployer} notes={notes} setCurrentNote={setCurrentNote} getCurrentNotes={getCurrentNotes}/>
       </Grid>
       <Divider orientation="vertical" flexItem/>
-      <Grid item md={8} style={{textAlign: 'left', paddingLeft: '20px'}}>
+      <Grid item md={8} style={{color: "#EFEFEF", textAlign: 'left', paddingLeft: '20px'}}>
           <MUIRichTextEditor
+            sx={{color: "#EFEFEF"}}
             label="Write your notes here"
             onSave={save}
             defaultValue={body}
@@ -99,6 +101,7 @@ function Notes(props) {
           />
       </Grid>
     </Grid>
+    </Container>
   )
 }
 

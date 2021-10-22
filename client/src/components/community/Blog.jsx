@@ -10,6 +10,8 @@ import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { ListItem, ListItemText, List, Divider } from "@mui/material";
+import Box from "@mui/material/Box";
+
 import axios from "axios";
 
 export default function Blog(props) {
@@ -41,12 +43,14 @@ export default function Blog(props) {
   }
 
   return (
-    <Card sx={{backgroundColor:"#efefef"}}>
+    <Card sx={{ backgroundColor: "#FAF9F6" }}>
       <Typography variant="h4">{props.post.title}</Typography>
       <CardContent>
         <List>{props.post.body}</List>
-        {`Created on: ${stringd}`}
       </CardContent>
+      <Box sx={{ fontWeight: "bold", fontSize: 16, display: "flex-end" }}>
+        {`Created on: ${stringd}`}
+      </Box>
     </Card>
   );
 }

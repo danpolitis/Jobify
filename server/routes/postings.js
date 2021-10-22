@@ -20,7 +20,7 @@ router.route("/employer/:employer_id")
     );
 
     try {
-      response.status(200).send(result.rows);
+      response.status(200).send(result);
     } catch (error) {
       console.error(error);
     }

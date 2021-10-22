@@ -4,7 +4,7 @@ import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 import Container from "@mui/material/Container";
 import Fab from "@mui/material/Fab";
-import MuiAlert from '@mui/material/Alert';
+import MuiAlert from "@mui/material/Alert";
 import {
   Button,
   Grid,
@@ -13,7 +13,7 @@ import {
   Tooltip,
   TextField,
   Snackbar,
-  Stack
+  Stack,
 } from "@mui/material";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     width: 750,
-    height: 600,
-    backgroundColor: "white",
+    height: 550,
+    backgroundColor: "#FAF9F6",
     position: "absolute",
     boxShadow: 24,
     top: 0,
@@ -136,7 +136,7 @@ export default function CreateBlog(props) {
                 <MenuItem value="Private">Private</MenuItem>
               </TextField>
             </div> */}
-            <div className={classes.item}>
+            <Stack direction="row" xs={{ marginTop: "65px" }}>
               <Button
                 type="submit"
                 variant="outlined"
@@ -153,7 +153,7 @@ export default function CreateBlog(props) {
               >
                 Cancel
               </Button>
-            </div>
+            </Stack>
           </form>
         </Container>
       </Modal>

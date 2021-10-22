@@ -13,8 +13,10 @@ import './Home.css';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import EmployerDropdown from './EmployerDropdown.jsx'
 import NativeSelect from "@mui/material/NativeSelect"
-import { GlobalContext } from "../App.jsx"
-import { useAuth } from '../Auth/AuthContext.js';
+import { GlobalContext } from "./App.jsx"
+
+
+
 
 
 export default function LoggedInHeader(props) {
@@ -22,8 +24,7 @@ export default function LoggedInHeader(props) {
   const [dropDown, setDropDown] = useState('')
   const [isEmployer, setIsEmployer] = useState(false)
   const { state } = useContext(GlobalContext);
-  const { logout } = useAuth();
-  const [error, setError] = useState("");
+
 
   const handleChange = (event) => {
     setDropDown(event.target.value);
@@ -33,25 +34,15 @@ export default function LoggedInHeader(props) {
     color: "white",
   };
 
-  const logoutHandler = (e) => {
-    // e.preventDefault();
-    logout()
-    .then(() => {
-      history.push("/");
-    })
-    .catch((error) => {
-      setError('Failed to log out');
-    })
-  }
 
   return (
     <>
       <AppBar
         position="static"
+        color="primary"
         elevation={0}
         sx={{
           borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-          backgroundColor: "rgba(121, 148, 150, 0.7)"
         }}
       >
         <Toolbar sx={{ flexWrap: "wrap" }}>
@@ -64,13 +55,13 @@ export default function LoggedInHeader(props) {
               display: "flex",
             }}
           >
-            Jobi<sup>fy</sup>
+             Jobi<sup>fy</sup>
           </Typography>
           <nav>
             <div>
             <Link to="/">Home</Link>
             <Link to="/dashboard" style={{padding: "15px"}}>{state.email}</Link>
-            {state.role !== false ? <span className="secondary">Employer</span> : <span className="secondary">Job Seeker</span>}
+            {state.role !== 'seeker' ? <span className="secondary">Employer</span> : <span className="secondary">Job Seeker</span>}
             </div>
           </nav>
           <FormControl sx={{ my: 1, mx: 1.5, midWidth: 80 }}>
@@ -81,15 +72,14 @@ export default function LoggedInHeader(props) {
               style={{minWidth: "100px", maxHeight: "55px", color: "white"}}
               key={"anything"}
             >
-            {state.role !== false ? <EmployerDropdown sx={{maxWidth: "150px"}}/> :
+            {state.role !== 'seeker' ? <EmployerDropdown sx={{maxWidth: "150px"}}/> :
             <div>
-            <Link style={{color: '#49475B', textDecoration: 'none'}} to="/dashboard"> <MenuItem value={20}>Dashboard</MenuItem></Link>
-            <Link style={{color: '#49475B', textDecoration: 'none'}} to="/documents"> <MenuItem value={30}>Documents</MenuItem></Link>
-            <Link style={{color: '#49475B', textDecoration: 'none'}} to="/notes"> <MenuItem value={40}>Notes</MenuItem></Link>
-            <Link style={{color: '#49475B', textDecoration: 'none'}} to="/blogs"> <MenuItem value={40}>Blogs</MenuItem></Link>
-            <Link style={{color: '#49475B', textDecoration: 'none'}} to="/chat"> <MenuItem value={40}>Chat</MenuItem></Link>
-            <Link style={{color: '#49475B', textDecoration: 'none'}} to="/community"> <MenuItem value={50}>Community</MenuItem></Link>
-            <Link style={{color: '#49475B', textDecoration: 'none'}} to="/"> <MenuItem value={50} onClick={logoutHandler}>Log Out</MenuItem></Link>
+            <Link to="/dashboard"> <MenuItem value={20}>Dashboard</MenuItem></Link>
+            <Link to="/documents"> <MenuItem value={30}>Documents</MenuItem></Link>
+            <Link to="/notes"> <MenuItem value={40}>Notes</MenuItem></Link>
+            <Link to="/blogs"> <MenuItem value={40}>Blogs</MenuItem></Link>
+            <Link to="/community"> <MenuItem value={50}>Community</MenuItem></Link>
+            <Link to="/logout"> <MenuItem value={50}>Log Out</MenuItem></Link>
             </div>
             }
             </Select>
@@ -99,3 +89,5 @@ export default function LoggedInHeader(props) {
     </>
   );
 }
+
+

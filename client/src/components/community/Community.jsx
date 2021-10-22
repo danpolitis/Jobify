@@ -17,11 +17,11 @@ import { GlobalContext } from "../App";
 
 const useStyles = makeStyles((theme) => ({
   blogsContainer: {
-    paddingTop: "2",
+    padding: "20px",
   },
   blogTitle: {
     fontWeight: 350,
-    paddingBottom: "2",
+    paddingBottom: "20px",
   },
   hero: {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.redd.it/0c4jejunxhd51.jpg')`,
@@ -43,12 +43,10 @@ function Community(props) {
   const globalState = useContext(GlobalContext);
   const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(globalState.state.userId);
-  const [isEmployer, setIsEmployer] = useState(
-    globalState.state.role === "true"
-  );
+  const [isEmployer, setIsEmployer] = useState(globalState.state.role === true);
 
   function getAllBlogs() {
-    if (isEmployer === "true") {
+    if (isEmployer === true) {
       axios
         .get(`http://localhost:3000/employer_blogs/all/${currentUser}`)
         .then((results) => {
@@ -88,7 +86,7 @@ function Community(props) {
         <Box className={classes.hero}>
           <Box>Community Blog</Box>
         </Box>
-        <Grid item md={12} xs={12} sm={10} xl={6}>
+        <Grid item md={12} xs={12} sm={10} xl={6} padding="20px">
           <BlogList
             currentUser={currentUser}
             isEmployer={isEmployer}
