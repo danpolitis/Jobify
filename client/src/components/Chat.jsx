@@ -25,6 +25,7 @@ function Chat() {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState({})
+  const [submitted, setSubmitted] = useState(false)
 
   const[d, updateD] = useState(false);
   const globalState = useContext(GlobalContext);
@@ -50,18 +51,17 @@ function Chat() {
       first_name: firstName,
       last_name: lastName
     })
-      .catch((err) => {
-        console.log(err)
-      })
+    .then(() => {
+      getUser()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   useEffect(() => {
     getUser()
   }, [])
-
-  useEffect(() => {
-    getUser()
-  }, [page])
 
   const getUser = () => {
     axios.get(`http://localhost:3000/chat/${globalState.state.userId}`)
@@ -76,10 +76,6 @@ function Chat() {
       last_name: lastName,
       password: password
     })
-      .then(() => {
-        updateD(!d)
-        getUser()
-      })
       .catch((err) => {
         console.log(err)
       })
@@ -87,7 +83,7 @@ function Chat() {
 
 
   const dialog = () => {
-    if (user.uuid !== undefined) {
+    if (user.first_name !== null && user.first_name !== undefined) {
       return (
         <ChatEngine
           publicKey={'908b0602-3660-43e8-bdb5-a0223c0a14ea'}

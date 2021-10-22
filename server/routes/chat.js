@@ -11,7 +11,6 @@ router.route('/:uuid')
     const last_name = request.body.last_name;
     const password = request.body.password;
     const params = [username, first_name, last_name, password, uuid]
-
     const result = pool.query(
       'UPDATE uuids \
       SET username = $1, \
