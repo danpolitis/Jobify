@@ -57,7 +57,7 @@ function PostDetails({ postId }) {
             align="center"
             sx={{fontSize:"18px", textAlign:"left"}}
           >
-            <strong>Pay:</strong> ${job.salary}
+            <strong>Salary:</strong> {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(job.salary)}
           </Typography>
           <Stack direction="row" spacing={2}>
             {!uid
@@ -95,7 +95,7 @@ function PostDetails({ postId }) {
             align="center"
             sx={{fontSize:"18px", textAlign:"left"}}
           >
-            <strong>Benifits</strong>
+            <strong>Benefits</strong>
           </Typography>
           <Typography
             variant="body1"
