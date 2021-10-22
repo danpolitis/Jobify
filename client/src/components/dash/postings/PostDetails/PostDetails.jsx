@@ -21,7 +21,10 @@ const style = {
 
 function PostDetails({ postId }) {
   const job = useFetch(`http://localhost:3000/postings/posting_id/${postId}`);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [fav, setFav] = useState(false);
+  const handleFav = () => setFav(true);
+  const handleCloseFav= () => setFav(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const globalData = useContext(GlobalContext);
@@ -64,9 +67,14 @@ function PostDetails({ postId }) {
             }
             <label htmlFor="icon-button-file">
               {/* <Input accept="image/*" id="icon-button-file" type="file" /> */}
-              <IconButton sx={{ color: pink[500] }} aria-label="upload picture" component="span">
-                <FavoriteBorderIcon />
-              </IconButton>
+              {!fav
+                  ?<IconButton onClick={handleFav} sx={{ color: pink[500] }} aria-label="favourite" component="span">
+                    <FavoriteBorderIcon />
+                  </IconButton>
+                  : <IconButton  onClick={handleCloseFav} sx={{ color: pink[500] }} aria-label="unfav" component="span">
+                      <FavoriteIcon />
+                    </IconButton>
+              }
             </label>
           </Stack>
           <Divider></Divider>
@@ -132,7 +140,7 @@ function PostDetails({ postId }) {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Apply For The Position
             </Typography>
-            <ApplyForm uid = {uid}/>
+            <ApplyForm uid = {uid} postId = {postId}/>
           </Box>
         </Modal>
       </>
