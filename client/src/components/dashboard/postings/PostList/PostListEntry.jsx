@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import React, { useState, useContext } from "react"
 import { Card, CardContent, Typography, CircularProgress, Button } from "@mui/material";
 import axios from 'axios';
+=======
+import React from "react"
+import { Card, CardContent, Typography, CircularProgress, Chip } from "@mui/material";
+>>>>>>> main
 import useFetch from "../hooks/useFetch.jsx"
 import { GlobalContext } from '../../../App.jsx';
 import { DashboardContext } from '../../Dashboard.jsx';
@@ -30,10 +35,10 @@ function PostListEntry({ job }) {
     ? <CircularProgress />
     : <Card variant="outlined" sx={{ textAlign: "left" }}>
       <CardContent>
-        <Typography variant="subtitle2" >
+        <Typography variant="subtitle2" sx={{fontWeight:"700", color:"#49475B", textTransform:"uppercase"}}>
           {employerData[0].uuid}
         </Typography>
-        <Typography variant="h6">
+        <Typography variant="h5" sx={{fontWeight:"700"}}>
           {title ? title : "Untitled"}
         </Typography>
         {/* remember to change this to include conditional rendering if role === employer */}
@@ -51,7 +56,7 @@ function PostListEntry({ job }) {
           {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(salary)}
         </Typography>
         <Typography variant="body1" sx={{ margin: "2% 0 2% 0"}}>
-          {description}
+          {description.length > 100 ? description.substring(0, 100) + "..." : description}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {`Posted ${new Date(posted_date).toLocaleDateString('en-US')}`}

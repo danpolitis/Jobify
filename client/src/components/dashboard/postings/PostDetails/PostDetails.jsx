@@ -1,9 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Grid, Typography, CircularProgress, Stack, Divider, Chip, Box, Button, Modal, IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { pink } from "@mui/material/colors";
 import useFetch from "../hooks/useFetch.jsx"
 import ApplyForm from "./ApplyForm.jsx"
+import { GlobalContext } from '../../../App.jsx';
 
 const style = {
   position: 'absolute',
@@ -22,20 +24,25 @@ function PostDetails({ postId }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const globalData = useContext(GlobalContext);
+  const uid = globalData.state.userId;
 
   return (
     !job
     ? <CircularProgress />
-    : <Grid item xs={7} sx={{border: "1px solid rgba(0, 0, 0, 0.12)"}}>
-      <>
+    : <>
         <Stack
           spacing={{xs: 3}}
+          sx={{border:"1px solid rgba(0, 0, 0, 0.12)", borderRadius: "2px", padding:"10px"}}
         >
+          <Typography variant="body2" color="text.secondary" sx={{textAlign:"left"}}>
+          {`Posted On: ${new Date(job.posted_date).toLocaleDateString('en-US')}`}
+        </Typography>
           <Typography
             variant="h4"
             color="text.primary"
             align="center"
-            sx={{fontWeight:"700", textAlign:"left"}}
+            sx={{fontWeight:"700", textAlign:"left", marginTop:"15px"}}
           >
             {job.title}
           </Typography>
@@ -49,14 +56,17 @@ function PostDetails({ postId }) {
             align="center"
             sx={{fontSize:"18px", textAlign:"left"}}
           >
-            <strong>Pay:</strong> ${job.salary}
+            <strong>Salary:</strong> {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(job.salary)}
           </Typography>
           <Stack direction="row" spacing={2}>
-            <Button variant="contained" onClick={handleOpen}>Apply</Button>
+            {!uid
+              ? <Button variant="contained" href="/signin">Apply</Button>
+              : <Button variant="contained" onClick={handleOpen}>Apply</Button>
+            }
             <label htmlFor="icon-button-file">
               {/* <Input accept="image/*" id="icon-button-file" type="file" /> */}
               <IconButton sx={{ color: pink[500] }} aria-label="upload picture" component="span">
-                <FavoriteIcon />
+                <FavoriteBorderIcon />
               </IconButton>
             </label>
           </Stack>
@@ -71,7 +81,7 @@ function PostDetails({ postId }) {
           </Typography>
           <Typography
             variant="h4"
-            color="text.primary"
+            color="text.secondary"
             align="center"
             sx={{fontSize:"18px", textAlign:"left"}}
           >
@@ -84,13 +94,13 @@ function PostDetails({ postId }) {
             align="center"
             sx={{fontSize:"18px", textAlign:"left"}}
           >
-            <strong>Benifits</strong>
+            <strong>Benefits</strong>
           </Typography>
           <Typography
-            variant="h4"
-            color="text.primary"
+            variant="body1"
+            color="text.secondary"
             align="center"
-            sx={{fontSize:"18px", textAlign:"left"}}
+            sx={{textAlign:"left"}}
           >
             {job.benefits}
           </Typography>
@@ -104,14 +114,15 @@ function PostDetails({ postId }) {
             <strong>Job Description</strong>
           </Typography>
           <Typography
-            variant="h4"
-            color="text.primary"
+            variant="body1"
+            color="text.secondary"
             align="center"
-            sx={{fontSize:"18px", textAlign:"left"}}
+            sx={{textAlign:"left"}}
           >
             {job.description}
           </Typography>
         </Stack>
+
         <Modal
           open={open}
           onClose={handleClose}
@@ -122,11 +133,10 @@ function PostDetails({ postId }) {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Apply For The Position
             </Typography>
-            <ApplyForm />
+            <ApplyForm uid = {uid}/>
           </Box>
         </Modal>
       </>
-    </Grid>
   )
 }
 

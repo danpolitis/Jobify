@@ -69,4 +69,17 @@ router.route('/:posting_id/:applicant_id/favorited')
     }
   })
 
+router.route('/delete/:application_id')
+  .delete(async (request, response) => {
+    const params = [request.params.application_id];
+    const result = await pool.query(
+      'DELETE FROM applications WHERE id = $1', params
+    )
+    try {
+      response.status(202).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  })
+
 module.exports = router;

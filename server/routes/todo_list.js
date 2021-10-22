@@ -24,6 +24,24 @@ router.route('/:uuid')
       'INSERT INTO todo_list(uuid, time, eventActivity, date) \
       VALUES($1, $2, $3, $4);', params
     )
+    try {
+      response.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  })
+
+router.route('/list_id/:id')
+  .delete(async (request, response) => {
+    const params = [request.params.id];
+    const result = await pool.query(
+      'DELETE FROM todo_list WHERE id = $1', params
+    )
+    try {
+      response.status(202).send(result);
+    } catch (error) {
+      console.error(error);
+    }
   })
 
 module.exports = router;

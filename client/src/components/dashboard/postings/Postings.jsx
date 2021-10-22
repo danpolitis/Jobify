@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Grid, CircularProgress } from "@mui/material";
-import useFetch from "./hooks/useFetch.jsx";
-import Search from './PostList/Search.jsx'
+import { Grid, CircularProgress, Container, Typography } from "@mui/material";
+import Search from '../../Search.jsx'
+import Filter from './PostList/Filter.jsx'
 import PostList from "./PostList/PostList.jsx";
 import PostDetails from "./PostDetails/PostDetails.jsx";
 import ApplicantsList from './ApplicantsList/ApplicantsList.jsx';
@@ -15,25 +15,41 @@ function Postings({ }) {
     : `http://localhost:3000/postings/employer/${state.userId}`
   const jobs = useFetch(url);
   // also needs context or something to be passed up & down to change details/applicants
+
   return (
     !jobs
     ? <CircularProgress />
-    : <Grid container>
-      <Grid container item>
-        {/* for employer might need to either get rid of search bar or include different function for it in component file */}
+    : <>
+      <Grid>
         <Search setRoute={setSearchRoute} />
-      </Grid>
-      <Grid container item>
-        filter components go here
-      </Grid>
-      <Grid container item rowSpacing={1} columnSpacing={2}>
-        <PostList jobs={jobs} />
-        {state.role === 'seeler'
-          ? <PostDetails postId={jobs && jobs.length > 0 ? jobs[0].id : null} />
-          : <ApplicantsList postId={jobs && jobs.length > 0 ? jobs[0].id : null}/>
-        }
-      </Grid>
-    </Grid>
+          <Typography
+          variant="h6"
+          align="center"
+        >
+        <Filter />
+        </Typography>
+        </Grid>
+        <Grid container spacing={2}>
+          {
+            jobs.length === 0
+            ? <Grid item xs={12} justifyContent="center">
+              <Typography>No jobs matched your search, try again!</Typography>
+            </Grid>
+            : <>
+              <Grid item xs={5}  sx={{maxHeight: "100vh", overflowY:"scroll"}}>
+                <PostList jobs={jobs} />
+              </Grid>
+              <Grid item xs={7}>
+                {
+                  state.role === 'seeker'
+                    ? <PostDetails postId={jobs && jobs.length > 0 ? jobs[0].id : null} />
+                    : <ApplicantsList postId={jobs && jobs.length > 0 ? jobs[0].id : null}/>
+                }
+              </Grid>
+            </>
+          }
+        </Grid>
+    </>
   );
 }
 
