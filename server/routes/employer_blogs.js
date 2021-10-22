@@ -73,4 +73,20 @@ router.route('/:poster_id')
       console.error(error);
     }
   })
+
+  router.route('/all/:poster_id')
+  .get(async (request, response) => {
+    const poster_id = request.params.poster_id;
+    const params = [poster_id];
+    const result = await pool.query(
+      'SELECT * FROM employers_blogs \
+       FULL OUTER JOIN seekers_blogs \
+       ON employers_blogs.id=seekers_blogs.id ;'
+    )
+    try {
+      response.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  })
 module.exports = router;

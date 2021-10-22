@@ -34,16 +34,6 @@ export default function Blogs() {
   const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(globalState.state.userId);
   const [isEmployer, setIsEmployer] = useState(globalState.state.role === 'employer');
-  const [open, setOpen] = useState(false);
-
-  function handleOpening() {
-    setOpen(true);
-  }
-
-  function handleClosing() {
-    setOpen(false);
-    props.getAllUserBlogs()
-  }
 
   function getAllUserBlogs() {
     if (isEmployer === 'employer') {
@@ -93,8 +83,6 @@ export default function Blogs() {
         currentUser={currentUser}
         isEmployer={isEmployer}
         getAllUserBlogs={getAllUserBlogs}
-        handleClosing={handleClosing}
-        open={open}
       />
     </Container>
   );
