@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import axios, { post } from 'axios';
 import Upload from './upload.jsx';
 //import { FileIcon, defaultStyles } from "react-file-icon";
@@ -7,6 +7,7 @@ import { makeStyles } from "@mui/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { GlobalContext } from '../App.jsx';
 
 const useStyles = makeStyles((theme) => ({
     icons: {
@@ -18,12 +19,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Documents = () => {
-  const user_id = 'hghaskjsdlkja3';
+  const { state } = useContext(GlobalContext);
+  // const user_id = 'hghaskjsdlkja3';
   const [files, setFiles] = useState([]);
   const [submitted, setSubmitted] = useState(0);
 
   const getDocs = () => {
-    axios.get(`http://localhost:3000/documents/${user_id}`)
+    console.log(state.userId);
+    axios.get(`http://localhost:3000/documents/${state.userId}`)
       .then((results) => {
         setFiles(results.data);
       })
@@ -58,7 +61,7 @@ const Documents = () => {
       Your Documents
     </Typography>
     <div className={classes.icons}>
-      {files.map((file, index) => (
+      {files.length > 0 && files.map((file, index) => (
         <div className={classes.icons} key={index}>
           <DescriptionIcon color="primary" fontSize="large" />
           <Typography variant="subtitle1">{file.name}</Typography>
