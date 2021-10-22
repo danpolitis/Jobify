@@ -5,7 +5,6 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import './Home.css';
 
 export default function Header() {
   return (
@@ -29,16 +28,17 @@ export default function Header() {
               fontWeight:"700"
             }}
           >
-          Jobi<sup>fy</sup>
+            Jobi<sup>fy</sup>
           </Typography>
           <nav>
             <Link to="/">Home</Link>
+            <Link to="/new-post">Add Job</Link>
             <Link to="/dashboard">Dashboard</Link>
           </nav>
           <Button
             href="/signin"
             variant="contained"
-            sx={{ my: 1, mx: 1.5 }}
+            sx={{backgroundColor: "#49475B", my: 1, mx: 1.5}}
           >
             Login / Sign Up
           </Button>

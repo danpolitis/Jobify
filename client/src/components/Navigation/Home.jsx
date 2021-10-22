@@ -32,6 +32,8 @@ function Home() {
             href="/signin"
             variant="contained"
             size="large"
+            color="primary"
+            style={{backgroundColor: "#49475B"}}
             startIcon={<LoginIcon />}
             >
               Create An Account

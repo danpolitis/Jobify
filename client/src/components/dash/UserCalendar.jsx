@@ -64,8 +64,6 @@ function UserCalendar(props) {
       let calDateString = prev.toLocaleString('en-US').slice(0,prev.toLocaleString('en-US').indexOf(','))
       let timeString = e.target.value
       let newDate = calDateString + ' ' + timeString + ':00'
-      console.log('prevdate', calDateString)
-      console.log('lolng', `${calDate.getFullYear()}-${(calDate.getMonth() + 1).toString().padStart(2,'0')}-${calDate.getDate()}`)
       return new Date(newDate)
     })
   }
@@ -84,7 +82,7 @@ function UserCalendar(props) {
           <input value={time} style={{ marginTop: "45px", marginRight: "25px", padding: "15px 15px" }} onChange={changeTime} type="time" min="00:00" max="23:59" required />
           <TextField sx={{ marginTop: "45px" }} value={eventActivity} placeholder="Enter event name" onChange={e => setEventActivity(e.target.value)}></TextField>
           <p></p>
-          <Button onClick={handleSubmit} color="primary" variant="contained">Add event to date</Button>
+          <Button onClick={handleSubmit} color="secondary" variant="contained">Add event to date</Button>
           <Box>
             <Typography align-content="left" variant="h5" sx={{marginTop: "20px", textDecoration: "underline" }} component="h5">Things to do on {calDate.toLocaleDateString()}</Typography>
             <p> </p>

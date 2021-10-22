@@ -3,6 +3,14 @@ div.homepage > div > input[type="text"] {
   width: 222px;
 }
 
+
+body {
+  background-image: url("https://static.vecteezy.com/system/resources/previews/002/036/080/original/spot-light-background-gallery-theater-interior-3d-realistic-background-illustration-free-vector.jpg");
+  background-size: cover;
+  background-size: 100%;
+  min-height: 100%;
+  min-width: 100%;
+}
 .nameOfuser {
   padding: 15px;
 }
@@ -27,3 +35,13 @@ h2 sup {
   color: #e9eb9e;
   font-weight: bold;
 }
+
+.img-fluid {
+  width: 120px;
+  height: 60px;
+  left: 50%;
+  right: 50%;
+  top: 1px;
+  position: fixed;
+}
+
