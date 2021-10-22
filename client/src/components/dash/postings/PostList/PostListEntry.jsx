@@ -44,7 +44,7 @@ function PostListEntry({ job }) {
           {title ? title : "Untitled"}
         </Typography>
         {
-          state.role === 'employer' &&
+          state.role &&
             <Button
               variant="contained"
               disableElevation
