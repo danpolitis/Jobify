@@ -29,34 +29,34 @@ function Postings({ pid, search }) {
     !jobs
     ? <CircularProgress />
     : <>
-      <Grid>
+      <Grid item sx={{ margin: "5% 0" }}>
         <Search setRoute={setSearchRoute} />
         <Filter route={searchRoute} setRoute={setSearchRoute} />
-        </Grid>
-        <Grid container spacing={2}>
-          {
-            jobs.length === 0 && !state.role
+      </Grid>
+      <Grid container spacing={2}>
+        {
+          jobs.length === 0 && !state.role
+          ? <Grid item xs={12} justifyContent="center">
+            <Typography>No jobs matched your search, try again!</Typography>
+          </Grid>
+          : jobs.length === 0 && state.role
             ? <Grid item xs={12} justifyContent="center">
-              <Typography>No jobs matched your search, try again!</Typography>
-            </Grid>
-            : jobs.length === 0 && state.role
-              ? <Grid item xs={12} justifyContent="center">
-                  <Typography>You have no job postings! <Link to="/new-post">Add a job!</Link></Typography>
+                <Typography>You have no job postings! <Link to="/new-post">Add a job!</Link></Typography>
+              </Grid>
+            : <>
+                <Grid item xs={5}  sx={{maxHeight: "100vh", overflowY:"scroll"}}>
+                  <PostList jobs={jobs} />
                 </Grid>
-              : <>
-                  <Grid item xs={5}  sx={{maxHeight: "100vh", overflowY:"scroll"}}>
-                    <PostList jobs={jobs} />
-                  </Grid>
-                  <Grid item xs={7}>
-                    {
-                      !state.role
-                        ? <PostDetails postId={pid ? pid : jobs[0].id} />
-                        : <ApplicantsList postId={jobs && jobs.length > 0 ? jobs[0].id : null}/>
-                    }
-                  </Grid>
-                </>
-          }
-        </Grid>
+                <Grid item xs={7}>
+                  {
+                    !state.role
+                      ? <PostDetails postId={pid ? pid : jobs[0].id} />
+                      : <ApplicantsList postId={jobs && jobs.length > 0 ? jobs[0].id : null}/>
+                  }
+                </Grid>
+              </>
+        }
+      </Grid>
     </>
   );
 }
