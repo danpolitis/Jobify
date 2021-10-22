@@ -11,22 +11,33 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 
 import BlogList from "./BlogList";
 import CreateBlog from "./CreateBlog";
 import { GlobalContext } from "../App";
+import theme from "../../Theme/ThemeFile.js";
 
 const useStyles = makeStyles((theme) => ({
-  blogsContainer: {
-    paddingTop: 10,
-
-  },
   blogTitle: {
     fontWeight: 350,
     paddingBottom: "2",
   },
   item: {
     marginBottom: theme.spacing(3),
+  },
+  hero: {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.theminimalists.com/wp-content/uploads/2019/01/how-to-start-a-blog-in-2020-1.jpg')`,
+    height: "500px",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#fff",
+    fontSize: "4rem",
   },
 }));
 
@@ -35,11 +46,11 @@ export default function Blogs() {
   const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(globalState.state.userId);
   const [isEmployer, setIsEmployer] = useState(
-    globalState.state.role === "employer"
+    globalState.state.role === "true"
   );
 
   function getAllUserBlogs() {
-    if (isEmployer === "employer") {
+    if (isEmployer === "true") {
       axios
         .get(`http://localhost:3000/employer_blogs/${currentUser}`)
         .then((results) => {
@@ -61,39 +72,42 @@ export default function Blogs() {
 
   const classes = useStyles();
   return (
-    <Container
-      // container
-      maxWidth="md"
-      alignItems="center"
-      direction="column"
-      justify="center"
-      style={{ minHeight: 400 }}
-      className={classes.blogsContainer}
-    >
-      <Grid
-        className={classes.items}
-        container
+    <ThemeProvider theme={theme}>
+      <Container
+        // container
+        paddingTop="20px"
+        margin="20px"
+        maxWidth="md"
+        alignItems="center"
         direction="column"
-        justifyContent="center"
-        alignitems="center"
+        justify="center"
+        style={{ minHeight: 400 }}
       >
-        <Typography variant="h4">
-          {isEmployer ? "Company Blog" : "Personal Blog"}
-        </Typography>
-        <Grid item md={12} xs={12} sm={8} xl={5} >
-          <BlogList
-            currentUser={currentUser}
-            isEmployer={isEmployer}
-            posts={posts}
-            getAllUserBlogs={getAllUserBlogs}
-          />
+        <Grid
+          className={classes.items}
+          container
+          direction="column"
+          justifyContent="center"
+          alignitems="center"
+        >
+          <Box className={classes.hero}>
+            <Box>{isEmployer ? "Company Blog" : "Personal Blog"}</Box>
+          </Box>
+          <Grid item md={10} xs={10} sm={10} xl={10} padding="20px">
+            <BlogList
+              currentUser={currentUser}
+              isEmployer={isEmployer}
+              posts={posts}
+              getAllUserBlogs={getAllUserBlogs}
+            />
+          </Grid>
         </Grid>
-      </Grid>
-      <CreateBlog
-        currentUser={currentUser}
-        isEmployer={isEmployer}
-        getAllUserBlogs={getAllUserBlogs}
-      />
-    </Container>
+        <CreateBlog
+          currentUser={currentUser}
+          isEmployer={isEmployer}
+          getAllUserBlogs={getAllUserBlogs}
+        />
+      </Container>
+    </ThemeProvider>
   );
 }

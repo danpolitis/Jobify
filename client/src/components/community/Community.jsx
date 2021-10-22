@@ -17,11 +17,24 @@ import { GlobalContext } from "../App";
 
 const useStyles = makeStyles((theme) => ({
   blogsContainer: {
-    paddingTop: "2",
+    padding: "20px",
   },
   blogTitle: {
     fontWeight: 350,
-    paddingBottom: "2",
+    paddingBottom: "20px",
+  },
+  hero: {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.redd.it/0c4jejunxhd51.jpg')`,
+    height: "500px",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#fff",
+    fontSize: "4rem",
   },
 }));
 
@@ -59,16 +72,21 @@ function Community(props) {
       maxWidth="lg"
       alignItems="center"
       direction="column"
-      spacing={0}
       justify="center"
       style={{ minHeight: 250 }}
       className={classes.blogsContainer}
     >
-      <Grid className={classes.items}>
-        <Typography variant="h4">
-          Community Blog
-        </Typography>
-        <Grid item md={12} xs={12} sm={10} xl={6}>
+      <Grid
+        className={classes.items}
+        container
+        direction="column"
+        justifyContent="center"
+        alignitems="center"
+      >
+        <Box className={classes.hero}>
+          <Box>Community Blog</Box>
+        </Box>
+        <Grid item md={12} xs={12} sm={10} xl={6} padding="20px">
           <BlogList
             currentUser={currentUser}
             isEmployer={isEmployer}

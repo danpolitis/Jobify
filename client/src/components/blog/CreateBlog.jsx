@@ -4,12 +4,7 @@ import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 import Container from "@mui/material/Container";
 import Fab from "@mui/material/Fab";
-
-// import Grid from "@mui/material/Grid";
-// import MenuItem from "@mui/material/MenuItem"
-// import Modal from "@mui/material/Modal";
-// import Tooltip from "@mui/material/Tooltip";
-// import TextField from "@mui/material/TextField";
+import MuiAlert from "@mui/material/Alert";
 import {
   Button,
   Grid,
@@ -17,7 +12,13 @@ import {
   MenuItem,
   Tooltip,
   TextField,
+  Snackbar,
+  Stack,
 } from "@mui/material";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -27,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     width: 750,
-    height: 600,
-    backgroundColor: "white",
+    height: 550,
+    backgroundColor: "#FAF9F6",
     position: "absolute",
     boxShadow: 24,
     top: 0,
@@ -50,33 +51,34 @@ export default function CreateBlog(props) {
   const [body, setBody] = useState("");
   const [public, setPublic] = useState("Public");
   const [open, setOpen] = useState(false);
-  const [modal, setModal] = useState(false);
 
-  const handleClose = () => setOpen(false)
+  const handleClose = () => setOpen(false);
   function handleCreatePost(e, reason) {
     e.preventDefault();
-    const toggle = () => setModal(!modal);
+    const toggle = () => setOpen(false);
 
     if (props.isEmployer === true) {
       axios
-      .post(`http://localhost:3000/employer_blogs/${props.currentUser}`, {
-        title: title,
-        body: body,
-        // public: public
-      })
-      .then(() => {
-        props.getAllUserBlogs();
-      });
+        .post(`http://localhost:3000/employer_blogs/${props.currentUser}`, {
+          title: title,
+          body: body,
+          // public: public
+        })
+        .then(() => {
+          props.getAllUserBlogs();
+        })
+        .then(() => toggle());
     } else {
       axios
-      .post(`http://localhost:3000/seeker_blogs/${props.currentUser}`, {
-        title: title,
-        body: body,
-        // public: public
-      })
-      .then(() => {
-        props.getAllUserBlogs();
-      });
+        .post(`http://localhost:3000/seeker_blogs/${props.currentUser}`, {
+          title: title,
+          body: body,
+          // public: public
+        })
+        .then(() => {
+          props.getAllUserBlogs();
+        })
+        .then(() => toggle());
     }
   }
 
@@ -134,7 +136,7 @@ export default function CreateBlog(props) {
                 <MenuItem value="Private">Private</MenuItem>
               </TextField>
             </div> */}
-            <div className={classes.item}>
+            <Stack direction="row" xs={{ marginTop: "65px" }}>
               <Button
                 type="submit"
                 variant="outlined"
@@ -151,7 +153,7 @@ export default function CreateBlog(props) {
               >
                 Cancel
               </Button>
-            </div>
+            </Stack>
           </form>
         </Container>
       </Modal>

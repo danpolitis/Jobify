@@ -12,21 +12,26 @@ export default function BlogList(props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
-    <Stack spacing={2}>
-        {props.posts.map((post, i) => {
-          return (
-            <Blog
-              setSelectedIndex={setSelectedIndex}
-              selectedIndex={selectedIndex}
-              setPosts={props.setPosts}
-              getAllUserBlogs={props.getAllUserBlogs}
-              isEmployer={props.isEmployer}
-              index={i}
-              key={i}
-              post={post}
-            />
-          );
-        })}
+    <Stack
+      direction="column"
+      justifyContent="space-around"
+      spacing={2}
+      paddingTop="10"
+    >
+      {props.posts.map((post, i) => {
+        return (
+          <Blog
+            setSelectedIndex={setSelectedIndex}
+            selectedIndex={selectedIndex}
+            setPosts={props.setPosts}
+            getAllUserBlogs={props.getAllUserBlogs}
+            isEmployer={props.isEmployer}
+            index={i}
+            key={i}
+            post={post}
+          />
+        );
+      })}
     </Stack>
   );
 }
