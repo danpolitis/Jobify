@@ -65,14 +65,13 @@ router.route("/search")
     )`;
     const citySearchClause = `
       lower(postings.city) LIKE LOWER('%${city}%')
-        OR lower(employers.city) LIKE LOWER ('%${city}%')
     `;
     const search =
       keyword && !city
       ? `SELECT * FROM postings, employers
         WHERE ${keywordSearchClause};`
       : !keyword && city
-      ? `SELECT * FROM postings, employers
+      ? `SELECT * FROM postings
         WHERE ${citySearchClause};`
       : `SELECT * FROM postings, employers
         WHERE ${keywordSearchClause} AND ${citySearchClause};`;
