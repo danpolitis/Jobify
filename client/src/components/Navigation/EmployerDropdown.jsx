@@ -37,6 +37,7 @@ export default function EmployerDropdown() {
       <Link style={{color: '#49475B', textDecoration: 'none'}} to="/documents"> <MenuItem value={40}>Documents</MenuItem></Link>
       <Link style={{color: '#49475B', textDecoration: 'none'}} to="/notes"> <MenuItem value={40}>Notes</MenuItem></Link>
       <Link style={{color: '#49475B', textDecoration: 'none'}} to="/blogs"> <MenuItem value={50}>Blogs</MenuItem></Link>
+      <Link style={{color: '#49475B', textDecoration: 'none'}} to="/chat"> <MenuItem value={50}>Chat</MenuItem></Link>
       <Link style={{color: '#49475B', textDecoration: 'none'}} to="/community"> <MenuItem value={50}>Community</MenuItem></Link>
       <Link style={{color: '#49475B', textDecoration: 'none'}} to="/"> <MenuItem value={50} onClick={logoutHandler}>Log Out</MenuItem></Link>
     </div>

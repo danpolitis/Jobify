@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Applicant from './Applicant.jsx';
 import { Grid, CircularProgress, Divider, Stack } from '@mui/material';
+import useFetch from '../hooks/useFetch.jsx'
 
 export default ApplicantsList = ({ postId }) => {
   const applicants = useFetch(`http://localhost:3000/applications/employer/${postId}`);
