@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
+import { ListItem, ListItemText, List, Divider } from "@mui/material";
 import axios from "axios";
 
 export default function Blog(props) {
@@ -57,7 +58,7 @@ export default function Blog(props) {
   }
 
   return (
-    <Card>
+    <div>
       <Grid
         container
         direction="row"
@@ -72,20 +73,24 @@ export default function Blog(props) {
           <DeleteIcon />
         </IconButton>
       </Grid>
-      <Button
-        onClick={(e) => {
-          handleListClick(e, props.index, props.post);
-        }}
-        selected={props.selectedIndex === props.index}
-        name="post"
-      ></Button>
       <Typography variant="h4">{props.post.title}</Typography>
       <CardContent>
-        <Typography variant="body2" color="text.secondary" noWrap="true">
-          {props.post.body}
-        </Typography>
+        <List>
+          <React.Fragment>
+            {/* <Typography sx={{display:'inline'}} component="span" variant="body2" color="text.secondary" noWrap="true"> */}
+            {props.post.body}
+            {/* </Typography> */}
+          </React.Fragment>
+        </List>
       </CardContent>
-      <div>{stringd}</div>
-    </Card>
+      <Grid
+        container
+        direction="flex-end"
+        justifyContent="flex-end"
+        alignItems="center"
+      >
+        {`Created on: ${stringd}`}
+      </Grid>
+    </div>
   );
 }

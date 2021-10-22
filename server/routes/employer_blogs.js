@@ -23,6 +23,7 @@ router.route('/:poster_id')
     const body = request.body.body;
     const created = new Date();
     const params = [poster_id, title, body, created, public]
+    console.log('params', params);
 
     const result = pool.query(
       'INSERT INTO employers_blogs(poster_id, title, body, created, public) \

@@ -8,17 +8,14 @@ import Blog from "./Blog";
 
 export default function BlogList(props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [open, setOpen] = useState(false);
 
-  function handleOpen() {
-    setOpen(true);
-  }
-
-  function handleClose() {
-    setOpen(false);
-  }
   return (
-    <div>
+    <Card
+      container
+      direction="column"
+      justifyContent="center"
+      alignitems="center"
+    >
       {props.posts.map((post, i) => {
         return (
           <Blog
@@ -33,6 +30,6 @@ export default function BlogList(props) {
           />
         );
       })}
-    </div>
+    </Card>
   );
 }

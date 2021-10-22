@@ -7,13 +7,6 @@ import './Calendar.css';
 import uniqid from 'uniqid';
 
 
-
-
-
-
-
-
-
 function UserCalendar(props) {
 
   const [employerPortal, setEmployerPortal] = useState("false")
@@ -90,7 +83,7 @@ function UserCalendar(props) {
             <ul className="checkmark">
                 {toDoList && toDoList.map(item =>  (
               <div key={uniqid()}>
-                  <li>{item.time.slice(1)} - {item.eventactivity}</li>
+                  <li>{item.time} - {item.eventactivity}</li>
               </div>
                 ))}
             </ul>
