@@ -3,7 +3,7 @@ const pool = require("./pool");
 
 router.route("/all")
   .get(async (request, response) => {
-    const result = await pool.query("SELECT * FROM postings;");
+    const result = await pool.query("SELECT * FROM postings WHERE status = true;");
     try {
       response.status(200).send(result);
     } catch (error) {
@@ -15,7 +15,10 @@ router.route("/employer/:employer_id")
   .get(async (request, response) => {
     const params = [request.params.employer_id];
     const result = await pool.query(
-      'SELECT * FROM postings WHERE employer_id = $1;', params
+      `SELECT * FROM postings
+        WHERE employer_id = $1
+        ORDER BY posted_date DESC;`,
+      params
     );
     try {
       response.status(200).send(result.rows);
@@ -85,7 +88,7 @@ router.route("/search")
       description,
       posted_date
         FROM postings, employers
-        WHERE
+        WHERE status = true
     `;
 
     const clause = {
@@ -107,9 +110,9 @@ router.route("/search")
     };
 
     Object.keys(request.query).map((column, i) => {
-      search += ` ${clause[column]} AND`;
+      search += `AND ${clause[column]}`;
       if (i === Object.keys(request.query).length - 1) {
-        search = search.slice(0, search.length - 4) + ';';
+        search += ' ORDER BY posted_date DESC;';
       }
     });
 
