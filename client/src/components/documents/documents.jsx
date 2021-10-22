@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 const Documents = () => {
   const user_id = 'hghaskjsdlkja3';
   const [files, setFiles] = useState([]);
+  const [submitted, setSubmitted] = useState(0);
 
   const getDocs = () => {
     axios.get(`http://localhost:3000/documents/${user_id}`)
@@ -30,7 +31,7 @@ const Documents = () => {
 
   useEffect(() => {
     getDocs()
-  }, [])
+  }, [submitted])
 
 
   useEffect(() => {
@@ -48,12 +49,15 @@ const Documents = () => {
   }
 
   const classes = useStyles();
+
+  setTimeout(() => setSubmitted(submitted + 1), 7000);
+
   return (
   <>
     <Typography variant="h2">
       Your Documents
     </Typography>
-    <div maxWidth="sm" className={classes.icons}>
+    <div className={classes.icons}>
       {files.map((file, index) => (
         <div className={classes.icons} key={index}>
           <DescriptionIcon color="primary" fontSize="large" />
@@ -63,12 +67,11 @@ const Documents = () => {
     </div>
     <Container
       id="Upload Document"
-      fullWidth
       margin="normal"
       >
     <Typography variant="h4">Upload Document</Typography>
     <div>
-      <Upload/>
+      <Upload setSubmitted={setSubmitted} submitted={submitted}/>
     </div>
     </Container>
   </>
