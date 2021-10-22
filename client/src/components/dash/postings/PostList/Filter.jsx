@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Grid, OutlinedInput, MenuItem, Select } from "@mui/material";
+import { Grid, FormControl, OutlinedInput, MenuItem, Select } from "@mui/material";
 
 function Filter({ list }) {
   // date posted: last 24 hours, last 3/7/14 days
@@ -63,7 +63,7 @@ function Filter({ list }) {
 
   return (
     <Grid item xs justifyContent="center">
-      <form>
+      <FormControl>
       {
         Object.keys(options).map((filter, i) => {
             <Select
@@ -86,7 +86,7 @@ function Filter({ list }) {
             </Select>
         })
       }
-      </form>
+      </FormControl>
     </Grid>
   );
 }

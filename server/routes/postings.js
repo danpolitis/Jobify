@@ -76,7 +76,7 @@ router.route("/search")
       min_salary,
     } = request.query;
 
-    let search = `SELECT
+    let search = `SELECT DISTINCT
       postings.id,
       title,
       employer_id,
