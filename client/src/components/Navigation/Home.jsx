@@ -40,7 +40,7 @@ function Home() {
     : <Redirect
       to={{
         pathname: "/dashboard",
-        search: searchRoute
+        state: searchRoute
       }}
     />
   );
