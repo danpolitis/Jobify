@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios";
-import BlogList from "./BlogList";
 import { makeStyles } from "@mui/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -13,6 +12,10 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
+import BlogList from "./BlogList";
+import CreateBlog from "./CreateBlog";
+import { GlobalContext } from '../App';
+
 const useStyles = makeStyles((theme) => ({
   blogsContainer: {
     paddingTop: "2",
@@ -24,9 +27,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Blogs() {
+  const globalState = useContext(GlobalContext);
   const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(1);
   const [isEmployer, setIsEmployer] = useState(true);
+
 
   function getAllUserBlogs() {
     if (isEmployer === true) {
@@ -61,8 +66,8 @@ export default function Blogs() {
       style={{ minHeight: "250" }}
       className={classes.blogsContainer}
     >
+      <Typography variant="h4">Selphie's Blogs</Typography>
       <Grid item md={12} xs={12} sm={10} xl={6}>
-        <Typography variant="h4">Selphie's Blogs</Typography>
         <BlogList
           currentUser={currentUser}
           isEmployer={isEmployer}
@@ -70,6 +75,7 @@ export default function Blogs() {
           getAllUserBlogs={getAllUserBlogs}
         />
       </Grid>
+      <CreateBlog />
     </Container>
   );
 }
