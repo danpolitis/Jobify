@@ -16,8 +16,6 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'addedJob':
-      return {...state, addedJob: action.data};
     case 'removePost':
       return { ...state, removePost: action.data};
     case 'renewedPost':
