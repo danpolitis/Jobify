@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import useFetch from "../hooks/useFetch.jsx";
+import useFetch from "./dash/postings/hooks/useFetch.jsx";
 
 function Search({ setRoute }) {
-  const [ keyword, setKeyword ] = useState("");
-  const [ city, setCity ] = useState("");
+  const [ terms, setTerms ] = useState({
+    keyword: '',
+    city: ''
+  });
+  let queryUrl = `search?`;
 
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(e)
-    keyword.length > 0
-    ? setRoute(`keyword/${keyword}`)
-    : city.length > 0
-    ? setRoute(`city/${city}`)
-    : null;
+    Object.keys(terms).map((term, i) => {
+      if (i < Object.keys(terms).length - 1) {
+        queryUrl += '&';
+      }
+      if (terms[term].length > 0) {
+        queryUrl += `${term}=${terms[term]}`
+      }
+    });
+    setRoute(queryUrl);
   }
 
   return (
@@ -22,19 +28,19 @@ function Search({ setRoute }) {
       <TextField
         name="keyword"
         label="Keyword"
-        value={keyword}
-        sx={{ padding: "5px", minWidth: "10px" }}
-        placeholder="Job title, description, industry"
-        onChange={e => setKeyword(e.target.value)}
+        value={terms.keyword}
+        sx={{ padding: "5px", width: "30%" }}
+        placeholder="Job title, description, industry..."
+        onChange={e => setTerms({ ...terms, [e.target.name]: e.target.value })}
         variant="outlined"
       />
       <TextField
         name="city"
         label="City"
-        value={city}
-        sx={{ padding: "5px", minWidth: "10px" }}
+        value={terms.city}
+        sx={{ padding: "5px", width: "30%" }}
         placeholder="City"
-        onChange={e => setCity(e.target.value)}
+        onChange={e => setTerms({ ...terms, [e.target.name]: e.target.value })}
         variant="outlined"
       />
       <Button

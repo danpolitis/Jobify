@@ -6,14 +6,6 @@ import axios from 'axios';
 import './Calendar.css';
 import uniqid from 'uniqid';
 
-
-
-
-
-
-
-
-
 function UserCalendar(props) {
 
   const [employerPortal, setEmployerPortal] = useState("false")
