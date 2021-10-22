@@ -31,4 +31,17 @@ router.route('/:uuid')
     }
   })
 
+router.route('/list_id/:id')
+  .delete(async (request, response) => {
+    const params = [request.params.id];
+    const result = await pool.query(
+      'DELETE FROM todo_list WHERE id = $1', params
+    )
+    try {
+      response.status(202).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  })
+
 module.exports = router;

@@ -73,8 +73,8 @@ const Signup = () => {
 
     }
 
-    useEffect(() => {
-    }, []);
+    // useEffect(() => {
+    // }, []);
 
 
 
@@ -89,8 +89,8 @@ const Signup = () => {
 
                     <TextField fullWidth label='Email' placeholder="name@example.com" inputRef={emailRef}/>
 
-                    <TextField fullWidth label='Password' placeholder="Enter password" inputRef={passwordRef}/>
-                    <TextField fullWidth label='Confirm Password' placeholder="Confirm your password" inputRef={passwordConfirmRef}/>
+                    <TextField fullWidth type="password" label='Password' placeholder="Enter password" inputRef={passwordRef}/>
+                    <TextField fullWidth type="password" label='Confirm Password' placeholder="Confirm your password" inputRef={passwordConfirmRef}/>
                     <FormControl component="fieldset" style={marginTop}>
                         <RadioGroup style={{ display: 'initial' }}>
                             <FormControlLabel value="seeker" control={<Radio />} label="JobSeeker"
@@ -105,9 +105,8 @@ const Signup = () => {
                         // control={<Checkbox name="checkedA" />}
                         label="I accept the terms and conditions."
                     />
-                    <Button disabled={loading} type='submit' variant='contained' onClick={SignUpHandler} color='primary'style={btnstyle}
-                    component={Link} to="/dashboard"
-                    >Sign up</Button>
+                    <Button disabled={loading} type='submit' variant='contained' onClick={SignUpHandler} color='primary'style={btnstyle}>
+                    <Link to="dashboard" style={{ textDecoration: 'none', color: '#FFF' }}>Sign up</Link></Button>
                 </form>
                 <Typography>Already have an account?<Link to="/signin" >Sign In</Link>
                 </Typography>

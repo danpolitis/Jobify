@@ -1,14 +1,13 @@
 import './App.css';
 import React, { useReducer, useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import {Container, GlobalStyles, Typography, CssBaseline } from "@mui/material";
-import Box from '@mui/material/Box';
+import { CssBaseline, Typography, GlobalStyles, Container, Box}from "@mui/material/";
 import { ThemeProvider } from "@mui/material/styles";
 import { Helmet } from 'react-helmet';
-import Footer from "./Footer.jsx"
-import Header from "./Header.jsx"
-import Home from "./Home.jsx"
-import Test from "./Test.jsx"
+import Footer from "./Navigation/Footer.jsx"
+import Header from "./Navigation/Header.jsx"
+import Home from "./Navigation/Home.jsx"
+import Test from "./Navigation/Test.jsx"
 import Notes from "./notes/Notes.jsx"
 import Dashboard from "./dashboard/Dashboard.jsx"
 import Theme from "../Theme/ThemeFile.js"
@@ -18,7 +17,8 @@ import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
 import Blogs from "./blog/Blogs.jsx";
 import Community from "./community/Community.jsx";
-import LoggedInHeader from "./LoggedInHeader.jsx"
+import Documents from "./documents/documents.jsx";
+import LoggedInHeader from "./Navigation/LoggedInHeader.jsx"
 
 //Import component here
 
@@ -42,10 +42,6 @@ const reducer = (state, action) => {
 };
 
 export const GlobalContext = React.createContext();
-
-
-
-
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -85,6 +81,7 @@ function App() {
               <Route path="/community" component={Community} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/notes" component={() => <Notes lol='lol'/>} />
+              <Route path="/documents" component={Documents} />
               {/* Add route here */}
             </Switch>
           </AuthProvider>
