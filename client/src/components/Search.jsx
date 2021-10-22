@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Grid, TextField, Button } from "@mui/material";
 import useFetch from "./dash/postings/hooks/useFetch.jsx";
 
@@ -7,10 +8,12 @@ function Search({ setRoute }) {
     keyword: '',
     city: ''
   });
+  const history = useHistory();
   let queryUrl = `search?`;
 
   function handleSubmit(e) {
     e.preventDefault();
+    history.push('/dashboard');
     if (terms.keyword === '' && terms.city === '') {
       setRoute("all");
     } else {
