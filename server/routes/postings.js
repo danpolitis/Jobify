@@ -100,10 +100,10 @@ router.route("/search")
       )`,
       city: `lower(postings.city) LIKE LOWER('%${city}%')`,
       wi_time: `posted_date <= NOW() + INTERVAL '${wi_time}'`,
-      field: `field = ${field}`,
-      type: `type = ${type}`,
-      exp_level: `exp_level = ${exp_level}`,
-      min_salary: `salary >= ${min_salary}::int AND salary < ${min_salary}::int + 20000`
+      field: `field = '${field}'`,
+      type: `type = '${type}'`,
+      exp_level: `exp_level = '${exp_level}'`,
+      min_salary: `salary >= ${min_salary} AND salary < ${min_salary} + 20000`
     };
 
     Object.keys(request.query).map((column, i) => {

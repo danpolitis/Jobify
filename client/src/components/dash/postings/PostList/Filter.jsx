@@ -1,10 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Grid, FormControl, InputLabel, OutlinedInput, MenuItem, Select } from "@mui/material";
+import useFetch from "../hooks/useFetch.jsx"
 
-function Filter({ list, setRoute }) {
-  // type: (full, part, contract, internship)
-  // experience level: (entry, mid, senior)
-
+function Filter({ route, setRoute }) {
+  const jobs = useFetch('http://localhost:3000/postings/all');
   const [ terms, setTerms ] = useState({
     wi_time: '',
     field: '',
@@ -12,7 +11,18 @@ function Filter({ list, setRoute }) {
     exp_level: '',
     min_salary: ''
   });
-  let queryUrl = `search?`;
+
+  useEffect(() => {
+    if (route === "all") {
+      setTerms({
+        wi_time: '',
+        field: '',
+        type: '',
+        exp_level: '',
+        min_salary: ''
+      });
+    }
+  }, [route])
 
   const labels = {
     wi_time: 'Date posted',
@@ -22,38 +32,39 @@ function Filter({ list, setRoute }) {
     min_salary: 'Salary Est.'
   }
 
-  const options = {
+  const options = jobs ? {
     wi_time: ['Last 24 hours', 'Last 3 days', 'Last 7 days', 'Last 14 days'],
-    field: list.reduce((fields, job) => {
+    field: jobs.reduce((fields, job) => {
       if (!fields.includes(job.field)) {
         fields.push(job.field);
       }
       return fields;
     }, []),
-    type: list.reduce((types, job) => {
+    type: jobs.reduce((types, job) => {
       if (!types.includes(job.type)) {
         types.push(job.type);
       }
       return types;
     }, []),
-    exp_level: list.reduce((levels, job) => {
+    exp_level: jobs.reduce((levels, job) => {
       if (!levels.includes(job.exp_level)) {
         levels.push(job.exp_level);
       }
       return levels;
     }, []),
     min_salary: ['$30-50,000', '$60-80,000', '$90-110,000', '$110,000+']
-  }
+  } : null;
 
   function convertValue(column, value) {
     return column === 'wi_time'
     ? value.substring(5, value.length)
     : column === 'min_salary'
-    ? (parseInt(value.substring(1,3)) * 1000).toString()
+    ? parseInt(value.substring(1,3)) * 1000
     : value;
   }
 
   function handleChange(e) {
+    let queryUrl = `search?`;
     let value = convertValue(e.target.name, e.target.value);
     queryUrl += `${e.target.name}=${value}&`;
 
@@ -72,7 +83,8 @@ function Filter({ list, setRoute }) {
   }
 
   return (
-    <Grid item xs justifyContent="center">
+    jobs
+    ? <Grid item xs justifyContent="center">
       {
         Object.keys(labels).map((filter, i) => (
           <FormControl key={i} sx={{ m: 1, width: 130 }}>
@@ -99,6 +111,7 @@ function Filter({ list, setRoute }) {
         ))
       }
     </Grid>
+    : null
   );
 }
 
