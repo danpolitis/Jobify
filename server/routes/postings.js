@@ -50,32 +50,35 @@ router.route("/employer/:employer_id")
     }
   });
 
-router.route("/keyword/:keyword")
+router.route("/search")
   .get(async (request, response) => {
-    const params = [request.params.keyword];
-    const result = await pool.query(
-      `SELECT * FROM postings
-        WHERE lower(field) LIKE LOWER('%' || $1 || '%')
-          OR lower(description) LIKE LOWER('%' || $1 || '%')
-          OR lower(title) LIKE LOWER('%' || $1 || '%')
-          OR lower(benefits) LIKE LOWER('%' || $1 || '%')
-          OR lower(requirements) LIKE LOWER('%' || $1 || '%');`,
-      params
-    )
-    try {
-      response.status(200).send(result);
-    } catch (error) {
-      console.error(error);
-    }
-  });
+    const { keyword, city } = request.query;
+    const fields = `
+    postings.id, title, employer_id, postings.city, salary, description, posted_date
+    `
+    const keywordSearchClause = `(
+      lower(field) LIKE LOWER('%${keyword}%')
+        OR lower(description) LIKE LOWER('%${keyword}%')
+        OR lower(title) LIKE LOWER('%${keyword}%')
+        OR lower(benefits) LIKE LOWER('%${keyword}%')
+        OR lower(requirements) LIKE LOWER('%${keyword}%')
+        OR lower(uuid) LIKE LOWER ('%${keyword}%')
+        AND CAST(postings.employer_id AS int) = employers.id
+    )`;
+    const citySearchClause = `
+      lower(postings.city) LIKE LOWER('%${city}%')
+    `;
+    const search =
+      keyword && !city
+      ? `SELECT ${fields} FROM postings, employers
+        WHERE ${keywordSearchClause};`
+      : !keyword && city
+      ? `SELECT ${fields} FROM postings
+        WHERE ${citySearchClause};`
+      : `SELECT ${fields} FROM postings, employers
+        WHERE ${keywordSearchClause} AND ${citySearchClause};`;
 
-router.route("/city/:city")
-  .get(async (request, response) => {
-    const params = [request.params.city];
-    const result = await pool.query(
-      `SELECT * FROM postings WHERE lower(city) LIKE LOWER('%' || $1 || '%');`,
-      params
-    );
+    const result = await pool.query(search);
     try {
       response.status(200).send(result);
     } catch (error) {

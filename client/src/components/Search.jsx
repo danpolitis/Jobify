@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import useFetch from "../hooks/useFetch.jsx";
+import useFetch from "./dashboard/postings/hooks/useFetch.jsx";
 
 function Search({ setRoute }) {
   const [ keyword, setKeyword ] = useState("");
@@ -8,12 +8,10 @@ function Search({ setRoute }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(e)
-    keyword.length > 0
-    ? setRoute(`keyword/${keyword}`)
-    : city.length > 0
-    ? setRoute(`city/${city}`)
-    : null;
+
+    if (keyword.length > 0 || city.length > 0) {
+      setRoute(`search?keyword=${keyword}&city=${city}`)
+    }
   }
 
   return (
@@ -23,8 +21,8 @@ function Search({ setRoute }) {
         name="keyword"
         label="Keyword"
         value={keyword}
-        sx={{ padding: "5px", minWidth: "10px" }}
-        placeholder="Job title, description, industry"
+        sx={{ padding: "5px", width: "30%" }}
+        placeholder="Job title, description, industry..."
         onChange={e => setKeyword(e.target.value)}
         variant="outlined"
       />
@@ -32,7 +30,7 @@ function Search({ setRoute }) {
         name="city"
         label="City"
         value={city}
-        sx={{ padding: "5px", minWidth: "10px" }}
+        sx={{ padding: "5px", width: "30%" }}
         placeholder="City"
         onChange={e => setCity(e.target.value)}
         variant="outlined"
