@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 import React, { useState, useContext } from "react"
 import { Card, CardContent, Typography, CircularProgress, Button } from "@mui/material";
 import axios from 'axios';
-=======
-import React from "react"
-import { Card, CardContent, Typography, CircularProgress, Chip } from "@mui/material";
->>>>>>> main
 import useFetch from "../hooks/useFetch.jsx"
 import { GlobalContext } from '../../../App.jsx';
 import { DashboardContext } from '../../Dashboard.jsx';
@@ -41,14 +36,16 @@ function PostListEntry({ job }) {
         <Typography variant="h5" sx={{fontWeight:"700"}}>
           {title ? title : "Untitled"}
         </Typography>
-        {/* remember to change this to include conditional rendering if role === employer */}
-        <Button
-          variant="contained"
-          disableElevation
-          onClick={handleRemovePost}
-          >
-          {!removeClicked ? 'Remove' : 'Add'}
-        </Button>
+        {
+          state.role === 'employer' &&
+            <Button
+              variant="contained"
+              disableElevation
+              onClick={handleRemovePost}
+              >
+              {!removeClicked ? 'Remove' : 'Add'}
+            </Button>
+        }
         <Typography variant="subtitle1">
           {city}
         </Typography>
