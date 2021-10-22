@@ -70,7 +70,7 @@ export default function LoggedInHeader(props) {
             <div>
             <Link to="/">Home</Link>
             <Link to="/dashboard" style={{padding: "15px"}}>{state.email}</Link>
-            {state.role !== 'seeker' ? <span className="secondary">Employer</span> : <span className="secondary">Job Seeker</span>}
+            {state.role !== false ? <span className="secondary">Employer</span> : <span className="secondary">Job Seeker</span>}
             </div>
           </nav>
           <FormControl sx={{ my: 1, mx: 1.5, midWidth: 80 }}>
@@ -81,12 +81,13 @@ export default function LoggedInHeader(props) {
               style={{minWidth: "100px", maxHeight: "55px", color: "white"}}
               key={"anything"}
             >
-            {state.role !== 'seeker' ? <EmployerDropdown sx={{maxWidth: "150px"}}/> :
+            {state.role !== false ? <EmployerDropdown sx={{maxWidth: "150px"}}/> :
             <div>
             <Link style={{color: '#49475B', textDecoration: 'none'}} to="/dashboard"> <MenuItem value={20}>Dashboard</MenuItem></Link>
             <Link style={{color: '#49475B', textDecoration: 'none'}} to="/documents"> <MenuItem value={30}>Documents</MenuItem></Link>
             <Link style={{color: '#49475B', textDecoration: 'none'}} to="/notes"> <MenuItem value={40}>Notes</MenuItem></Link>
             <Link style={{color: '#49475B', textDecoration: 'none'}} to="/blogs"> <MenuItem value={40}>Blogs</MenuItem></Link>
+            <Link style={{color: '#49475B', textDecoration: 'none'}} to="/chat"> <MenuItem value={40}>Chat</MenuItem></Link>
             <Link style={{color: '#49475B', textDecoration: 'none'}} to="/community"> <MenuItem value={50}>Community</MenuItem></Link>
             <Link style={{color: '#49475B', textDecoration: 'none'}} to="/"> <MenuItem value={50} onClick={logoutHandler}>Log Out</MenuItem></Link>
             </div>

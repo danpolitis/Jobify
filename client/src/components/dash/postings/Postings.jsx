@@ -11,7 +11,7 @@ import { GlobalContext } from '../../App.jsx';
 function Postings({ pid, search }) {
   const [ searchRoute, setSearchRoute ] = useState(search ? search : "all");
   const { state } = useContext(GlobalContext);
-  const url = state.role === 'seeker'
+  const url = state.role === false
     ? `http://localhost:3000/postings/${searchRoute}`
     : `http://localhost:3000/postings/employer/${state.userId}`
   const jobs = useFetch(url);
@@ -41,7 +41,7 @@ function Postings({ pid, search }) {
               </Grid>
               <Grid item xs={7}>
                 {
-                  state.role === 'seeker'
+                  state.role === false
                     ? <PostDetails postId={pid ? pid : jobs[0].id} />
                     : <ApplicantsList postId={jobs && jobs.length > 0 ? jobs[0].id : null}/>
                 }

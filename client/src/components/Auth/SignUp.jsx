@@ -34,8 +34,8 @@ const Signup = () => {
 
     const handleRoleChange = (e) => {
 
-      console.log(e.target.value)
-      globalData.dispatch({ type: 'updateRole', data: e.target.value})
+      // console.log(e.target.value)
+      // globalData.dispatch({ type: 'updateRole', data: e.target.value})
 
     }
 
@@ -59,7 +59,7 @@ const Signup = () => {
           // email: emailRef.current.value,
         };
         console.log(data);
-        return axios.post('http://localhost:3000/signup_login', data);
+        return axios.post('http://localhost:3000/signup_login/1', data);
       })
       .then(() => {
         history.push("/dashboard");
