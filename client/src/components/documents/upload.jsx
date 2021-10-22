@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios, { post } from 'axios';
 
-const Upload = (props) => {
+const Upload = ( {submitted, setSubmitted} ) => {
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('Choose File');
 
@@ -12,6 +12,8 @@ const Upload = (props) => {
 
   const onSubmit = async e => {
     e.preventDefault();
+    console.log('in submit function');
+    setSubmitted(submitted + 1);
     const formData = new FormData();
     formData.append('file', file);
 
