@@ -1,17 +1,13 @@
 import './App.css';
 import React, { useReducer, useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import GlobalStyles from "@mui/material/GlobalStyles";
-import Container from "@mui/material/Container";
-import Box from '@mui/material/Box';
+import { CssBaseline, Typography, GlobalStyles, Container, Box}from "@mui/material/";
 import { ThemeProvider } from "@mui/material/styles";
 import { Helmet } from 'react-helmet';
-import Footer from "./Footer.jsx"
-import Header from "./Header.jsx"
-import Home from "./Home.jsx"
-import Test from "./Test.jsx"
+import Footer from "./Navigation/Footer.jsx"
+import Header from "./Navigation/Header.jsx"
+import Home from "./Navigation/Home.jsx"
+import Test from "./Navigation/Test.jsx"
 import Notes from "./notes/Notes.jsx"
 import Dashboard from "./dashboard/Dashboard.jsx"
 import Theme from "../Theme/ThemeFile.js"
@@ -21,16 +17,17 @@ import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
 import Blogs from "./blog/Blogs.jsx";
 import Community from "./community/Community.jsx";
-import LoggedInHeader from "./LoggedInHeader.jsx";
 import Email from './Email.jsx';
 import Chat from './Chat.jsx';
+import Documents from "./documents/documents.jsx";
+import LoggedInHeader from "./Navigation/LoggedInHeader.jsx"
 
 //Import component here
 
 const initialState = {
   userId: '',
   role: 'seeker',
-//   email:'',
+  email:'',
 }
 
 const reducer = (state, action) => {
@@ -39,8 +36,8 @@ const reducer = (state, action) => {
       return { ...state, userId: action.data };
     case 'updateRole':
       return { ...state, role: action.data};
-      // case 'updateEmail':
-      //   return { ...state, email: action.data};
+      case 'updateEmail':
+        return { ...state, email: action.data};
     default:
       return state;
   }
@@ -48,32 +45,8 @@ const reducer = (state, action) => {
 
 export const GlobalContext = React.createContext();
 
-
-
-
-
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  // const [loggedIn, setLoggedIn] = useState(false)
-
-
-  // console.log('123', state.userId)
-
-
-
-  // function grabUserId() {
-  //   if (state.userId === "") {
-  //     setLoggedIn(false)
-  //   } else {
-  //     setLoggedIn(true)
-  //   }
-  // }
-
-  // useEffect(() => (
-  //   setLoggedIn()
-  // ),[state.userId])
-
 
   return (
     <>
@@ -95,11 +68,12 @@ function App() {
             <meta name="description" content="App Description" />
             <meta name="theme-color" content="#799496" />
           </Helmet>
+          <GlobalContext.Provider value={{ state, dispatch }}>
+
+          <AuthProvider>
           {state.userId !== "" ? <LoggedInHeader/> :
           <Header />
            }
-          <GlobalContext.Provider value={{ state, dispatch }}>
-          <AuthProvider>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/test" component={Test} />
@@ -112,6 +86,7 @@ function App() {
               <Route path="/notes" component={() => <Notes lol='lol'/>} />
               <Route path='/email' component={Email} />
               <Route path='/chat' component={Chat} />
+              <Route path="/documents" component={Documents} />
               {/* Add route here */}
             </Switch>
           </AuthProvider>
