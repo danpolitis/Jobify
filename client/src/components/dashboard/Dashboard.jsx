@@ -28,7 +28,6 @@ const reducer = (state, action) => {
   }
 };
 
-<<<<<<< HEAD
 function Dashboard() {
   const [ state, dispatch ] = useReducer(reducer, initialState);
 
@@ -43,17 +42,6 @@ function Dashboard() {
           <Grid item xs={3}>
             <UserCalendar/>
           </Grid>
-=======
-function Dashboard({ location }) {
-  return (
-    <Container>
-      <Grid container spacing={2}>
-        <Grid item xs={9}>
-          <Postings search={location.state} />
-        </Grid>
-        <Grid item xs={3}>
-          <UserCalendar/>
->>>>>>> main
         </Grid>
       </Container>
     </DashboardContext.Provider>

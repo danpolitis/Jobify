@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Grid, CircularProgress, Container, Typography } from "@mui/material";
 import Search from '../../Search.jsx'
 import Filter from './PostList/Filter.jsx'
 import PostList from "./PostList/PostList.jsx";
 import PostDetails from "./PostDetails/PostDetails.jsx";
 import ApplicantsList from './ApplicantsList/ApplicantsList.jsx';
+import useFetch from "./hooks/useFetch.jsx"
 import { GlobalContext } from '../../App.jsx';
 
 function Postings({ }) {
   const [ searchRoute, setSearchRoute ] = useState("all");
   const { state } = useContext(GlobalContext);
   const url = state.role === 'seeker'
-    ? `http://localhost:3000/postings/${searchRoute}`;
+    ? `http://localhost:3000/postings/${searchRoute}`
     : `http://localhost:3000/postings/employer/${state.userId}`
   const jobs = useFetch(url);
   // also needs context or something to be passed up & down to change details/applicants
