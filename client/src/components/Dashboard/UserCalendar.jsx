@@ -27,19 +27,19 @@ function UserCalendar(props) {
 
   useEffect(() => {
     getToDoList()
-  },[])
+  },[time])
 
   const rawCalDate = calDate.toString()
   const sliceDate = rawCalDate.slice(3,10)
 
   function handleSubmit(e) {
     e.preventDefault()
-    axios.post(`http://localhost:3000/todo_list/2`, {
+    axios.post(`http://localhost:3000/todo_list/${state.userId}`, {
       time: time,
-      eventactivity: eventActivity,
+      eventActivity: eventActivity,
       date: sliceDate
     }).then(resetInputs())
-    .then(getToDoList())
+
     .catch(error => {
       console.log('error posting')
     })
@@ -48,7 +48,7 @@ function UserCalendar(props) {
   // console.log(toDoList)
 
   function getToDoList() {
-    axios.get(`http://localhost:3000/todo_list/2`).then(response =>
+    axios.get(`http://localhost:3000/todo_list/${state.userId}`).then(response =>
       setToDoList(response.data.rows)
     ).catch(error => (
       console.log('error', error)
@@ -61,21 +61,16 @@ function UserCalendar(props) {
     setEventActivity('')
   }
 
-  function CheckboxList() {
-    const [checked, setChecked] = React.useState([0]);
 
-    const handleToggle = (value) => () => {
-      const currentIndex = checked.indexOf(value);
-      const newChecked = [...checked];
-
-      if (currentIndex === -1) {
-        newChecked.push(value);
-      } else {
-        newChecked.splice(currentIndex, 1);
-      }
-
-      setChecked(newChecked);
-    };
+  function deleteToDoList() {
+    axios.delete(`http://localhost:3000/todo_list/${state.userId}`, {
+      time: time,
+      eventActivity: eventActivity,
+      date: sliceDate
+    }).then(resetInputs())
+    .catch(error => {
+      console.log('error posting')
+    })
   }
 
 
@@ -88,15 +83,15 @@ function UserCalendar(props) {
             onChange={setCalDate}
             value={calDate}/>
           <input value={time} style={{marginTop: "45px", marginRight: "25px", padding: "15px 15px"}} onChange={e => setTime(e.target.value)} type="time" min="09:00" max="18:00" required/>
-          <TextField sx={{marginTop: "45px"}} placeholder="Enter event name" onChange={e => setEventActivity(e.target.value)}></TextField>
+          <TextField sx={{marginTop: "45px"}} value={eventActivity} placeholder="Enter event name" onChange={e => setEventActivity(e.target.value)}></TextField>
           <p></p>
           <Button onClick={handleSubmit} color="primary" variant="contained">Add event to date</Button>
           <Box>
             <Typography align-content="left" variant="h5" sx={{marginTop: "20px", textDecoration: "underline"}} component="h5">Things to do Today</Typography>
             <ul className="checkmark">
-                {toDoList && toDoList.map(item =>  (
+                {toDoList && toDoList.map(item => (
               <div key={uniqid()}>
-                  <li>{item.time.slice(1)} - {item.eventactivity}</li>
+                  <li>{item.time} - {item.eventactivity}</li>
               </div>
                 ))}
             </ul>
