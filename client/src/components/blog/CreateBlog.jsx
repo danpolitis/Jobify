@@ -50,12 +50,11 @@ export default function CreateBlog(props) {
   const [body, setBody] = useState("");
   const [public, setPublic] = useState("Public");
   const [open, setOpen] = useState(false);
-  const [modal, setModal] = useState(false);
 
   const handleClose = () => setOpen(false)
   function handleCreatePost(e, reason) {
     e.preventDefault();
-    const toggle = () => setModal(!modal);
+    const toggle = () => setOpen(false);
 
     if (props.isEmployer === true) {
       axios
@@ -66,7 +65,8 @@ export default function CreateBlog(props) {
       })
       .then(() => {
         props.getAllUserBlogs();
-      });
+      })
+      .then(() => toggle());
     } else {
       axios
       .post(`http://localhost:3000/seeker_blogs/${props.currentUser}`, {
@@ -76,7 +76,8 @@ export default function CreateBlog(props) {
       })
       .then(() => {
         props.getAllUserBlogs();
-      });
+      })
+      .then(() => toggle());
     }
   }
 
