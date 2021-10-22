@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Grid, CircularProgress, Container, Typography } from "@mui/material";
+import axios from 'axios';
 import Search from '../../Search.jsx'
 import Filter from './PostList/Filter.jsx'
 import PostList from "./PostList/PostList.jsx";
@@ -11,10 +12,11 @@ import { GlobalContext } from '../../App.jsx';
 function Postings({ pid, search }) {
   const [ searchRoute, setSearchRoute ] = useState(search ? search : "all");
   const { state } = useContext(GlobalContext);
-  const url = state.role === 'seeker'
-    ? `http://localhost:3000/postings/${searchRoute}`
-    : `http://localhost:3000/postings/employer/${state.userId}`
-  const jobs = useFetch(url);
+  const jobs = state.role === 'seeker'
+    ? useFetch(`http://localhost:3000/postings/${searchRoute}`)
+    : axios.get(`http://localhost:3000/postings/employer/${state.userId}`)
+      .then((data) => data);
+  console.log(jobs);
 
   return (
     !jobs

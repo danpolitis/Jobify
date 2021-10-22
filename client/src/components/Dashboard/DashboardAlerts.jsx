@@ -8,26 +8,6 @@ export default Alerts = () => {
 
   return (
     <>
-      <Collapse in={dashboardState.addedJob}>
-        <Alert
-          severity="success"
-          sx={{ mt: '8px' }}
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                dashboardDispatch({ type: 'addedJob', data: false })
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
-        >
-          A new job has been posted!
-        </Alert>
-      </Collapse>
       <Collapse in={dashboardState.removePost}>
         <Alert
           severity="success"
