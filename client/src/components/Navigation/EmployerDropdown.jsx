@@ -32,13 +32,13 @@ export default function EmployerDropdown() {
 
   return (
     <div>
-      <Link to="/dashboard"> <MenuItem value={20}>Dashboard</MenuItem></Link>
-      <Link to="/new-post"> <MenuItem value={30}>Add Job</MenuItem></Link>
-      <Link to="/documents"> <MenuItem value={40}>Documents</MenuItem></Link>
-      <Link to="/notes"> <MenuItem value={40}>Notes</MenuItem></Link>
-      <Link to="/blogs"> <MenuItem value={50}>Blogs</MenuItem></Link>
-      <Link to="/community"> <MenuItem value={50}>Community</MenuItem></Link>
-      <Link to="/"> <MenuItem value={50} onClick={logoutHandler}>Log Out</MenuItem></Link>
+      <Link style={{color: '#49475B', textDecoration: 'none'}} to="/dashboard"> <MenuItem style={{textDecoration: 'none'}} value={20}>Dashboard</MenuItem></Link>
+      <Link style={{color: '#49475B', textDecoration: 'none'}} to="/new-post"> <MenuItem value={30}>Add Job</MenuItem></Link>
+      <Link style={{color: '#49475B', textDecoration: 'none'}} to="/documents"> <MenuItem value={40}>Documents</MenuItem></Link>
+      <Link style={{color: '#49475B', textDecoration: 'none'}} to="/notes"> <MenuItem value={40}>Notes</MenuItem></Link>
+      <Link style={{color: '#49475B', textDecoration: 'none'}} to="/blogs"> <MenuItem value={50}>Blogs</MenuItem></Link>
+      <Link style={{color: '#49475B', textDecoration: 'none'}} to="/community"> <MenuItem value={50}>Community</MenuItem></Link>
+      <Link style={{color: '#49475B', textDecoration: 'none'}} to="/"> <MenuItem value={50} onClick={logoutHandler}>Log Out</MenuItem></Link>
     </div>
   )
 }

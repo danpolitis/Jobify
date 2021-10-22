@@ -39,9 +39,10 @@ router.route('/')
     } else {
       role = true;
     }
+    params = [uuid, role]
     // console.log(role);
     const result = await pool.query(
-      `INSERT INTO uuids(uuid, role) VALUES (${uuid}, ${role});`
+      'INSERT INTO uuids(uuid, role) VALUES ($1, $2);', params
     )
     try {
       response.status(200).send(result);

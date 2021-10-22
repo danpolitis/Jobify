@@ -1,0 +1,4 @@
+a:hover .joblist,
+a.active .joblist {
+  background-color: #acc196;
+}
