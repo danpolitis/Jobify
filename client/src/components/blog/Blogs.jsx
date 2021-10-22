@@ -19,9 +19,6 @@ import { GlobalContext } from "../App";
 import theme from "../../Theme/ThemeFile.js";
 
 const useStyles = makeStyles((theme) => ({
-  blogsContainer: {
-    paddingTop: 10,
-  },
   blogTitle: {
     fontWeight: 350,
     paddingBottom: "2",
@@ -85,7 +82,6 @@ export default function Blogs() {
         direction="column"
         justify="center"
         style={{ minHeight: 400 }}
-        className={classes.blogsContainer}
       >
         <Grid
           className={classes.items}

@@ -43,7 +43,7 @@ export default function Blog(props) {
   }
 
   return (
-    <Card sx={{ backgroundColor: "#efefef" }}>
+    <Card sx={{ backgroundColor: "#FAF9F6" }}>
       <Typography variant="h4">{props.post.title}</Typography>
       <CardContent>
         <List>{props.post.body}</List>

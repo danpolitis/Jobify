@@ -77,7 +77,7 @@ export default function Blog(props) {
   }
 
   return (
-    <Card sx={{ backgroundColor: "#efefef" }} className={classes.items}>
+    <Card sx={{ backgroundColor: "#FAF9F6" }} className={classes.items}>
       <IconButton
         onClick={handleDeletePost}
         size="medium"
