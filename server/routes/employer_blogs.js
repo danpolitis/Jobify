@@ -23,6 +23,7 @@ router.route('/:poster_id')
     const body = request.body.body;
     const created = new Date();
     const params = [poster_id, title, body, created, public]
+    console.log('params', params);
 
     const result = pool.query(
       'INSERT INTO employers_blogs(poster_id, title, body, created, public) \
@@ -36,7 +37,6 @@ router.route('/:poster_id')
     }
   })
 
-router.route('/id/:id')
   .put(async (request, response) => {
     const id = request.params.id;
     const title = request.body.title;
@@ -60,13 +60,31 @@ router.route('/id/:id')
   })
 
   .delete(async (request, response) => {
-    const id = request.params.id;
+    const id = request.params.poster_id;
+    const params = [id];
     const result = pool.query(
-      `DELETE FROM employers_blogs
-       WHERE id = ${id};`
+      'DELETE FROM employers_blogs \
+       WHERE id = $1;', params
     )
+    console.log(params);
     try {
       response.status(202).send(result);
+    } catch (error) {
+      console.error(error);
+    }
+  })
+
+  router.route('/all/:poster_id')
+  .get(async (request, response) => {
+    const poster_id = request.params.poster_id;
+    const params = [poster_id];
+    const result = await pool.query(
+      'SELECT * FROM employers_blogs \
+       FULL OUTER JOIN seekers_blogs \
+       ON employers_blogs.id=seekers_blogs.id ;'
+    )
+    try {
+      response.status(200).send(result);
     } catch (error) {
       console.error(error);
     }
