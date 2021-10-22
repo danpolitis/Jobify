@@ -26,7 +26,7 @@ function Postings({ pid, search }) {
           variant="h6"
           align="center"
         >
-        <Filter list={jobs} />
+        <Filter list={jobs} setRoute={setSearchRoute} />
         </Typography>
         </Grid>
         <Grid container spacing={2}>

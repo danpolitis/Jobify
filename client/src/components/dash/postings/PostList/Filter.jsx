@@ -1,12 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Grid, FormControl, OutlinedInput, MenuItem, Select } from "@mui/material";
+import { Grid, FormControl, InputLabel, OutlinedInput, MenuItem, Select } from "@mui/material";
 
-function Filter({ list }) {
-  // date posted: last 24 hours, last 3/7/14 days
-  // field: pull
+function Filter({ list, setRoute }) {
   // type: (full, part, contract, internship)
   // experience level: (entry, mid, senior)
-  // salary estimate: 30-50, 60-80, 90-110, 120+
 
   const [ terms, setTerms ] = useState({
     wi_time: '',
@@ -16,6 +13,14 @@ function Filter({ list }) {
     min_salary: ''
   });
   let queryUrl = `search?`;
+
+  const labels = {
+    wi_time: 'Date posted',
+    field: 'Industry',
+    type: 'Type',
+    exp_level: 'Exp. Level',
+    min_salary: 'Salary Est.'
+  }
 
   const options = {
     wi_time: ['Last 24 hours', 'Last 3 days', 'Last 7 days', 'Last 14 days'],
@@ -40,53 +45,59 @@ function Filter({ list }) {
     min_salary: ['$30-50,000', '$60-80,000', '$90-110,000', '$110,000+']
   }
 
-  const labels = {
-    wi_time: 'Date posted',
-    field: 'Industry/field',
-    type: 'Type',
-    exp_level: 'Experience Level',
-    min_salary: 'Salary Estimate'
+  function convertValue(column, value) {
+    return column === 'wi_time'
+    ? value.substring(5, value.length)
+    : column === 'min_salary'
+    ? (parseInt(value.substring(1,3)) * 1000).toString()
+    : value;
   }
 
   function handleChange(e) {
-    setTerms({ ...terms, [e.target.name]: e.target.value });
+    let value = convertValue(e.target.name, e.target.value);
+    queryUrl += `${e.target.name}=${value}&`;
+
     Object.keys(terms).map((term, i) => {
-      if (i < Object.keys(terms).length - 1) {
-        queryUrl += '&';
+      let value = convertValue(term, terms[term]);
+      if (terms[term].length > 0 && !queryUrl.includes(term)) {
+        queryUrl += `${term}=${value}&`;
       }
-      if (terms[term].length > 0) {
-        queryUrl += `${term}=${terms[term]}`
+      if (i === Object.keys(terms).length - 1) {
+        queryUrl = queryUrl.slice(0, queryUrl.length - 1);
       }
     });
+
+    setTerms({ ...terms, [e.target.name]: e.target.value });
     setRoute(queryUrl);
   }
 
   return (
     <Grid item xs justifyContent="center">
-      <FormControl>
       {
-        Object.keys(options).map((filter, i) => {
+        Object.keys(labels).map((filter, i) => (
+          <FormControl key={i} sx={{ m: 1, width: 130 }}>
+            <InputLabel id={filter}>{labels[filter]}</InputLabel>
             <Select
-              key={i}
+              labelId={filter}
               name={filter}
               value={terms[filter]}
               onChange={handleChange}
-              input={<OutlinedInput label={filter} />}
+              input={<OutlinedInput label={labels[filter]} />}
             >
               {
-                Object.keys(options).map((label, i) => (
+                options[filter].map((option, i) => (
                   <MenuItem
                     key={i}
-                    value={options.label}
+                    value={option}
                   >
-                    {options.label}
+                    {option}
                   </MenuItem>
                 ))
               }
             </Select>
-        })
+          </FormControl>
+        ))
       }
-      </FormControl>
     </Grid>
   );
 }

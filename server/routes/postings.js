@@ -99,7 +99,7 @@ router.route("/search")
           AND postings.employer_id ::int = employers.id
       )`,
       city: `lower(postings.city) LIKE LOWER('%${city}%')`,
-      wi_time: `posted_date <= NOW() + INTERVAL ${wi_time}`,
+      wi_time: `posted_date <= NOW() + INTERVAL '${wi_time}'`,
       field: `field = ${field}`,
       type: `type = ${type}`,
       exp_level: `exp_level = ${exp_level}`,
