@@ -100,7 +100,7 @@ function UserCalendar(props) {
         onClick={handleSubmit}
         color="primary"
         variant="contained"
-        sx={{ margin: "0 18%" }}
+        sx={{ padding: "7%", margin: "0 15%" }}
       >
         Add event to date
       </Button>
