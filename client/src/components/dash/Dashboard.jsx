@@ -38,9 +38,9 @@ function Dashboard({ location }) {
   const globalData = useContext(GlobalContext)
 
   const getRole = () => {
-    axios.get(`http://localhost:3000/signup_login/${state.userId}`)
+    axios.get(`http://localhost:3000/signup_login/${globalData.state.userId}`)
       .then((results) => {
-        console.log(results)
+        console.log(results.data.rows[0])
         globalData.dispatch({ type: 'updateRole', data: results.data.rows[0].role})
       })
       .catch((err) => {

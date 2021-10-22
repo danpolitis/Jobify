@@ -35,7 +35,7 @@ const Signup = () => {
     const handleRoleChange = (e) => {
 
       // console.log(e.target.value)
-      // globalData.dispatch({ type: 'updateRole', data: e.target.value})
+      globalData.dispatch({ type: 'updateRole', data: e.target.value})
 
     }
 

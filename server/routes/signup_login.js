@@ -19,8 +19,9 @@ router.route('/:uuid')
     // console.log(request.body.uuid);
     // console.log(request.body.role);
     const uuid = request.body.uuid;
+    console.log(request.body.isSeeker)
     let role;
-    if(request.body.isSeeker === false) {
+    if(request.body.isSeeker === 'seeker') {
       role = false;
     } else {
       role = true;
