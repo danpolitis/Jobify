@@ -9,7 +9,7 @@ import Header from "./Navigation/Header.jsx"
 import Home from "./Navigation/Home.jsx"
 import Test from "./Navigation/Test.jsx"
 import Notes from "./notes/Notes.jsx"
-import Dashboard from "./dashboard/Dashboard.jsx"
+import Dashboard from "./dash/Dashboard.jsx"
 import Theme from "../Theme/ThemeFile.js"
 import AddJob from "./AddJob/AddJob.jsx";
 import { AuthProvider } from './Auth/AuthContext.js';
@@ -17,6 +17,8 @@ import SignUp from "./Auth/SignUp.jsx";
 import SignIn from "./Auth/SignIn.jsx";
 import Blogs from "./blog/Blogs.jsx";
 import Community from "./community/Community.jsx";
+import Email from './Email.jsx';
+import Chat from './Chat.jsx';
 import Documents from "./documents/documents.jsx";
 import LoggedInHeader from "./Navigation/LoggedInHeader.jsx"
 
@@ -26,6 +28,7 @@ const initialState = {
   userId: '',
   role: 'seeker',
   email:'',
+  company:''
 }
 
 const reducer = (state, action) => {
@@ -34,8 +37,8 @@ const reducer = (state, action) => {
       return { ...state, userId: action.data };
     case 'updateRole':
       return { ...state, role: action.data};
-      case 'updateEmail':
-        return { ...state, email: action.data};
+    case 'updateEmail':
+      return { ...state, email: action.data};
     default:
       return state;
   }
@@ -82,6 +85,8 @@ function App() {
               <Route path="/community" component={Community} />
               <Route path="/dashboard/:id?" component={Dashboard} />
               <Route path="/notes" component={() => <Notes lol='lol'/>} />
+              <Route path='/email' component={Email} />
+              <Route path='/chat' component={Chat} />
               <Route path="/documents" component={Documents} />
               {/* Add route here */}
             </Switch>
