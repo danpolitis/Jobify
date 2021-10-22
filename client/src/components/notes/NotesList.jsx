@@ -24,7 +24,7 @@ function NotesList(props) {
   return (
       <List>
         <ListItemButton style={{height: '60px', backgroundColor: '#49475B'}} onClick={handleOpen}>
-          <ListItemIcon style={{margin: 'auto', color: '#799496'}}>
+          <ListItemIcon style={{margin: 'auto', marginLeft: "7.35em", color: '#799496'}}>
             <AddIcon />
           </ListItemIcon>
         </ListItemButton>

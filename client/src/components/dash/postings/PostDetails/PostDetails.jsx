@@ -6,7 +6,16 @@ import { pink } from "@mui/material/colors";
 import useFetch from "../hooks/useFetch.jsx"
 import ApplyForm from "./ApplyForm.jsx"
 import { GlobalContext } from '../../../App.jsx';
-
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  EmailIcon,
+  FacebookIcon,
+  LinkedinIcon,
+  TwitterIcon
+} from "react-share";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -21,11 +30,15 @@ const style = {
 
 function PostDetails({ postId }) {
   const job = useFetch(`http://localhost:3000/postings/posting_id/${postId}`);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [fav, setFav] = useState(false);
+  const handleFav = () => setFav(true);
+  const handleCloseFav= () => setFav(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const globalData = useContext(GlobalContext);
   const uid = globalData.state.userId;
+  const shareUrl = `http://localhost:1234/dashboard/${postId}`;
 
   return (
     !job
@@ -38,6 +51,44 @@ function PostDetails({ postId }) {
           <Typography variant="body2" color="text.secondary" sx={{textAlign:"left"}}>
           {`Posted On: ${new Date(job.posted_date).toLocaleDateString('en-US')}`}
         </Typography>
+        <Stack direction="row" spacing={1}>
+        <Typography
+            variant="h4"
+            color="text.primary"
+            align="center"
+            sx={{fontSize:"18px", textAlign:"left", color:"#49475B" }}
+          >
+            <strong>Share&nbsp;&nbsp;</strong>
+          </Typography>
+        <EmailShareButton
+            url={shareUrl}
+            quote={job.title}
+            className="Demo__some-network__share-button"
+          >
+            <EmailIcon size={32} />
+          </EmailShareButton>
+        <FacebookShareButton
+            url={shareUrl}
+            quote={job.title}
+            className="Demo__some-network__share-button"
+          >
+            <FacebookIcon size={32} />
+          </FacebookShareButton>
+          <TwitterShareButton
+            url={shareUrl}
+            quote={job.title}
+            className="Demo__some-network__share-button"
+          >
+            <TwitterIcon size={32} />
+          </TwitterShareButton>
+          <LinkedinShareButton
+            url={shareUrl}
+            quote={job.title}
+            className="Demo__some-network__share-button"
+          >
+            <LinkedinIcon size={32} />
+          </LinkedinShareButton>
+        </Stack>
           <Typography
             variant="h4"
             align="center"
@@ -64,9 +115,14 @@ function PostDetails({ postId }) {
             }
             <label htmlFor="icon-button-file">
               {/* <Input accept="image/*" id="icon-button-file" type="file" /> */}
-              <IconButton sx={{ color: pink[500] }} aria-label="upload picture" component="span">
-                <FavoriteBorderIcon />
-              </IconButton>
+              {!fav
+                  ?<IconButton onClick={handleFav} sx={{ color: pink[500] }} aria-label="favourite" component="span">
+                    <FavoriteBorderIcon />
+                  </IconButton>
+                  : <IconButton  onClick={handleCloseFav} sx={{ color: pink[500] }} aria-label="unfav" component="span">
+                      <FavoriteIcon />
+                    </IconButton>
+              }
             </label>
           </Stack>
           <Divider></Divider>
@@ -132,7 +188,7 @@ function PostDetails({ postId }) {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Apply For The Position
             </Typography>
-            <ApplyForm uid = {uid}/>
+            <ApplyForm uid = {uid} postId = {postId}/>
           </Box>
         </Modal>
       </>
