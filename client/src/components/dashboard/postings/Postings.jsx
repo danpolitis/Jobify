@@ -26,12 +26,20 @@ function Postings() {
             </Typography>
             </Grid>
             <Grid container spacing={2}>
-              <Grid item xs={5}  sx={{maxHeight: "100vh", overflowY:"scroll"}}>
-                <PostList jobs={jobs} />
-              </Grid>
-              <Grid item xs={7}>
-                <PostDetails postId={jobs && jobs.length > 0 ? jobs[0].id : null} />
-              </Grid>
+              {
+                jobs.length === 0
+                ? <Grid item xs={12} justifyContent="center">
+                  <Typography>No jobs matched your search, try again!</Typography>
+                </Grid>
+                : <>
+                  <Grid item xs={5}  sx={{maxHeight: "100vh", overflowY:"scroll"}}>
+                    <PostList jobs={jobs} />
+                  </Grid>
+                  <Grid item xs={7}>
+                    <PostDetails postId={jobs[0].id} />
+                  </Grid>
+                </>
+              }
             </Grid>
         </>
   );
