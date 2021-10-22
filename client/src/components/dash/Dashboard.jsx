@@ -29,20 +29,12 @@ const reducer = (state, action) => {
   }
 };
 
-function Dashboard() {
-  const [ searched, setSearched ] = useState(false);
+function Dashboard({ location }) {
   const [ state, dispatch ] = useReducer(reducer, initialState);
   const { id } = useParams();
 
   return (
-    searched
-    ? <Redirect
-      to={{
-        pathname: "/dashboard",
-        state: searchRoute
-      }}
-    />
-    : <DashboardContext.Provider value={{ dashboardState: state, dashboardDispatch: dispatch }}>
+    <DashboardContext.Provider value={{ dashboardState: state, dashboardDispatch: dispatch }}>
       <Container>
         <DashboardAlerts />
         <Grid container spacing={2}>
