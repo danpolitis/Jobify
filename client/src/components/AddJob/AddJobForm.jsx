@@ -1,37 +1,32 @@
 import React, { useState, useContext } from 'react';
-import { TextField, Button, Typography, Alert } from '@mui/material';
+import { TextField, Button, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { GlobalContext } from '../App.jsx';
-import { DashboardContext } from '../dash/Dashboard.jsx';
 
-export default AddJobForm = () => {
+export default AddJobForm = ({ setErrorStatus }) => {
   const [ submitClicked, setSubmitClicked ] = useState(false);
-  const [ errorSubmitting, setErroSubmitting ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const history = useHistory();
   const { state } = useContext(GlobalContext);
-  const { dashboardDispatch } = useContext(DashboardContext);
 
   const handleAddJobSubmit = (addJobForm) => {
-    setErroSubmitting(false);
+    setErrorStatus(false);
     setSubmitClicked(true);
 
     axios.post(`http://localhost:3000/postings/employer/${state.userId}`, addJobForm)
       .then((res) => {
-        dashboardDispatch({ type: 'addedJob', data: true });
-        history.push('/dashboard'); // need to test to see if it plays
+        history.push('/dashboard');
       })
       .catch((err) => {
-        setErroSubmitting(true);
+        setErrorStatus(true);
         setSubmitClicked(false);
       });
   }
 
   return(
     <>
-      {errorSubmitting && <Alert severity="error">Something went wrong with posting the job, please try again!</Alert>}
       <form onSubmit={handleSubmit(handleAddJobSubmit)} style={{ maxWidth: '500px' }}>
         <TextField
           id="add-job-title"
