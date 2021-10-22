@@ -1,91 +1,96 @@
 import React, { useState, useEffect, useContext } from "react"
-import {Button, Grid, Box,Typography, TextField, Checkbox, ListItemText, ListItemIcon} from "@mui/material"
+import { Button, Grid, Box, Typography, TextField, Checkbox, ListItemText, ListItemIcon, ListItemButton} from "@mui/material"
 import { GlobalContext } from "../App.jsx"
 import Calendar from 'react-calendar';
 import axios from 'axios';
 import './Calendar.css';
 import uniqid from 'uniqid';
+import ToDoListEntry from "./ToDoListEntry.jsx"
+import moment from 'moment';
 
 function UserCalendar(props) {
 
   const [employerPortal, setEmployerPortal] = useState("false")
   const [seekerPortal, setSeekerPortal] = useState("false")
   const [calDate, setCalDate] = useState(new Date())
+  const [calDateView, setCalDateView] = useState(new Date())
   const [eventActivity, setEventActivity] = useState("")
   const [time, setTime] = useState('')
   const [toDoList, setToDoList] = useState([])
   const { state } = useContext(GlobalContext);
+  const [listId, setListId] = useState("")
 
   useEffect(() => {
     getToDoList()
-  },[])
+  }, [])
 
-  function handleSubmit() {
-    axios.post(`http://localhost:3000/todo_list/2`, {
+  function handleSubmit(e) {
+    e.preventDefault()
+    axios.post(`http://localhost:3000/todo_list/${state.userId}`, {
       time: time,
-      eventactivity: eventActivity,
-      date: calDate.slice(0,10)
+      eventActivity: eventActivity,
+      date: calDate
     }).then(resetInputs())
-    .catch(error => {
-      console.log('error posting')
-    })
+    .then(getToDoList())
+      .catch(error => {
+        console.log('error posting')
+      })
   }
 
   // console.log(toDoList)
 
   function getToDoList() {
-    axios.get(`http://localhost:3000/todo_list/2`).then(response =>
+    axios.get(`http://localhost:3000/todo_list/${state.userId}`).then(response =>
       setToDoList(response.data.rows)
     ).catch(error => (
       console.log('error', error)
     ))
   }
 
+  const calDateHandler = (val,e) => {
+    setCalDateView(val)
+    setCalDate(val)
+  }
 
   function resetInputs() {
     setTime('')
     setEventActivity('')
   }
 
-  function CheckboxList() {
-    const [checked, setChecked] = React.useState([0]);
 
-    const handleToggle = (value) => () => {
-      const currentIndex = checked.indexOf(value);
-      const newChecked = [...checked];
-
-      if (currentIndex === -1) {
-        newChecked.push(value);
-      } else {
-        newChecked.splice(currentIndex, 1);
-      }
-
-      setChecked(newChecked);
-    };
+  const changeTime = (e) => {
+    setTime(e.target.value)
+    setCalDate((prev) => {
+      let calDateString = prev.toLocaleString('en-US').slice(0,prev.toLocaleString('en-US').indexOf(','))
+      let timeString = e.target.value
+      let newDate = calDateString + ' ' + timeString + ':00'
+      console.log('prevdate', calDateString)
+      console.log('lolng', `${calDate.getFullYear()}-${(calDate.getMonth() + 1).toString().padStart(2,'0')}-${calDate.getDate()}`)
+      return new Date(newDate)
+    })
   }
 
-
+  function convertTime(input) {
+    return moment(input, 'HH:mm').format('h:mm A');
+  }
 
   return (
     <div>
       <Grid container >
-        <Box sx={{marginTop: "102px"}}>
+        <Box sx={{ marginTop: "102px" }}>
           <Calendar
-            onChange={setCalDate}
-            value={calDate}/>
-          <input value={time} style={{marginTop: "45px", marginRight: "25px", padding: "15px 15px"}} onChange={e => setTime(e.target.value)} type="time" min="09:00" max="18:00" required/>
-          <TextField sx={{marginTop: "45px"}} placeholder="Enter event name" onChange={e => setEventActivity(e.target.value)}></TextField>
+            onChange={(val,e) => calDateHandler(val)}
+            value={calDate} />
+          <input value={time} style={{ marginTop: "45px", marginRight: "25px", padding: "15px 15px" }} onChange={changeTime} type="time" min="00:00" max="23:59" required />
+          <TextField sx={{ marginTop: "45px" }} value={eventActivity} placeholder="Enter event name" onChange={e => setEventActivity(e.target.value)}></TextField>
           <p></p>
-          <Button color="primary" variant="contained">Add event to date</Button>
+          <Button onClick={handleSubmit} color="primary" variant="contained">Add event to date</Button>
           <Box>
-            <Typography align-content="left" variant="h5" sx={{marginTop: "20px", textDecoration: "underline"}} component="h5">Things to do Today</Typography>
-            <ul className="checkmark">
-                {toDoList && toDoList.map(item =>  (
-              <div key={uniqid()}>
-                  <li>{item.time} - {item.eventactivity}</li>
-              </div>
-                ))}
-            </ul>
+            <Typography align-content="left" variant="h5" sx={{marginTop: "20px", textDecoration: "underline" }} component="h5">Things to do on {calDate.toLocaleDateString()}</Typography>
+            <p> </p>
+              {toDoList && toDoList.filter(x => x.date !== null && x.date.slice(0,x.date.indexOf('T')) === calDateView.toISOString().slice(0,calDateView.toISOString().indexOf('T'))).map(item => (
+                <ToDoListEntry key={uniqid()} getToDoList={getToDoList} item={item}/>
+              ))}
           </Box>
         </Box>
       </Grid>
@@ -95,3 +100,4 @@ function UserCalendar(props) {
 
 
 export default UserCalendar
+

@@ -89,8 +89,8 @@ const Signup = () => {
 
                     <TextField fullWidth label='Email' placeholder="name@example.com" inputRef={emailRef}/>
 
-                    <TextField fullWidth label='Password' placeholder="Enter password" inputRef={passwordRef}/>
-                    <TextField fullWidth label='Confirm Password' placeholder="Confirm your password" inputRef={passwordConfirmRef}/>
+                    <TextField fullWidth type="password" label='Password' placeholder="Enter password" inputRef={passwordRef}/>
+                    <TextField fullWidth type="password" label='Confirm Password' placeholder="Confirm your password" inputRef={passwordConfirmRef}/>
                     <FormControl component="fieldset" style={marginTop}>
                         <RadioGroup style={{ display: 'initial' }}>
                             <FormControlLabel value="seeker" control={<Radio />} label="JobSeeker"
