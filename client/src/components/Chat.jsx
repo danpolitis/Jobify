@@ -94,6 +94,10 @@ function Chat() {
     } else {
       if (page === 1) {
         return (
+          <>
+          <Button variant="outlined" onClick={handleClickOpen}>
+            Sign Up
+          </Button>
           <Dialog open={open} onClose={handleClose}>
           <DialogTitle>User Information</DialogTitle>
           <DialogContent>
@@ -150,9 +154,14 @@ function Chat() {
             <Button onClick={changePage}>Submit Information</Button>
           </DialogActions>
         </Dialog>
+        </>
         )
       } else {
         return (
+          <>
+          <Button variant="outlined" onClick={handleClickOpen}>
+            Sign Up
+          </Button>
           <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Sign Up</DialogTitle>
           <DialogContent>
@@ -174,6 +183,7 @@ function Chat() {
             <Button onClick={addToChatEngine}>Sign Up</Button>
           </DialogActions>
         </Dialog>
+        </>
         )
       }
     }
@@ -181,9 +191,6 @@ function Chat() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Sign Up
-      </Button>
       {dialog()}
     </div>
   );
