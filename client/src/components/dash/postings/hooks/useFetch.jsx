@@ -6,7 +6,8 @@ const useFetch = url => {
     useEffect(() => {
       (async () => {
         const data = await fetch(url)
-          .then(res => res.json());
+          .then(res => res.json())
+          .catch((err) => console.log(err));
         data.rows ? setState(data.rows) : setState(data[0]);
       })();
     }, [url]);
