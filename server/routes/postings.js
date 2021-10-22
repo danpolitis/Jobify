@@ -53,7 +53,9 @@ router.route("/employer/:employer_id")
 router.route("/search")
   .get(async (request, response) => {
     const { keyword, city } = request.query;
-
+    const fields = `
+    postings.id, title, employer_id, postings.city, salary, description, posted_date
+    `
     const keywordSearchClause = `(
       lower(field) LIKE LOWER('%${keyword}%')
         OR lower(description) LIKE LOWER('%${keyword}%')
@@ -68,12 +70,12 @@ router.route("/search")
     `;
     const search =
       keyword && !city
-      ? `SELECT * FROM postings, employers
+      ? `SELECT ${fields} FROM postings, employers
         WHERE ${keywordSearchClause};`
       : !keyword && city
-      ? `SELECT * FROM postings
+      ? `SELECT ${fields} FROM postings
         WHERE ${citySearchClause};`
-      : `SELECT * FROM postings, employers
+      : `SELECT ${fields} FROM postings, employers
         WHERE ${keywordSearchClause} AND ${citySearchClause};`;
 
     const result = await pool.query(search);
