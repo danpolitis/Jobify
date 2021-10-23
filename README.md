@@ -1,6 +1,4 @@
-# Blue Ocean Project
-
-# Jobify *Your next hire is here*
+# Blue Ocean Project Hack Reactor - Jobify *Your next hire is here*
 
 ## Table of Contents
 
