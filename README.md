@@ -20,7 +20,7 @@ Jobify is an open-source job search portal for employers/job seekers of all indu
 
 - run `npm install` in this directory to install the dependencies.
 - run `npm run start:react` and `npm start` in separate terminals to build with parcel and start the express server.
-- use the `authkey.example.js` file to create your own `authkey.js` and add your github API token to attach as an "Authorization" header in requests.
+- use the `authkey.example.js` file to create your own `authkey.js` and add Firebase headers.
 - navigate to cloud.google.com, create an account and create new credentials for an auth file. Store this file on the top level of the project (same level as package.json).
 
 ## Contributors
