@@ -50,11 +50,6 @@ Jobify is an open-source job search portal for employers/job seekers of all indu
 
 ## App Features
 
-![Public Dashboard preview](https://media.giphy.com/media/MbA4xDbCIc1JgBAoXQ/giphy.gif)
-![Seeker Posting interaction](https://media.giphy.com/media/qvFcMCoO58Ofew3Dpm/giphy.gif)
-![Notes page](https://media.giphy.com/media/smCu2ELKnVOgqv824s/giphy.gif)
-![Blog & Community pages](https://media.giphy.com/media/fsi59TAjxda0qZjhZ3/giphy.gif)
-
 ### For public users:
 - Search and apply for jobs
 - Read public blog posts
@@ -73,6 +68,11 @@ Jobify is an open-source job search portal for employers/job seekers of all indu
 - View submitted applications
 - Create personal blog posts, read public blog posts
 - Chat with other registered job seekers & employers
+
+![Public Dashboard preview](https://media.giphy.com/media/MbA4xDbCIc1JgBAoXQ/giphy.gif)
+![Seeker Posting interaction](https://media.giphy.com/media/qvFcMCoO58Ofew3Dpm/giphy.gif)
+![Notes page](https://media.giphy.com/media/smCu2ELKnVOgqv824s/giphy.gif)
+![Blog & Community pages](https://media.giphy.com/media/fsi59TAjxda0qZjhZ3/giphy.gif)
 
 ## Challenges
 ### Technical
