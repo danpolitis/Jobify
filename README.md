@@ -1,4 +1,5 @@
-# Blue Ocean Project Hack Reactor - Jobify *Your next hire is here*
+# Jobify: *Your next hire is here*
+### Hack Reactor Blue Ocean Project
 
 ## Table of Contents
 
@@ -49,6 +50,11 @@ Jobify is an open-source job search portal for employers/job seekers of all indu
 
 ## App Features
 
+![Public Dashboard preview](https://media.giphy.com/media/MbA4xDbCIc1JgBAoXQ/giphy.gif)
+![Seeker Posting interaction](https://media.giphy.com/media/qvFcMCoO58Ofew3Dpm/giphy.gif)
+![Notes page](https://media.giphy.com/media/smCu2ELKnVOgqv824s/giphy.gif)
+![Blog & Community pages](https://media.giphy.com/media/fsi59TAjxda0qZjhZ3/giphy.gif)
+
 ### For public users:
 - Search and apply for jobs
 - Read public blog posts
@@ -70,10 +76,10 @@ Jobify is an open-source job search portal for employers/job seekers of all indu
 
 ## Challenges
 ### Technical
-- Postgresql document storage changed formatting of files, had to switch to google-cloud storage using node module.
-- Tracking user state throughout the web app using global context without accidentally reverting to the initial state. 
+- PostgreSQL document storage changed formatting of files, had to switch to Google Cloud Storage using Node module.
+- Tracking user state throughout the web app using global context without reverting to the initial state. 
 #### Unexpected
-- Differentiating user roles (job seekers vs employers) within Postgresql database, while staying in sync with firebase.
+- Differentiating user roles (job seekers vs employers) within PostgreSQL database, while staying in sync with Firebase.
 
 
 ## Ticketing System
@@ -82,7 +88,5 @@ Jobify is an open-source job search portal for employers/job seekers of all indu
 ## Future Considerations
 - Deploy on AWS/EC2 instance or any web server
 - Make website mobile responsive with material UI
-- Write tests
 - Make an animated landing page and style fonts and color scheme
-- Navbar change to include icons instead of text (like LinkedIn)
-
+- Increase test coverage!
